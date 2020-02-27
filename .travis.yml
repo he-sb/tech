@@ -1,0 +1,39 @@
+os: linux
+dist: bionic
+language: go
+
+go:
+  - "1.14"  # 指定Golang 1.14
+
+env:
+ global:
+   # Github Pages
+   - GH_REF: github.com/he-sb/tech
+
+# Specify which branches to build using a safelist
+# 分支白名单限制：只有 master 分支的提交才会触发构建
+branches:
+  only:
+    - master
+    
+before_install:
+  # 安装依赖
+  - sudo apt-get install libstdc++6
+  # 安装 hugo （version: v0.65.3）
+  - wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_extended_0.65.3_Linux-64bit.deb
+  - sudo dpkg -i hugo.deb
+
+install:
+# 运行hugo命令
+  - hugo
+  
+script:
+  # 部署
+  - cd ./public
+  - git init
+  - git config user.name "he-sb"
+  - git config user.email "0he.sb0@gmail.com"
+  - git add .
+  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+  # Github Pages
+  - git push --force --quiet "https://$GITHUB_TOKEN@${GH_REF}" master:gh-pages
