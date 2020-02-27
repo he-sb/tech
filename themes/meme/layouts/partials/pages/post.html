@@ -1,0 +1,76 @@
+{{- $Deliver := . -}}
+<main class="main single" id="main">
+    <div class="main-inner">
+
+        {{ partial "utils/data-attributes.html" . }}
+        {{- $smallCaps := .Scratch.Get "smallCaps" -}}
+        {{- $align := .Scratch.Get "align" -}}
+        {{- $type := .Scratch.Get "type" -}}
+        {{- $layout := .Scratch.Get "layout" -}}
+        {{- $indent := .Scratch.Get "indent" -}}
+
+        <article class="content post"{{ if $smallCaps }} data-small-caps="true"{{ end }}{{ with $align }} data-align="{{ . }}"{{ end }}{{ with $type }} data-type="{{ . }}"{{ end }}{{ with $layout }} data-layout="{{ . }}"{{ end }}{{ if $indent }} data-indent="true"{{ end }}>
+
+            <h1 class="post-title">{{ .Title }}</h1>
+
+            {{ with .Params.subtitle }}
+                {{- $raw := . -}}
+                {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
+                {{- $Content := $Deliver.Scratch.Get "Content" -}}
+                <div class="post-subtitle">{{ $Content | safeHTML }}</div>
+            {{ end }}
+
+            {{ if .Site.Params.displayPostDescription }}
+                {{ with .Params.description }}
+                    {{- $raw := . -}}
+                    {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
+                    {{- $Content := $Deliver.Scratch.Get "Content" -}}
+                    <div class="post-description">{{ $Content | safeHTML }}</div>
+                {{ end }}
+            {{ end }}
+
+            {{ if .Params.meta | default .Site.Params.enablePostMeta }}
+                {{ partial "components/post-meta.html" (dict "Deliver" . "isHome" false) }}
+            {{ end }}
+
+            {{ $enableTOC := .Params.toc | default .Site.Params.enableTOC -}}
+            {{- if $enableTOC -}}
+                {{- partial "utils/toc.html" . -}}
+                {{- $toc := .Scratch.Get "toc" }}
+                {{ $toc -}}
+            {{- end -}}
+
+            {{- partial "utils/content.html" . -}}
+            {{- $Content := .Scratch.Get "Content" -}}
+            <div class="post-body">
+                {{- $Content -}}
+            </div>
+
+        </article>
+
+        {{ if and .Site.Params.enableGoogleAdUnits (eq hugo.Environment "production") -}}
+            {{ partial "third-party/google-adsense-unit.html" . }}
+        {{- end }}
+
+        {{ partial "components/post-copyright.html" . }}
+
+        {{ partial "components/post-updated-badge.html" . }}
+
+        {{ partial "components/post-gitinfo.html" . }}
+
+        {{ partial "components/post-share.html" . }}
+
+        {{ partial "components/related-posts.html" . }}
+
+        {{ partial "components/post-tags.html" . }}
+
+        {{ partial "components/minimal-footer.html" . }}
+
+        {{ partial "components/minimal-footer-about.html" . }}
+
+        {{ partial "components/post-nav.html" . }}
+
+        {{ partial "components/comments.html" . }}
+
+    </div>
+</main>

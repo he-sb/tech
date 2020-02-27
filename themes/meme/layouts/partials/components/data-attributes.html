@@ -1,0 +1,38 @@
+<!-- Small Caps -->
+{{- .Scratch.Delete "smallCaps" -}}
+{{- if .Params.smallCaps | default .Site.Params.enableSmallCaps -}}
+    {{- .Scratch.Set "smallCaps" true -}}
+{{- end -}}
+
+<!-- Align -->
+{{- .Scratch.Delete "align" -}}
+{{- with .Params.align | default "default" -}}
+    {{- if ne $.Type "poetry" -}}
+        {{- if or (eq . "justify") (and $.Site.Params.enableJustify (eq . "default")) -}}
+            {{- $.Scratch.Set "align" "justify" -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq . "center" -}}
+        {{- $.Scratch.Set "align" "center" -}}
+    {{- end -}}
+{{- end -}}
+
+<!-- Type -->
+{{- .Scratch.Delete "type" -}}
+{{- with .Type -}}
+    {{- $.Scratch.Set "type" . -}}
+{{- end -}}
+
+<!-- Layout -->
+{{- .Scratch.Delete "layout" -}}
+{{- with .Params.layout -}}
+    {{- $.Scratch.Set "layout" . -}}
+{{- end -}}
+
+<!-- Paragraph Indent -->
+{{- .Scratch.Delete "indent" -}}
+{{- if ne .Type "poetry" -}}
+    {{- if (and .Site.Params.enableParagraphIndent .Params.indent) | default (and .Site.Params.enableParagraphIndent (eq .Site.Params.paragraphStyle "indent")) -}}
+        {{- .Scratch.Set "indent" true -}}
+    {{- end -}}
+{{- end -}}

@@ -1,0 +1,52 @@
+<script data-no-instant>InstantClick.init();</script>
+
+{{ if .Site.Params.enableBackToTopAutoHide }}
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+{{ end }}
+
+{{ if .Site.Params.enableDarkMode }}
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+{{ end -}}
+
+{{ if and .Site.Params.enableGoogleAnalytics (eq hugo.Environment "production") -}}
+    {{ if eq .Site.Params.trackingCodeType "gtag" -}}
+        <script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', '{{ .Site.Params.trackingID }}', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    {{ end -}}
+
+    {{ if eq .Site.Params.trackingCodeType "analytics" -}}
+        <script data-no-instant>
+            InstantClick.on('change', function () {
+                ga('send', 'pageview', location.pathname + location.search);
+            });
+        </script>
+    {{ end -}}
+{{ end -}}

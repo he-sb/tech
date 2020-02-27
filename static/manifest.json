@@ -1,0 +1,16 @@
+{
+    "name": "疯言疯语",
+    "short_name": "疯言疯语",
+    "icons": [
+        {
+            "src": "./icons/android-chrome-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#fff",
+    "background_color": "#fff",
+    "display": "standalone",
+	"orientation": "portrait-primary",
+	"start_url": "./"
+}
