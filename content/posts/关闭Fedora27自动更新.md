@@ -4,7 +4,7 @@ description = " "
 date = "2018-08-30T12:37:35+08:00"
 categories = ["linux"]
 tags = ["fedora"]
-slug = "diasble-fedora-27-auto-update"
+slug = "disable-fedora-27-auto-update"
 comments = true
 draft = false
 +++
