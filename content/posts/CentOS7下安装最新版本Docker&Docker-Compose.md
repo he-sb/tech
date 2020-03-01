@@ -97,3 +97,4 @@ curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compos
 
 # 赋予可执行权限
 chmod +x /usr/bin/docker-compose
+```
