@@ -36,6 +36,7 @@ docker run -d \
     -p 6888:6888/udp \
     -v /root/aria2-config:/config \
     -v /root/downloads:/downloads \
+    -e RCLONE=enable \
     p3terx/aria2-pro
 ```
 
@@ -60,6 +61,7 @@ firewall-cmd --reload
 * `-p 6888:6888` , `-p 6888:6888/udp` ：前者为 BT 监听端口 (TCP) ，后者为 DHT 监听端口 (UDP) ，冒号左边的宿主机端口可自定义
 * `-v /root/aria2-config:/config` ：配置文件目录映射，使配置文件持久化，冒号左边为宿主机路径，可自定义，路径内不要有中文
 * `-v /root/downloads:/downloads` ： 下载目录映射，冒号左边为宿主机路径，可自定义，路径内不要有中文
+* `-e RCLONE=enable` ：开启下载完成后自动上传网盘功能，需将宿主机目录 `~/.config/rclone/` 下的 `rclone.conf`（rclone配置文件）复制至 aria2-pro 配置文件目录，然后修改 aria2-pro 配置文件目录下 `autoupload.sh` 文件内的【网盘名称】和【目标路径】这两个选项即可
 
 ---
 
