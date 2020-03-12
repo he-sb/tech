@@ -2,15 +2,18 @@ os: linux
 dist: bionic
 language: go
 
+git:
+  depth: 1  # 指定只 clone 最后一次 commit
+  quiet: true  # 不包含日志
+
 go:
   - "1.14"  # 指定Golang 1.14
 
 env:
- global:
-   # Github Pages
-   - GH_REF: github.com/he-sb/tech
+  global:
+    # 设定 Github Pages 环境变量
+    - GH_REF: github.com/he-sb/tech
 
-# Specify which branches to build using a safelist
 # 分支白名单限制：只有 master 分支的提交才会触发构建
 branches:
   only:
