@@ -10,11 +10,11 @@ draft = false
 +++
 **系统环境：** CentOS 7 x64
 
-前几天用Rlcone挂载好了Google Drive（[使用Rclone挂载Google Drive](/posts/mount-google-drive-as-local-disk-with-rclone)），使用过程中遇到一点问题，记录一下。
+前几天用 Rclone 挂载好了 Google Drive（[使用Rclone挂载Google Drive](/posts/mount-google-drive-as-local-disk-with-rclone)），使用过程中遇到一点问题，记录一下。
 
 **0.**
 
-刚开始时向挂载的gd中上传文件直接使用 `mv /root/Downloads/* /mnt/he-sb` 命令将本地文件移动至挂载后的GD目录，小文件时没问题，但大文件有时会莫名出错，经大佬指点，改为使用 `rclone move source:path dest:path` 命令。
+刚开始时向挂载的 GD 中上传文件直接使用 `mv /root/Downloads/* /mnt/he-sb` 命令将本地文件移动至挂载后的GD目录，小文件时没问题，但大文件有时会莫名出错，经大佬指点，改为使用 `rclone move source:path dest:path` 命令。
 
 **1.**
 
@@ -44,19 +44,19 @@ Command move needs 2 arguments maximum
 
 **3.**
 
-`-v` 参数用于输出Rclone当前操作的进度。
+`-v` 参数用于输出 Rclone 当前操作的进度。
 
 **4.**
 
-`--transfers [int]` 参数修改线程数，即同时开始传输的文件数，避免占用资源（主要是内存）过多，该参数默认值为4。
+`--transfers [int]` 参数修改线程数，即同时开始传输的文件数，避免占用资源（主要是内存）过多，该参数默认值为 `4` 。
 
 **5.**
 
-`--bwlimit` 参数可以限制同步时占用的带宽，可以用此命令来避免触发GD的API每天750G的流量限制，此时使用 `--bwlimit 8M` 即可。
+`--bwlimit` 参数可以限制同步时占用的带宽，可以用此命令来避免触发 GD 的 API 每天 750G 的流量限制，此时使用 `--bwlimit 8M` 即可。
 
 **6.**
 
-`--disable copy` 参数禁用server side copy，同样用于突破单日750G的API流量限制。
+`--disable copy` 参数禁用 server side copy ，同样用于突破单日 750G 的 API 流量限制。
 
 **7.**
 
@@ -68,7 +68,7 @@ Command move needs 2 arguments maximum
 
 **9.**
 
-`rolne size [DriveName]:[Folder]` 获取指定路径下文件内容的总大小。
+`rclone size [DriveName]:[Folder]` 获取指定路径下文件内容的总大小。
 
 **10.**
 
@@ -76,4 +76,8 @@ Command move needs 2 arguments maximum
 
 **11.**
 
-Rclone配置文件路径为 `/root/.config/rclone/rlcone.conf` ，在VPS重装系统或迁移前可以备份下来免去重新配置的麻烦。
+Rclone 配置文件路径为 `/root/.config/rclone/rlcone.conf` ，在 VPS 重装系统或迁移前可以备份下来免去重新配置的麻烦。
+
+**12.**
+
+`--drive-server-side-across-configs` 参数可在团队盘复制中使用 server side copy ，不占用服务器流量和带宽。
