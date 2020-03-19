@@ -575,7 +575,7 @@ uglyURLs = false
 
     ## Utterances
     enableUtterances = true
-    utterancesRepo = "he-sb/tech"
+    utterancesRepo = "he-sb/blog-comments"
     utterancesIssueTerm = "title"
     utterancesTheme = "github-light"
     utterancesThemeDark = "photon-dark"
