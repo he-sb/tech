@@ -22,8 +22,8 @@ branches:
 before_install:
   # 安装依赖
   - sudo apt-get install libstdc++6
-  # 安装 hugo （version: v0.65.3）
-  - wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.65.3/hugo_extended_0.65.3_Linux-64bit.deb
+  # 安装 hugo （version: v0.66.0）
+  - wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb
   - sudo dpkg -i hugo.deb
 
 install:
