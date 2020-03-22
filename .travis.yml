@@ -1,9 +1,13 @@
 os: linux
 dist: bionic
-language: go
+language: python  # python 环境启动比 Golang 耗时少，hugo 为编译好的二进制文件，语言环境不影响 hugo 执行
 
-go:
-  - "1.14"  # 指定Golang 1.14
+python:
+  - "3.7"  # 指定 Python 3.7
+
+git:
+  depth: 1  # 只 clone 最后一次 commit ，加快速度
+  quiet: true
 
 env:
   global:
@@ -15,24 +19,21 @@ branches:
   only:
     - master
     
-before_install:
-  # 安装依赖
-  - sudo apt-get install libstdc++6
+install:  # 安装依赖
   # 安装 hugo （version: v0.66.0）
   - wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb
   - sudo dpkg -i hugo.deb
 
-install:
-# 运行hugo命令
-  - hugo
-  
 script:
-  # 部署
-  - cd ./public
-  - git init
-  - git config user.name "he-sb"
-  - git config user.email "0he.sb0@gmail.com"
-  - git add .
-  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
-  # Github Pages
-  - git push --force --quiet "https://$GITHUB_TOKEN@${GH_REF}" master:gh-pages
+  - hugo  # 生成网站
+  
+deploy:
+  provider: pages  # 部署到 Github Pages
+  skip-cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
+  local-dir: public  # 被推送到 GitHub Pages 的目录，可以指定为当前目录的绝对路径或相对路径
+  on:
+    branch: master  # 博客源码所在分支
+  target-branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
+  github-token: $GITHUB_TOKEN
+  verbose: true  # 显示 Travis 的log
+  keep-history: true  # 保持 target-branch 分支的提交记录
