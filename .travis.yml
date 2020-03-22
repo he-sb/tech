@@ -35,5 +35,4 @@ deploy:
     branch: master  # 博客源码所在分支
   target-branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
   github-token: $GITHUB_TOKEN
-  verbose: true  # 显示 Travis 的log
   keep-history: true  # 保持 target-branch 分支的提交记录
