@@ -2,10 +2,6 @@ os: linux
 dist: bionic
 language: go
 
-git:
-  depth: 1  # 指定只 clone 最后一次 commit
-  quiet: true  # 不包含日志
-
 go:
   - "1.14"  # 指定Golang 1.14
 
