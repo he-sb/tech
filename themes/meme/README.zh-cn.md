@@ -9,9 +9,9 @@
 
 MemE 是一个强大且可高度定制的 [GoHugo](https://github.com/gohugoio/hugo) 博客主题，专为个人博客设计。MemE 主题专注于优雅、简约、现代，以及代码的正确性。同时，希望你将像欣赏一个模因一样欣赏 MemE，希望你将像分享一个模因一样分享 MemE，就像你的博客和文章所做的那样😝！
 
-## Lighthouse 测试报告
+## 预览
 
-![lighthouse-report.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/lighthouse-report.png)
+![tn.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/tn.png)
 
 ## 快速开始
 
@@ -33,18 +33,15 @@ https://gohugo.io/getting-started/quick-start/
 ```sh
 ~ $ cd blog
 ~/blog $ git init
-~/blog $ git submodule add https://github.com/reuixiy/hugo-theme-meme.git themes/meme
-```
-
-如何将 MemE 更新到最新版本？
-
-```sh
-~/blog $ git submodule update --rebase --remote
+~/blog $ git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 ```
 
 ### 开始写作
 
-1. 将 `config.toml` 替换为 [config.toml](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/zh-cn/config.toml)。
+1. 将 `config.toml` 替换为[示例配置](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/zh-cn/config.toml)。
+   ```sh
+   ~/blog $ rm config.toml && cp themes/meme/config-examples/zh-cn/config.toml config.toml
+   ```
 
 2. 新建一篇文章和一个关于页面：
    ```sh
@@ -56,6 +53,26 @@ https://gohugo.io/getting-started/quick-start/
    ```sh
    ~/blog $ hugo server -D
    ```
+
+## 更新 MemE
+
+```sh
+~/blog $ git submodule update --rebase --remote
+```
+
+如果失败了，请尝试：
+
+1. 删除 `meme` 文件夹，比如
+   ```sh
+   ~/blog $ rm -rf themes/meme
+   ```
+
+2. 重新克隆 MemE
+   ```sh
+   ~/blog $ git clone --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+   ```
+
+**特别注意**：MemE 主题有时会新增一些全新功能或一些毁灭改动，所以在你更新完后，请务必检查 [`config.toml` 的改动历史](https://github.com/reuixiy/hugo-theme-meme/commits/master/config-examples)并将相应内容也更新！
 
 ## Awesome MemE
 
@@ -89,6 +106,7 @@ aliases | * | array
 markup | * | string
 meta | set `false` to disable post-meta | boolean, MemE only
 toc | display TOC | boolean, override `enableTOC` in `config.toml`, MemE only
+tocNum | display TOC number | boolean, override `displayTOCNum` in `config.toml`, MemE only
 displayCopyright | display post-copyright | boolean, override `displayPostCopyright` in `config.toml`, MemE only
 badge | display updated-badge | boolean, override `displayUpdatedBadge` in `config.toml`, MemE only
 gitinfo | display post-gitinfo | boolean, override `displayPostGitInfo` in `config.toml`, MemE only
@@ -96,6 +114,7 @@ share | display post-share | boolean, override `displayPostShare` in `config.tom
 related | display related-posts | boolean, override `displayRelatedPosts` in `config.toml`, MemE only
 katex | add KaTeX support | boolean, override `enableKaTeX` in `config.toml`, MemE only
 mathjax | add MathJax support | boolean, override `enableMathJax` in `config.toml`, MemE only
+mermaid | add Mermaid support | boolean, override `enableMermaid` in `config.toml`, MemE only
 comments | set `false` to disable comments in mainSections or set `true` to enable comments in non-mainSections | boolean, MemE only
 smallCaps | small caps? | boolean, override `enableSmallCaps` in `config.toml`, MemE only
 dropCap | drop cap? | boolean, override `enableDropCap` in `config.toml`, MemE only

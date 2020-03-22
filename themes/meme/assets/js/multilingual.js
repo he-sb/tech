@@ -1,7 +1,10 @@
-function langSwitcherOver() {
-    document.getElementById("langs").setAttribute("style", "display:block");
-}
+const langSwitcher = document.getElementById('lang-switcher');
+const langs = document.getElementById('langs');
 
-function langSwitcherOut() {
-    document.getElementById("langs").setAttribute("style", "display:none");
-}
+langSwitcher.addEventListener('mouseover', function() {
+    langs.style = 'display: block';
+});
+
+langSwitcher.addEventListener('mouseout', function() {
+    langs.style = 'display: none';
+});

@@ -33,3 +33,29 @@
         margin: 0 auto;
     }
 }
+
+[data-toc-num="true"] {
+    .contents {
+        ol {
+            counter-reset: item;
+            li {
+                &::before {
+                    counter-increment: item;
+                    margin-right: 0.5em;
+                }
+            }
+        }
+    }
+    // First level
+    .contents > ol > li {
+        &::before {
+            content: counters(item, ".") ".";
+        }
+    }
+    // Sub level
+    .contents li > ol > li {
+        &::before {
+            content: counters(item, ".");
+        }
+    }
+}

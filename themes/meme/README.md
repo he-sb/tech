@@ -9,9 +9,9 @@ English |
 
 MemE is a powerful and highly customizable [GoHugo](https://github.com/gohugoio/hugo) theme for personal blogs. MemE focuses on elegance, simplicity, modernity, and code correctness. Also, I hope you would enjoy MemE like a meme and share MemE like a meme! Just like what your blog and articles do! 😝
 
-## Lighthouse Report
+## Preview
 
-![lighthouse-report.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/lighthouse-report.png)
+![tn.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/tn.png)
 
 ## Quick Start
 
@@ -33,18 +33,15 @@ For users of other systems, see: https://gohugo.io/getting-started/installing/
 ```sh
 ~ $ cd blog
 ~/blog $ git init
-~/blog $ git submodule add https://github.com/reuixiy/hugo-theme-meme.git themes/meme
-```
-
-How to update MemE to the latest version?
-
-```sh
-~/blog $ git submodule update --rebase --remote
+~/blog $ git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 ```
 
 ### Blogging
 
-1. Replace `config.toml` with [config.toml](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/en-us/config.toml).
+1. Replace `config.toml` with [config examples](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/en/config.toml).
+   ```sh
+   ~/blog $ rm config.toml && cp themes/meme/config-examples/en/config.toml config.toml
+   ```
 
 2. Create a new post and the about page:
    ```sh
@@ -56,6 +53,26 @@ How to update MemE to the latest version?
    ```sh
    ~/blog $ hugo server -D
    ```
+
+## Update MemE
+
+```sh
+~/blog $ git submodule update --rebase --remote
+```
+
+If failed, try:
+
+1. Delete `meme` folder, e.g.
+   ```sh
+   ~/blog $ rm -rf themes/meme
+   ```
+
+2. Clone MemE again
+   ```sh
+   ~/blog $ git clone --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+   ```
+
+**Note that** MemE makes some brand new features or *breaking changes* sometimes, so please be sure to check [the modification history of `config.toml`](https://github.com/reuixiy/hugo-theme-meme/commits/master/config-examples) and update the related items after the update!
 
 ## Awesome MemE
 
@@ -89,6 +106,7 @@ aliases | * | array
 markup | * | string
 meta | set `false` to disable post-meta | boolean, MemE only
 toc | display TOC | boolean, override `enableTOC` in `config.toml`, MemE only
+tocNum | display TOC number | boolean, override `displayTOCNum` in `config.toml`, MemE only
 displayCopyright | display post-copyright | boolean, override `displayPostCopyright` in `config.toml`, MemE only
 badge | display updated-badge | boolean, override `displayUpdatedBadge` in `config.toml`, MemE only
 gitinfo | display post-gitinfo | boolean, override `displayPostGitInfo` in `config.toml`, MemE only
@@ -96,6 +114,7 @@ share | display post-share | boolean, override `displayPostShare` in `config.tom
 related | display related-posts | boolean, override `displayRelatedPosts` in `config.toml`, MemE only
 katex | add KaTeX support | boolean, override `enableKaTeX` in `config.toml`, MemE only
 mathjax | add MathJax support | boolean, override `enableMathJax` in `config.toml`, MemE only
+mermaid | add Mermaid support | boolean, override `enableMermaid` in `config.toml`, MemE only
 comments | set `false` to disable comments in mainSections or set `true` to enable comments in non-mainSections | boolean, MemE only
 smallCaps | small caps? | boolean, override `enableSmallCaps` in `config.toml`, MemE only
 dropCap | drop cap? | boolean, override `enableDropCap` in `config.toml`, MemE only

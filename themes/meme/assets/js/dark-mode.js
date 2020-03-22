@@ -1,14 +1,14 @@
 // Back to Previous Mode & Respect System Preferences
 // `userPrefers`, `darkModeMediaQuery`, `lightModeMediaQuery` is defined in layouts/partials/head.html
 
-if (userPrefers === "dark") {
-    changeMode("🌙", "chroma", "chroma-dark");
-} else if (userPrefers === "light") {
-    changeMode("🌞", "chroma-dark", "chroma");
+if (userPrefers === 'dark') {
+    changeMode('dark');
+} else if (userPrefers === 'light') {
+    changeMode('light');
 } else if (darkModeMediaQuery.matches) {
-    changeMode("🌙", "chroma", "chroma-dark");
+    changeMode('dark');
 } else if (lightModeMediaQuery.matches) {
-    changeMode("🌞", "chroma-dark", "chroma");
+    changeMode('light');
 }
 
 // Reactive Dark Mode
@@ -18,74 +18,83 @@ if (userPrefers === "dark") {
 darkModeMediaQuery.addListener((e) => {
     const darkModeOn = e.matches;
     if (darkModeOn) {
-        changeModeMeta("dark");
-        changeMode("🌙", "chroma", "chroma-dark");
-        setMode("dark");
+        changeModeMeta('dark');
+        changeMode('dark');
+        setMode('dark');
     }
 });
 
 lightModeMediaQuery.addListener((e) => {
     const lightModeOn = e.matches;
     if (lightModeOn) {
-        changeModeMeta("light");
-        changeMode("🌞", "chroma-dark", "chroma");
-        setMode("light");
+        changeModeMeta('light');
+        changeMode('light');
+        setMode('light');
     }
 });
 
-// Mode Switcher
+// Theme Switcher
 // https://derekkedziora.com/blog/dark-mode
 
-function modeSwitcher() {
+const themeSwitcher = document.getElementById('theme-switcher');
+
+themeSwitcher.addEventListener('click', function() {
     const currentMode = document.documentElement.getAttribute('data-theme');
-    if (currentMode === "dark") {
-        changeModeMeta("light");
-        changeMode("🌞", "chroma-dark", "chroma");
-        setMode("light");
+
+    if (currentMode === 'dark') {
+        changeModeMeta('light');
+        changeMode('light');
+        setMode('light');
     } else {
-        changeModeMeta("dark");
-        changeMode("🌙", "chroma", "chroma-dark");
-        setMode("dark");
+        changeModeMeta('dark');
+        changeMode('dark');
+        setMode('dark');
     }
-}
+});
 
 // Sync Across Tabs
 // https://codepen.io/tevko/pen/GgWYpg
 
 window.addEventListener('storage', function (event) {
-    if (event.newValue === "dark") {
-        changeModeMeta("dark");
-        changeMode("🌙", "chroma", "chroma-dark");
+    if (event.newValue === 'dark') {
+        changeModeMeta('dark');
+        changeMode('dark');
     } else {
-        changeModeMeta("light");
-        changeMode("🌞", "chroma-dark", "chroma");
+        changeModeMeta('light');
+        changeMode('light');
     }
 });
 
 // Functions
 
-function changeMode() {
-    document.getElementById("theme-toggle").innerHTML = arguments[0];
+function changeMode(theme) {
+    var isDark = theme === 'dark';
 
-    var els = [].slice.apply(document.getElementsByClassName(arguments[1]));
-    for (var i = 0; i < els.length; i++) {
-        els[i].className = arguments[2];
-    }
+    // Change Theme Toggle Emoji
+    document.getElementById('theme-switcher').innerHTML = isDark ? '🌙' : '🌞';
 
-    // Utterances
-    // https://github.com/utterance/utterances/issues/229
+    // Change Chroma Code Highlight Theme
+    var oldChromaTheme = isDark ? 'chroma' : 'chroma-dark';
+    var newChromaTheme = isDark ? 'chroma-dark' : 'chroma';
+
+    [].slice.apply(document.getElementsByClassName(oldChromaTheme)).forEach((e) => {
+        e.className = newChromaTheme;
+    });
+
     {{ if and .Site.Params.enableUtterances (eq hugo.Environment "production") }}
-        if (arguments[0] === "🌙") {
-            changeUtterancesTheme("{{ .Site.Params.utterancesThemeDark }}");
+        // Change Utterances Comments Theme
+        // https://github.com/utterance/utterances/issues/229
+        if (isDark) {
+            changeUtterancesTheme('{{ .Site.Params.utterancesThemeDark }}');
         } else {
-            changeUtterancesTheme("{{ .Site.Params.utterancesTheme }}");
+            changeUtterancesTheme('{{ .Site.Params.utterancesTheme }}');
         }
-        function changeUtterancesTheme() {
+        function changeUtterancesTheme(theme) {
             const iframe = document.querySelector('.utterances-frame');
             if (iframe !== null) {
                 const message = {
                     type: 'set-theme',
-                    theme: arguments[0]
+                    theme: theme
                 };
                 iframe.contentWindow.postMessage(message, 'https://utteranc.es');
             }
@@ -93,6 +102,6 @@ function changeMode() {
     {{ end }}
 }
 
-function setMode() {
-    window.localStorage.setItem('theme', arguments[0]);
+function setMode(theme) {
+    window.localStorage.setItem('theme', theme);
 }

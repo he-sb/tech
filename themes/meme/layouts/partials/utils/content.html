@@ -1,5 +1,5 @@
 {{- $Deliver := . -}}
-{{- $raw := .RawContent -}}
+{{- $raw := .Content -}}
 {{- partial "utils/markdownify.html" (dict "Deliver" . "raw" $raw "isContent" true) -}}
 
 <!-- Link Headings to TOC -->
@@ -210,20 +210,11 @@
 {{- if .Site.Params.enableHighlight -}}
     {{- if and .Site.Params.enableDarkMode (eq .Site.Params.defaultTheme "dark") -}}
         {{- $Content := .Scratch.Get "Content" -}}
-        {{- $regexPatternDarkmode := `(<pre class=")(chroma)(">)` -}}
+        {{- $regexPatternDarkmode := `(<(div|pre) class=")chroma(">)` -}}
         {{- $regexReplacementDarkmode := `${1}chroma-dark${3}` -}}
         {{- $Content := $Content | replaceRE $regexPatternDarkmode $regexReplacementDarkmode | safeHTML -}}
         {{- .Scratch.Set "Content" $Content -}}
     {{- end -}}
-{{- end -}}
-
-<!-- Medium Zoom -->
-{{- $Content := .Scratch.Get "Content" -}}
-{{- if .Site.Params.enableMediumZoom -}}
-    {{- $regexPatternMediumZoom := `(<img)(.[^>]+)( />|>)` -}}
-    {{- $regexReplacementMediumZoom := `$1$2 data-zoomable$3` -}}
-    {{- $Content := $Content | replaceRE $regexPatternMediumZoom $regexReplacementMediumZoom | safeHTML -}}
-    {{- .Scratch.Set "Content" $Content -}}
 {{- end -}}
 
 <!-- Custom -->

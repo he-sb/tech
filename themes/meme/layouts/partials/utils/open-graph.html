@@ -5,7 +5,6 @@
 <!-- https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/opengraph.html -->
 {{- $Deliver := .Deliver -}}
 {{- $description := .description -}}
-{{- $keywords := .keywords -}}
 <!-- Title -->
 {{- partial "utils/title.html" $Deliver -}}
 {{- $rawTitle := $Deliver.Scratch.Get "rawTitle" -}}
@@ -19,27 +18,15 @@
 <!-- Images -->
 {{- partial "utils/images.html" $Deliver -}}
 {{- $images := $Deliver.Scratch.Get "images" -}}
-<!-- languageCode -->
-{{- if $Deliver.Site.IsMultiLingual -}}
-    {{- $languageCode := readFile "config.toml" | findRE `languageCode = "([^"]+)` | uniq -}}
-    {{- with $languageCode -}}
-        {{- $Deliver.Scratch.Delete "languageCode" -}}
-        {{- range . -}}
-            {{- $languageCode := replaceRE `languageCode = "([^"]+)` `$1` . -}}
-            {{- $Deliver.Scratch.Add "languageCode" (slice $languageCode) -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}
-{{- $languageCode := $Deliver.Scratch.Get "languageCode" -}}
 
 <meta property="og:title" content="{{ $rawTitle }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:url" content="{{ $Deliver.Permalink }}" />
 <meta property="og:site_name" content="{{ $Deliver.Site.Title }}" />
-<meta property="og:locale" content="{{ $Deliver.Site.LanguageCode }}" />
-{{- if $Deliver.Site.IsMultiLingual -}}
-    {{- range $languageCode -}}
-        {{ if ne . $Deliver.Site.LanguageCode }}
+<meta property="og:locale" content="{{ $Deliver.Site.Language.Lang }}" />
+{{- if and $Deliver.Site.IsMultiLingual $Deliver.IsTranslated -}}
+    {{- range $Deliver.Site.Languages -}}
+        {{ if ne .Lang $Deliver.Site.Language.Lang }}
             <meta property="og:locale:alternate" content="{{ . }}" />
         {{ end }}
     {{- end -}}
@@ -61,7 +48,6 @@
         {{ printf `<meta property="article:expiration_time" content="%s" />` ($Deliver.ExpiryDate.Format "2006-01-02T15:04:05-07:00") | safeHTML }}
     {{- end }}
     <meta property="article:section" content="{{ $Deliver.Section }}" />
-    <meta property="article:tag" content="{{ $keywords }}" />
 {{ else -}}
     <meta property="og:type" content="website" />
 {{- end }}
