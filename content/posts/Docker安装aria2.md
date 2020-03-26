@@ -2,7 +2,7 @@
 title = "Docker 安装 aria2"
 description = " "
 date = "2020-03-02T19:42:21+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["docker","aria2"]
 slug = "install-aria2-through-docker"
 comments = true

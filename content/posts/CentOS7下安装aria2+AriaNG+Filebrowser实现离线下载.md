@@ -2,7 +2,7 @@
 title = "CentOS 7 下安装 aria2 + AriaNG + Filebrowser 实现离线下载"
 description = " "
 date = "2018-06-15"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["aria2","centos","filebrowser","下载"]
 slug = "setup-offline-download-service-aria2-ariang-filebrowser-on-centos7"
 comments = true

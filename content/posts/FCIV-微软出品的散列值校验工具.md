@@ -2,7 +2,7 @@
 title = "FCIV - 微软出品的散列值校验工具"
 description = " "
 date = "2019-01-03T12:37:35+08:00"
-categories = ["windows"]
+categories = ["奇技淫巧"]
 tags = ["fciv","安全","校验","md5","sha1"]
 slug = "fciv-a-file-checksum-integrity-verifier-of-microsoft"
 comments = true

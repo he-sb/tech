@@ -2,7 +2,7 @@
 title = "CentOS 7 下安装最新版本 Docker & Docker Compose"
 description = " "
 date = "2020-03-01T19:12:43+08:00"
-categories = ["linux"]
+categories = ["Linux"]
 tags = ["centos","docker"]
 slug = "install-latest-version-of-docker&compose-in-centos7"
 comments = true

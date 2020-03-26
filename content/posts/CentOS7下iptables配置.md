@@ -2,7 +2,7 @@
 title = "CentOS 7 下 iptables 配置"
 description = " "
 date = "2018-11-23T12:37:35+08:00"
-categories = ["linux"]
+categories = ["Linux"]
 tags = ["iptables","防火墙","centos"]
 slug = "centos7-iptables-configuration"
 comments = true

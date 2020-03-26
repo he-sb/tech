@@ -2,7 +2,7 @@
 title = "使用 Rclone 挂载 Google Drive"
 description = " "
 date = "2018-12-04T12:37:35+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["rclone","挂载","gd"]
 slug = "mount-google-drive-as-local-disk-with-rclone"
 comments = true

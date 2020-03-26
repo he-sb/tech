@@ -2,7 +2,7 @@
 title = "IPv6 相关配置"
 description = " "
 date = "2018-12-09T12:37:35+08:00"
-categories = ["windows"]
+categories = ["Windows"]
 tags = ["ipv6","dns","hosts"]
 slug = "ipv6-related-system-configuration"
 comments = true

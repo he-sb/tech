@@ -2,7 +2,7 @@
 title = "使用 Rclone 挂载 One Drive"
 description = " "
 date = "2018-12-06T14:37:35+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["rclone","挂载","od"]
 slug = "mount-microsoft-one-drive-as-local-disk-with-rclone"
 comments = true

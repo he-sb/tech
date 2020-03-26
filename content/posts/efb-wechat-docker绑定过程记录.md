@@ -2,7 +2,7 @@
 title = "efb-wechat-docker 绑定过程记录"
 description = " "
 date = "2020-02-24T12:37:35+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["efb","wechat","docker","telegram"]
 slug = "usage-of-efbwechat-docker"
 comments = true

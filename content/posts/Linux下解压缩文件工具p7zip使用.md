@@ -2,7 +2,7 @@
 title = "Linux 下解压缩文件工具 p7zip 使用"
 description = " "
 date = "2019-07-02T12:37:35+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["p7zip","解压"]
 slug = "usage-of-p7zip"
 comments = true

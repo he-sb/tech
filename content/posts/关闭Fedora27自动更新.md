@@ -2,7 +2,7 @@
 title = "关闭 Fedora 27 自动更新"
 description = " "
 date = "2018-08-30T12:37:35+08:00"
-categories = ["linux"]
+categories = ["Linux"]
 tags = ["fedora"]
 slug = "disable-fedora-27-auto-update"
 comments = true

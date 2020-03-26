@@ -2,7 +2,7 @@
 title = "Rclone 使用小记"
 description = " "
 date = "2018-12-06T19:37:35+08:00"
-categories = ["linux"]
+categories = ["奇技淫巧"]
 tags = ["rclone"]
 slug = "usage-of-rclone"
 comments = true

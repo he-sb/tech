@@ -2,7 +2,7 @@
 title = "aria2 加入开机启动"
 description = " "
 date = "2018-08-17T22:02:25+08:00"
-categories = ["linux"]
+categories = ["Linux"]
 tags = ["aria2","fedora"]
 slug = "aria2-auto-start-when-system-boot"
 comments = true
