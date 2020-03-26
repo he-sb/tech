@@ -1,5 +1,5 @@
 +++
-title = "解决NetworkManager服务在运行Docker时占用内存过高"
+title = "解决 NetworkManager 服务在运行 Docker 时占用内存过高"
 description = " "
 date = "2020-02-29T23:39:48+08:00"
 categories = ["linux"]

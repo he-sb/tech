@@ -1,5 +1,5 @@
 +++
-title = "FCIV-微软出品的散列值校验工具"
+title = "FCIV - 微软出品的散列值校验工具"
 description = " "
 date = "2019-01-03T12:37:35+08:00"
 categories = ["windows"]

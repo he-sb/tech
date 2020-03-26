@@ -1,5 +1,5 @@
 +++
-title = "KVM开启暴力魔改BBR"
+title = "KVM 开启暴力魔改 BBR"
 description = " "
 date = "2018-12-06T13:37:35+08:00"
 categories = ["linux"]

@@ -1,5 +1,5 @@
 +++
-title = "OpenVZ开启暴力魔改BBR"
+title = "OpenVZ 开启暴力魔改 BBR"
 description = " "
 date = "2018-12-06T12:37:35+08:00"
 categories = ["linux"]

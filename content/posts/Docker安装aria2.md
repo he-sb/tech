@@ -1,5 +1,5 @@
 +++
-title = "Docker安装aria2"
+title = "Docker 安装 aria2"
 description = " "
 date = "2020-03-02T19:42:21+08:00"
 categories = ["linux"]

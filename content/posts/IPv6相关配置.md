@@ -1,5 +1,5 @@
 +++
-title = "IPv6相关配置"
+title = "IPv6 相关配置"
 description = " "
 date = "2018-12-09T12:37:35+08:00"
 categories = ["windows"]

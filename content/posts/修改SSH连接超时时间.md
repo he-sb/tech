@@ -1,5 +1,5 @@
 +++
-title = "修改SSH连接超时时间"
+title = "修改 SSH 连接超时时间"
 description = " "
 date = "2018-12-06T16:37:35+08:00"
 categories = ["linux"]

@@ -1,5 +1,5 @@
 +++
-title = "CentOS 7下安装aria2+AriaNG+Filebrowser实现离线下载"
+title = "CentOS 7 下安装 aria2 + AriaNG + Filebrowser 实现离线下载"
 description = " "
 date = "2018-06-15"
 categories = ["linux"]

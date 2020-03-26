@@ -1,5 +1,5 @@
 +++
-title = "efb-wechat-docker绑定过程记录"
+title = "efb-wechat-docker 绑定过程记录"
 description = " "
 date = "2020-02-24T12:37:35+08:00"
 categories = ["linux"]

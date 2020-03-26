@@ -1,5 +1,5 @@
 +++
-title = "Linux下解压缩文件工具p7zip使用"
+title = "Linux 下解压缩文件工具 p7zip 使用"
 description = " "
 date = "2019-07-02T12:37:35+08:00"
 categories = ["linux"]

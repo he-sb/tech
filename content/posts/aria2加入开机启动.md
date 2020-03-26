@@ -1,5 +1,5 @@
 +++
-title = "aria2加入开机启动"
+title = "aria2 加入开机启动"
 description = " "
 date = "2018-08-17T22:02:25+08:00"
 categories = ["linux"]

@@ -1,5 +1,5 @@
 +++
-title = "关闭Fedora27自动更新"
+title = "关闭 Fedora 27 自动更新"
 description = " "
 date = "2018-08-30T12:37:35+08:00"
 categories = ["linux"]
@@ -8,7 +8,7 @@ slug = "disable-fedora-27-auto-update"
 comments = true
 draft = false
 +++
-**系统环境：** Fedora27 Desktop Workstation x64
+**系统环境：** Fedora 27 Desktop Workstation x64
 
 先安装 `dconf-editor`
 
