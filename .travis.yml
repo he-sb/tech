@@ -1,6 +1,7 @@
 os: linux
 dist: bionic
 language: python  # python 环境启动比 Golang 耗时少，hugo 为编译好的二进制文件，语言环境不影响 hugo 执行
+sudo: required
 
 python:
   - "3.7"  # 指定 Python 3.7
@@ -20,7 +21,9 @@ branches:
     - master
     
 before_install:
-  - export TZ='Asian/Shanghai'  # 更改时区
+  - timedatectl status  # 查看当前时区
+  - sudo timedatectl set-timezone Asia/Shanghai  # 更改时区为东八区
+  - timedatectl status  # 再次查看当前时区
 
 install:  # 安装依赖
   # 安装 hugo （version: v0.66.0）
