@@ -1,7 +1,6 @@
 os: linux
 dist: bionic
 language: python  # python 环境启动比 Golang 耗时少，hugo 为编译好的二进制文件，语言环境不影响 hugo 执行
-sudo: required
 
 python:
   - "3.7"  # 指定 Python 3.7
@@ -36,10 +35,12 @@ script:
   
 deploy:
   provider: pages  # 部署到 Github Pages
-  skip-cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
-  local-dir: public  # 被推送到 GitHub Pages 的目录，可以指定为当前目录的绝对路径或相对路径
+  edge: true # opt in to dpl v2
+  # skip_cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
+  local_dir: public  # 被推送到 GitHub Pages 的目录，可以指定为当前目录的绝对路径或相对路径
   on:
     branch: master  # 博客源码所在分支
-  target-branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
-  github-token: $GITHUB_TOKEN
-  keep-history: true  # 保持 target-branch 分支的提交记录
+  target_branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
+  token: $GITHUB_TOKEN
+  strategy: git
+  # keep_history: true  # 保持 target-branch 分支的提交记录
