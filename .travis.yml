@@ -18,11 +18,11 @@ env:
 branches:
   only:
     - master
-    
-before_install:
-  - timedatectl status  # 查看当前时区
-  - sudo timedatectl set-timezone Asia/Shanghai  # 更改时区为东八区
-  - timedatectl status  # 再次查看当前时区
+
+# before_install:
+#   - timedatectl status  # 查看当前时区
+#   - sudo timedatectl set-timezone Asia/Shanghai  # 更改时区为东八区
+#   - timedatectl status  # 再次查看当前时区
 
 install:  # 安装依赖
   # 安装 hugo （version: v0.66.0）
