@@ -10,7 +10,7 @@ draft = true
 
 本博客使用 [Hugo](https//gohugo.io/) 生成，[Github Pages](https://pages.github.com/) 服务来部署，新建一篇文章并发布，常规的操作流程是这样的：
 
-```shell
+```bash
 hugo new posts/new-article.md
 # 编辑新文章
 hugo
@@ -28,7 +28,7 @@ git push
 
 经过一番学习，发现不少大佬都在用 [Travis CI](https//travis-ci.org/) 这个持续集成（ Continuous Integration ，简称 CI ）服务来使静态博客的发布过程自动化，思路为：
 
-1. 使用 git 来管理源代码，即用于生成静态站点的配置文件及文章的 `markdown` 源文件等。
+1. 使用 git 来管理源代码，即用于生成静态站点的配置文件及文章的 `markdown` 源文件等（以下统一称为“源文件”）。
 
 2. `git push` 源文件至 Github 后会自动根据配置文件调用 Travis CI 的服务来完成生成静态站点文件及部署至 Github Pages 等后续操作，不需手动干预。
 
@@ -64,7 +64,7 @@ git push
 本博客就是这种情况，仓库地址：[https://github.com/he-sb/tech/](https://github.com/he-sb/tech/) ，源文件所在分支为 `master` ，站点文件所在分支为 `gh-pages` 。
 
 在源文件仓库的根目录下新建一个 `.travis.yml` 文件，并写入以下内容：
-```yml
+```yaml
 os: linux
 dist: bionic
 language: python  # python 环境启动比 Golang 耗时少，hugo 为编译好的二进制文件，语言环境不影响 hugo 执行
@@ -93,7 +93,7 @@ install:  # 安装依赖
 
 script:
   - hugo  # 生成网站
-  
+
 deploy:
   provider: pages  # 部署到 Github Pages
   skip_cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
@@ -112,7 +112,7 @@ deploy:
 
 在源文件仓库的根目录下新建 `.travis.yml` 文件，并写入以下内容：
 
-```yml
+```yaml
 os: linux
 dist: bionic
 language: python  # python 环境启动比 Golang 耗时少，hugo 为编译好的二进制文件，语言环境不影响 hugo 执行
@@ -133,7 +133,7 @@ env:
 branches:
   only:
     - master
-    
+
 install:  # 安装依赖
   # 安装 hugo （version: v0.66.0）
   - wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb
@@ -141,7 +141,7 @@ install:  # 安装依赖
 
 script:
   - hugo  # 生成网站
-  
+
 after_script:  # 部署至 Github Pages
   - cd ./public
   - git init
@@ -153,3 +153,15 @@ after_script:  # 部署至 Github Pages
 ```
 
 配置完毕后，只要有源文件仓库有新的 `push` 操作，Travis CI 即会按照编辑好的配置文件来自动化站点的构建和部署，也就是说，俺只需操心源文件的编辑改动即可，不用再手动部署 Github Pages 了，方便了许多。
+
+## 4. 一点小问题
+
+该方案目前还存在一点小 bug —— 每次自动构建并发布后网站内所有文章的修改日期均为构建时的最新时间，目前并不知道该如何修改……
+
+---
+
+*参考链接：*
+
+1. [使用 Travis CI 自动部署 Hugo 博客 | Mogeko`s Blog](https://mogeko.me/2018/028/)
+
+2. [Hugo 博客使用 Travis CI 部署 - A simple blog](https://rileyng.github.io/post/hugo-travis/)
