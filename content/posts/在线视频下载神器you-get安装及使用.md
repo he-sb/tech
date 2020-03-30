@@ -10,11 +10,11 @@ draft = false
 +++
 **系统环境：** Windows 10 专业版 1803 x64
 
-## 本文写作目的
+## 0. 本文写作目的
 
 You-Get 是一个命令行下的小工具，可以便捷地下载各个视频网站的在线视频。网络上介绍 You-Get 用法的文章很多，但是就本人踩坑过程中的体验，阻碍小白用户的最大障碍其实并不在于 You-Get 本身，而是 `Python3` 和 `ffmpeg` 这两个必不可少的依赖，其安装过程对于小白用户不太友好，遂有此文。
 
-## 先安装 Python 3.7 环境
+## 1. 先安装 Python 3.7 环境
 
 官网下载windows x64用的安装包即可，
 
@@ -29,7 +29,7 @@ Python 3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD6
 Type "help", "copyright", "credits" or "license" for more information.
 ```
 
-## 再安装 ffmpeg
+## 2. 再安装 ffmpeg
 
 ffmpeg（[官网链接](https://www.ffmpeg.org/)）是一个命令行下的视频格式转换等的工具，功能非常强大，感兴趣的可以自行搜索其用法，此处安装的目的是 You-Get 下载分了块的视频后需要调用 ffmpeg 来合并分块。
 
@@ -57,7 +57,7 @@ usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfi
 Use -h to get full help or, even better, run 'man ffmpeg'
 ```
 
-## 安装 You-Get
+## 3. 安装 You-Get
 
 打开cmd，输入
 
