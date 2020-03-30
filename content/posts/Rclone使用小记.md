@@ -80,4 +80,4 @@ Rclone 配置文件路径为 `/root/.config/rclone/rlcone.conf` ，在 VPS 重�
 
 **12.**
 
-`--drive-server-side-across-configs` 参数可在团队盘复制中使用 server side copy ，不占用服务器流量和带宽。
+`--drive-server-side-across-configs` 参数可在团队盘复制中使用 Server Side Copy ，不占用服务器流量和带宽。
