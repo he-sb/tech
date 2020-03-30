@@ -150,7 +150,7 @@ Choose a number from below, or type in an existing value
    \ "siteid"
  5 / Search a Sharepoint site
    \ "search"
-Your choice> 1    #因为我这个One Drive账号是商业版，所以选了1，根据实际情况来选
+Your choice> 1    #因为俺这个One Drive账号是商业版，所以选了1，根据实际情况来选
 Found 1 drives, please select the one you want to use:
 0: OneDrive (business) id=********    #手动打码嘿嘿嘿
 Chose drive to use:> 0    #输入0就好了
@@ -162,7 +162,7 @@ y/n> y    #输y确认
 
 [j0ker]
 type = onedrive
-token = ******    #保护隐私，token内容已被我手动打码了嘿嘿嘿
+token = ******    #保护隐私，token内容已被俺手动打码了嘿嘿嘿
 drive_id = b!vDx1HhJobUaNvJPugzWSWtOoZz2uN9hFhCdhE593vj7CcCS_6TKbR5hW7vI4rjY1
 drive_type = business
 

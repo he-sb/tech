@@ -31,7 +31,7 @@ aria2_new_ver=$(wget --no-check-certificate -qO- https://api.github.com/repos/q3
 
 手动获取版本
 
-首先访问Github的[Releases页面](https://github.com/aria2/aria2/releases)查看版本号，例如 `1.34.0` ，然后我们执行如下代码后即可继续下面的【下载安装】步骤了
+首先访问Github的[Releases页面](https://github.com/aria2/aria2/releases)查看版本号，例如 `1.34.0` ，执行如下代码后即可继续下面的【下载安装】步骤了
 
 ```bash
 aria2_new_ver="1.34.0"
@@ -84,7 +84,7 @@ chmod +x aria2c
 ### 编辑配置文件
 
 ```bash
-# 我们需要在 当前用户（ROOT）目录新建一个 存放配置文件的文件夹
+# 需要在当前用户（ROOT）目录新建一个存放配置文件的文件夹
 mkdir "/root/.aria2"
 
 #创建配置文件
