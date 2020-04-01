@@ -5,7 +5,7 @@ date = "2020-04-01T22:58:39+08:00"
 categories = ["Linux"]
 tags = ["进程守护","supervisor"]
 slug = "supervisor-in-linux-daemon"
-draft = true
+draft = false
 +++
 
 **系统环境：** CentOS 7 x64
