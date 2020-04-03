@@ -83,17 +83,19 @@ systemctl enable supervisord
 
 ## Supervisor 常用命令
 
-* `supervisorctl reload` : 载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程。
-* `supervisorctl update` : 根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。
+* `supervisorctl stop | start ProjectName` : 停止/启动某个进程
 * `supervisorctl restart ProjectName` : 重启某个进程。
 * `supervisorctl status` : 查看所有任务状态。
+* `supervisorctl reload` : 载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程。
+* `supervisorctl update` : 根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。
+* 用 `stop` 停止的进程，`reload` 或 `update` 后都不会自动重启。 
 
 ---
 
 *参考链接：*
 
-1. [Supervisor 为服务创建守护进程 - alonghub - 博客园](https://www.cnblogs.com/along21/p/10255681.html/)
+1. [Supervisor 为服务创建守护进程 - alonghub - 博客园](https://www.cnblogs.com/along21/p/10255681.html)
 
-2. [Linux 后台进程管理利器 Supervisor](kuanghy.github.io/2016/03/21/supervisor/)
+2. [Linux 后台进程管理利器 Supervisor](https://kuanghy.github.io/2016/03/21/supervisor)
 
 3. [Supervisor 官方文档](http://supervisord.org/)
