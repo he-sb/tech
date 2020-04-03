@@ -218,10 +218,8 @@ docker-compose up -d
 
 若上一步 `V2Ray` 可以正常工作，此时就可以回到 CF 开启 CDN 了。
 
-1. `DNS` 页签，将云朵图标点亮
-2. `SSL` 页签
-    1. `Universal SSL Status` : `Active Certificate`
-    2. 模式选择 `Full`
+1. `DNS` 页签：将云朵图标点亮
+2. `SSL` 页签：模式选择 `Full`
 
 ## 客户端配置示例
 
