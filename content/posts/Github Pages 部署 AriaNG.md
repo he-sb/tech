@@ -5,7 +5,7 @@ date = "2020-04-03T21:33:59+08:00"
 categories = ["奇技淫巧"]
 tags = ["aria2"]
 slug = "deploy-ariang-on-github-pages"
-draft = true
+draft = false
 +++
 
 ~~本文是个简易教程，~~ AriaNG 本质上是个纯静态网站，不需要服务器也可以运行，只要有个地方用来展示就可以了，因此像 [Github Pages](https://pages.github.com/) 这类提供静态站点托管的服务也是可以的，某种程度上比用自己的服务器更为方便（安全？）。
