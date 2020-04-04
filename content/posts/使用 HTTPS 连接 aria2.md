@@ -10,7 +10,7 @@ draft = false
 
 aria2 服务端搭好后（[Docker 安装 aria2](/posts/install-aria2-through-docker)），还需要搭配 AriaNG 前端面板来使用，[之前的方法](/posts/setup-offline-download-service-aria2-ariang-filebrowser-on-centos7/#安装ariang)虽然能用，但是配置好后是使用 HTTP 协议来访问的，虽然小破站也没什么人知道，不怎么担心安全问题，但是浏览器地址栏的红色小锁看着让轻度强迫症的俺十分不爽，于是研究了一下如何使用 HTTPS 来访问 AriaNG ，本文应该是目前最全面的 AriaNG 教程了。
 
-## 1. aria2 配置文件中指定证书文件路径
+## 1.aria2 配置文件中指定证书文件路径
 
 * 如果是参考 [Docker 安装 aria2](/posts/install-aria2-through-docker) 这篇来搭建的 aria2 ，配置文件路径参考 [这一小节](/posts/install-aria2-through-docker/#参数说明) 中的内容；
 
@@ -29,6 +29,11 @@ rpc-certificate=/root/xxx.pem
 # 在 RPC 服务中启用 SSL/TLS 加密时的私钥文件(.key)
 rpc-private-key=/root/xxx.key
 ```
+
+注意：
+* 通过本方法配置完后， 部署AriaNG 实际上不需要用到自己的服务器，可以使用 [Github Pages](https://pages.github.com/) 等静态站点托管服务，更加方便安全且便于复用，详情请移步 [Github Pages 部署 AriaNG](/posts/deploy-ariang-on-github-pages) 。
+
+* 按照以下说明修改完 aria2 配置文件后，要修改 AriaNG 设置中的 `Aria2 RPC 协议` 参数为 `Https` 。
 
 ### 1.1 不使用 CDN
 
@@ -50,31 +55,57 @@ rpc-private-key=/root/xxx.key
 
 4. 现在应该能通过 HTTPS 来访问 AriaNG 了。
 
-5. 使用本方法其实不需要在服务器上部署 AriaNG ，使用 [Github Pages](https://pages.github.com/) 即可。~~使用方法还在咕咕咕中~~
+## 2.使用 Nginx 反代端口
 
-## 2. 使用 Nginx 反代端口（推荐使用此方法）
+此方法无需修改 aria2 配置文件，只需修改 Nginx 配置，设置好反向代理即可。
 
-1. 给网站配置好证书（本方法中对证书来源无要求，只要用来访问 AriaNG 的域名有对应的 SSL 证书即可）。
+本方法假定系统环境为：**AriaNG 与 aria2 配置在同一台机器上，且 AriaNG 网站使用 Nginx 搭建。**
 
-2. 在 Nginx 网站配置中添加以下内容：
+### 2.1 操作说明
 
-    ```bash
-    location ^~ /jsonrpc {
-        proxy_http_version 1.1;
-        add_header Front-End-Https on;
-        proxy_set_header Connection "";
-        proxy_set_header Host $http_host;
-        proxy_set_header X-NginX-Proxy true;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass http://127.0.0.1:6800/jsonrpc;
-        proxy_pass_header X-Transmission-Session-Id;
-    }
-    ```
+* 若你的环境与本文相同，那么这样操作：
 
-3. 在 AriaNG 设置中更改 RPC 端口号为 `443` 即可。
+    1. 给网站配置好证书（本方法中对证书来源无要求，只要用来访问 AriaNG 的域名有对应的 SSL 证书即可）。
 
-4. 此方法无需修改 aria2 配置文件，只需有一台服务器搭建反向代理（本文中默认【搭建反代的机器】与【搭建 aria2 的机器】是同一台，若非如此，需将 `2.` 中的 `127.0.0.1:6800` 修改为搭建了 aria2 的机器的地址和对应端口）。
+    2. 在 Nginx 网站配置中添加以下内容：
+
+        ```bash
+        location ^~ /jsonrpc {
+            proxy_http_version 1.1;
+            add_header Front-End-Https on;
+            proxy_set_header Connection "";
+            proxy_set_header Host $http_host;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://127.0.0.1:6800/jsonrpc;
+            proxy_pass_header X-Transmission-Session-Id;
+        }
+        ```
+
+    3. 在 AriaNG 设置中更改 `Aria2 RPC 地址` 参数后面的端口号为 `443` 。
+
+    4. 此时 AriaNG 应该可以正常通过 HTTPS 使用了，本文后面的部分不必阅读。
+
+* 若你的环境与本文不同：
+
+    1. 在同一台机器上使用 Nginx 搭建搭建了 AriaNG ，但需通过此站点来访问其他机器的 aria2 ：将上文中添加的 Nginx 配置项，其中的 `127.0.0.1:6800` 字段修改为搭建了 aria2 的   机器的地址和对应端口。
+
+    2. AriaNG 使用静态站点方式来部署：参见上文【[1.aria2 配置文件中指定证书文件路径](#1aria2-配置文件中指定证书文件路径)】部分。
+
+    3. 使用别人搭建好的 AriaNG 来访问自己的 aria2 ：参见上文【[1.aria2 配置文件中指定证书文件路径](#1aria2-配置文件中指定证书文件路径)】部分。
+
+### 2.2 一点小瑕疵
+
+通过反代端口的方法，虽然配置方便，且成功率高，但是仍不完美：
+
+* 必须使用自己的服务器来通过 Nginx 来搭建 AriaNG ，且参照前述方法配置好反代后的 AriaNG 只能访问【一台】机器的 aria2 。
+
+原因是 Nginx 配置中固定了反代地址（即搭建了 aria2 的服务器地址），如果你有多个 aria2 服务需要连接，临时的解决办法：
+
+* 参考上文【[1.aria2 配置文件中指定证书文件路径](#1aria2-配置文件中指定证书文件路径)】部分。
+
+完美的解决办法有待研究。 ~~又可以愉快地咕咕咕了~~
 
 ---
 
