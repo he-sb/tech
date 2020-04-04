@@ -12,7 +12,11 @@ aria2 服务端搭好后（[Docker 安装 aria2](/posts/install-aria2-through-do
 
 ## 1. aria2 配置文件中指定证书文件路径
 
-如果是参考 [Docker 安装 aria2](/posts/install-aria2-through-docker) 这篇来搭建的 aria2 ，配置文件路径参考 [这一小节](/posts/install-aria2-through-docker/#参数说明) 中的内容；如果是手动安装的 aria2 ，配置文件路径参考 [这一小节](/posts/setup-offline-download-service-aria2-ariang-filebrowser-on-centos7/#%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6) ；使用一键脚本之类的方法安装的话，配置文件如何修改请参考所使用的脚本的说明。
+* 如果是参考 [Docker 安装 aria2](/posts/install-aria2-through-docker) 这篇来搭建的 aria2 ，配置文件路径参考 [这一小节](/posts/install-aria2-through-docker/#参数说明) 中的内容；
+
+* 如果是手动安装的 aria2 ，配置文件路径参考 [这一小节](/posts/setup-offline-download-service-aria2-ariang-filebrowser-on-centos7/#%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6) ；
+
+* 使用一键脚本之类的方法安装的话，配置文件如何修改请参考所使用的脚本的说明。
 
 配置文件中相关参数：
 
