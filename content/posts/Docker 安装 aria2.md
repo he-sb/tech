@@ -63,6 +63,12 @@ firewall-cmd --reload
 * `-v /root/downloads:/downloads` ： 下载目录映射，冒号左边为宿主机路径，可自定义，路径内不要有中文
 * `-e RCLONE=enable` ：开启下载完成后自动上传网盘功能，需将宿主机目录 `~/.config/rclone/` 下的 `rclone.conf`（rclone配置文件）复制至 aria2-pro 配置文件目录，然后修改 aria2-pro 配置文件目录下 `autoupload.sh` 文件内的【网盘名称】和【目标路径】这两个选项即可
 
+## 注意事项
+
+1. 远程调用 aria2 时下载目录务必设置为 `/downloads` ，即容器内默认路径，实际下载的文件会出现在【上一步中自定义映射的宿主机路径】下，否则会将文件下载至容器内部，需要手动从中 copy 出来，比较麻烦；
+
+2. 想到了再补充。
+
 ---
 
 *参考链接：*
