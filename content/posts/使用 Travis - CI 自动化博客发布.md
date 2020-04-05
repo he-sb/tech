@@ -34,13 +34,13 @@ git push
 
 以下记录一下俺的配置过程。
 
-## 1. 申请 Access Token
+## 1.申请 Access Token
 
 为了使 Travis CI 有权限接触 Github 仓库，需要生成一个 Personal Access Token，在这个地址可以新建一个：[https://github.com/settings/tokens/new/](https://github.com/settings/tokens/new/) ，名字随便填一个，勾选上 `repo` 内所有项目，其他项目均取消勾选，最后点底下的 `Generate token` 生成 Token。
 
 记下 Token 的值，建议找个空白文档先粘贴保存一下。这个值只会在生成时显示一次，离开此页面后就无法再次查看了，要是忘了就只能重新生成一个。
 
-## 2. Travis CI 网站设置
+## 2.Travis CI 网站设置
 
 首先使用 Github 账号登陆，勾选上存放博客【源文件】的仓库，点击 `Settings` ，设置 `Environment Variables` ：
 
@@ -57,7 +57,7 @@ git push
 
 下面分别进行配置。
 
-## 3. 编辑 `.travis.yml` 配置文件
+## 3.编辑 `.travis.yml` 配置文件
 
 ### 3.1 源文件与站点文件在同一 repo
 
@@ -154,7 +154,7 @@ after_script:  # 部署至 Github Pages
 
 配置完毕后，只要有源文件仓库有新的 `push` 操作，Travis CI 即会按照编辑好的配置文件来自动化站点的构建和部署，也就是说，俺只需操心源文件的编辑改动即可，不用再手动部署 Github Pages 了，方便了许多。
 
-## 4. 一点小问题
+## 4.一点小问题
 
 该方案目前还存在一点小 bug —— 每次自动构建并发布后网站内所有文章的修改日期均为构建时的最新时间，目前并不知道该如何修改……
 
