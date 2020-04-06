@@ -153,6 +153,8 @@ wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.c
 
 以上命令执行后终端内会返回一个数字，这个数字即是当前客户端程序（其实是一个 Python 脚本）对应的 PID 值。
 
+之后记得打开客户端机器防火墙的 `35601` 端口。
+
 ### 2.2 手动部署
 
 同样，参考 [程序作者的说明](https://github.com/cppla/ServerStatus#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B) 的【客户端配置】部分。
