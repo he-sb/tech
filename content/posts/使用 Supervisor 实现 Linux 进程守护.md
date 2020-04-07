@@ -18,6 +18,14 @@ draft = false
 yum install supervisor
 ```
 
+如果以上命令不起作用，则需要先添加 `epel` 源：
+
+```bash
+yum install -y epel-release
+````
+
+完成后再执行上条命令安装 Supervisor 。
+
 
 ## 配置 Supervisor
 
