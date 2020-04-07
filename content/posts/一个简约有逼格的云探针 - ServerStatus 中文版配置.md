@@ -157,9 +157,39 @@ wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.c
 
 ### 2.2 手动部署
 
-同样，参考 [程序作者的说明](https://github.com/cppla/ServerStatus#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B) 的【客户端配置】部分。
+下载客户端脚本：
 
-## 3.配置客户端进程守护
+```bash
+wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.com/cppla/ServerStatus/master/clients/client-linux.py'
+```
+
+修改其中的参数：
+
+```bash
+vi client-linux.py
+```
+
+将其中的 `SERVER` , `USERNAME` , `PASSWORD` 分别修改为上文中服务端配置文件内自定义的值后保存，然后执行：
+
+```bash
+python client-linux.py
+```
+
+不出意外的话现在看看服务端页面应该能看到当前客户端的数据了，如果出现意外或想了解更多 ~~姿势~~ 配置请参考 [程序作者的说明](https://github.com/cppla/ServerStatus#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B) 的【客户端配置】部分。
+
+## 3.服务端网页访问
+
+1. 不讲究的话可以直接通过 `[服务端公网 IP]:[服务端端口]` 来访问探针页面了（如果端口是 `80` 那么不需要指定端口）；
+
+	> 假设我的【服务端】公网 IP 为 `123.123.123.123` ，前面指定的服务端端口为 `80` ，浏览器访问 `123.123.123.123` ；
+	> 
+	> 如果端口指定了 `8080` ，那么浏览器访问地址为 `123.123.123.123:8080` 。
+
+2. 如果不需要 HTTPS ，那么只要去配置 DNS ，将域名解析到服务器公网 IP ，将上条的 `[服务端公网 IP]` 替换为域名即可；
+
+3. 如果配置了 HTTPS ，或者不想通过上面两种需要显式地指定端口的方式来访问，或者兼而有之 ~~我全都要~~ ，那么你需要安装一个网站服务器，比如 [Caddy](https://caddyserver.com/) 或 [Nginx](https://www.nginx.com/) 等，并做好相应设置（如反代端口等），此处就不详述了。
+
+## 4.配置客户端进程守护
 
 参考 [使用 Supervisor 实现 Linux 进程守护](/posts/supervisor-in-linux-daemon) 的方法，先新建一个配置文件：
 
