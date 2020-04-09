@@ -154,7 +154,15 @@ after_script:  # 部署至 Github Pages
 
 配置完毕后，只要有源文件仓库有新的 `push` 操作，Travis CI 即会按照编辑好的配置文件来自动化站点的构建和部署，也就是说，俺只需操心源文件的编辑改动即可，不用再手动部署 Github Pages 了，方便了许多。
 
-## 4.一点小问题
+## 4.额外技巧
+
+如果某次 `git commit` 不想被自动构建（比如新建了一篇文章，但还没写完，处于草稿状态，不想触发自动构建，那么可以在 `commit` 信息中加上 `[ci skip]` ，比如下面这样：
+
+```bash
+git commit -m "[ci skip] commit message"
+```
+
+## 5.一点小问题
 
 该方案目前还存在一点小 bug —— 每次自动构建并发布后网站内所有文章的修改日期均为构建时的最新时间，目前并不知道该如何修改……
 
@@ -165,3 +173,5 @@ after_script:  # 部署至 Github Pages
 1. [使用 Travis CI 自动部署 Hugo 博客 | Mogeko`s Blog](https://mogeko.me/2018/028/)
 
 2. [Hugo 博客使用 Travis CI 部署 - A simple blog](https://rileyng.github.io/post/hugo-travis/)
+
+3. [使用 Travis CI 自动更新 GitHub Pages | 大专栏](https://www.dazhuanlan.com/2019/10/16/5da60e2b04440/#%E5%A6%82%E4%BD%95%E8%B7%B3%E8%BF%87%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA)
