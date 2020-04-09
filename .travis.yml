@@ -26,6 +26,7 @@ branches:
 
 before_install:
   - git config --global core.quotePath false
+  - git config --global core.autocrlf input
 
 install:  # 安装依赖
   # 安装 hugo （version: v0.66.0）
