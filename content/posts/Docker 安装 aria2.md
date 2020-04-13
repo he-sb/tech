@@ -11,7 +11,7 @@ draft = false
 
 **系统环境：** CentOS 7 x64
 
-使用 `Docker` 容器来安装 `aria2` ，相比使用一键脚本或[手动安装](/posts/setup-offline-download-service-aria2-ariang-filebrowser-on-centos7/#安装aria2)来说，好处很多
+使用 `Docker` 容器来安装 `aria2` ，相比使用一键脚本或 [手动安装](/posts/setup-offline-download-service-aria2-ariang-filebrowser-on-centos7/#安装aria2) 来说，好处很多
 
 * 下载错误或取消下载后，自动删除未完成的文件，防止磁盘空间占用
 * 自动获取 BT tracker
