@@ -14,6 +14,18 @@ Manjaro 官方镜像按照桌面环境的不同，分为 XFCE ，KDE ，GNOME �
 
 ## 1.替换自带的 Vi 为 Vim
 
+系统自带的 Vi 体验简直令人发指，没有方向键， Backspace 也会变成莫名其妙的符号，直接卸载：
+
+```bash
+sudo pacman -Rs vi
+```
+
+装上完全体的 Vim ：
+
+```bash
+sudo pacman -Sy vim
+```
+
 ## 2.添加 ArchLinuxCN 源
 
 首先编辑 `/etc/pacman.conf` 这个文件，在末尾添加以下内容：
@@ -36,7 +48,7 @@ sudo pacman -S archlinuxcn-keyring
 sudo pacman -Syy
 ```
 
-## 替换默认的 Shell 为 zsh
+## 3.替换默认的 Shell 为 zsh
 
 安装 zsh ：
 
@@ -44,7 +56,13 @@ sudo pacman -Syy
 sudo pacman -S zsh
 ```
 
+<!-- todo -->
 
+## 附：包管理说明
+
+### pacman
+
+### yay
 
 ---
 
