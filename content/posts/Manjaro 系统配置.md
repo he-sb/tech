@@ -48,7 +48,13 @@ sudo pacman -S archlinuxcn-keyring
 sudo pacman -Syy
 ```
 
-## 3.替换默认的 Shell 为 zsh
+## 3.配置环境变量
+
+目的是使包管理器也走代理，这样就不需要添加国内镜像源了：
+
+
+
+## 4.替换默认的 Shell 为 zsh
 
 安装 zsh ：
 
