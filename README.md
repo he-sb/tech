@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/he-sb/tech.svg?branch=master)](https://travis-ci.org/he-sb/tech)
-![GitHub last commit](https://img.shields.io/github/last-commit/he-sb/tech)
 ![GitHub](https://img.shields.io/github/license/he-sb/tech)
 
 ### My tech blog: [https://tech.he-sb.top](https://tech.he-sb.top)
