@@ -62,7 +62,11 @@ draft = false
 
     > Your site is published at https://he-sb.top/aria-ng/
 
-之后按照 [这篇帖子](/posts/use-https-on-ariang/) 中的【1.aria2 配置文件中指定证书文件路径】部分的操作来配置；
+    之后按照 [这篇帖子](/posts/use-https-on-ariang/) 中的【1.aria2 配置文件中指定证书文件路径】部分的操作来配置；
+
+    > **特别提醒：**
+    > 
+    > 如果 AriaNG 前端配置了 HTTPS ，那么只能连接 RPC 开启了 TLS 的后端，这是 aria2 的限制。
 
 * 【[4.](#4配置-github-pages)】中提到
 
