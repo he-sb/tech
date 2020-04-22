@@ -83,7 +83,7 @@ sudo pacman -S zsh
     ```bash
     sudo su
     chsh -s full-path-to-shell
-    sudo none-root-user-name
+    su none-root-user-name
     ```
 
 ## 附：包管理说明
