@@ -39,7 +39,7 @@ Server = https://repo.archlinuxcn.org/$arch
 然后导入 archlinuxcn-keyring ：
 
 ```bash
-sudo pacman -S archlinuxcn-keyring
+sudo pacman -Sy archlinuxcn-keyring
 ```
 
 最后刷新一下缓存：
