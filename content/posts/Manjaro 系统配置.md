@@ -100,7 +100,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions
 ```
 
-在 `~/.zshrc` 文件中找到 `plugins` 字段，默认值为（默认启用了 git 插件）：
+在 `~/.zshrc` 文件中找到 `plugins` 字段，默认值为 `(git)`（默认启用了 git 插件）：
 
 ```conf
 ...
