@@ -36,15 +36,24 @@ install:  # 安装依赖
 
 script:
   - hugo  # 生成网站
-  
-deploy:
-  provider: pages  # 部署到 Github Pages
-  edge: true # opt in to dpl v2
-  # skip_cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
-  local_dir: public  # 被推送到 GitHub Pages 的目录，可以指定为当前目录的绝对路径或相对路径
-  on:
-    branch: master  # 博客源码所在分支
-  target_branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
-  token: $GITHUB_TOKEN
-  strategy: git
-  # keep_history: true  # 保持 target-branch 分支的提交记录
+
+after_script:  # 部署至 Github Pages
+  - cd ./public
+  - git init
+  - git config user.name "he-sb"
+  - git config user.email "0he.sb0@gmail.com"
+  - git add .
+  - git commit -m "Update Blog By TravisCI With Build $TRAVIS_BUILD_NUMBER"
+  - git push --force --quiet "https://$GITHUB_TOKEN@${GH_REF}" master:gh-pages
+
+# deploy:
+#   provider: pages  # 部署到 Github Pages
+#   edge: true # opt in to dpl v2
+#   # skip_cleanup: true  # 必须为 true ，否则 Travis 会删除在构建期间创建的所有文件（即删除了要上传的文件）
+#   local_dir: public  # 被推送到 GitHub Pages 的目录，可以指定为当前目录的绝对路径或相对路径
+#   on:
+#     branch: master  # 博客源码所在分支
+#   target_branch: gh-pages  # 将 local-dir 强制推送到哪个分支（自定义，名称不能与源代码分支名相同），默认为 gh-pages
+#   token: $GITHUB_TOKEN
+#   strategy: git
+#   # keep_history: true  # 保持 target-branch 分支的提交记录
