@@ -156,13 +156,17 @@ after_script:  # 部署至 Github Pages
 
 ## 4.额外技巧
 
-如果某次 `git commit` 不想被自动构建（比如新建了一篇文章，但还没写完，处于草稿状态，不想触发自动构建，那么可以在 `commit` 信息中加上 `[ci skip]` ，比如下面这样：
+* 如果某次 `git commit` 不想被自动构建（比如新建了一篇文章，但还没写完，处于草稿状态，不想触发自动构建，那么可以在 `commit` 信息中加上 `[ci skip]` ，比如下面这样：
 
-```bash
-git commit -m "[ci skip] commit message"
-```
+    ```bash
+    git commit -m "[ci skip] commit message"
+    ```
 
-详细参数请看 Travis-CI 官方文档： [Customizing the Build # Skipping a Build - Travis CI](https://docs.travis-ci.com/user/customizing-the-build#skipping-a-build)
+    详细参数请看 Travis-CI 官方文档： [Customizing the Build # Skipping a Build - Travis CI](https://docs.travis-ci.com/user/customizing-the-build#skipping-a-build)
+
+* 个人使用时以上两种情况均采用 [【3.2 源文件与站点文件在不同 repo】](#32-源文件与站点文件在不同-repo) 的配置，把最后的 `master:master` 冒号后面的分支名改成比如 `gh-pages` 就可以了，实测速度会快很多，仅需 22s ，使用 Travis-CI 的 Deploy 配置需要 30s + ，有点慢。
+    
+    缺点是部署 GitHub Pages 的仓库/分支会失去提交历史（因为部署时的 `git push` 使用了 `--force` 参数），不过无伤大雅，反正这个仅是最终发布版本，源码部分的提交历史不受影响。
 
 ## 5.一点小问题
 
