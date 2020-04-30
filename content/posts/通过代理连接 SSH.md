@@ -8,7 +8,7 @@ slug = "ssh-connecting-through-proxy"
 draft = false
 +++
 
-有时虽然 VPS 没被墙，但通过 SSH 连接进行操作时却十分卡顿，或者 VPS 不幸被墙，只能通过代理来访问，诸如 Putty 等 SSH 客户端可以很方便地配置代理，但如果你像俺一样使用操作系统的终端来通过 OpenSSH 连接，那么需要一番设置才能顺利使 SSH 经过代理。下面分别记录一下 Windows 和 Linux 下的配置过程。
+有时虽然 VPS 没被墙，但通过 SSH 连接进行操作时却十分卡顿，或者 VPS 不幸被墙，只能通过代理来访问。虽然 Putty 等 SSH 客户端可以很方便地配置代理，但如果你像俺一样使用操作系统的终端来通过 OpenSSH 连接，那么需要一番设置才能顺利使 SSH 经过代理。下面分别记录一下 Windows 和 Linux 下的配置过程。
 
 ## Windows 系统
 
