@@ -64,7 +64,7 @@ Command move needs 2 arguments maximum
 
 **8.**
 
-`--ignore-existing` 忽略已存在的文件。
+`--ignore-existing` 跳过目标处已存在的【文件名相同但 hash 不同】的文件，不加此参数会使用来源覆盖目标处，但如果 hash 相同即使不加此参数也会跳过。
 
 **9.**
 
