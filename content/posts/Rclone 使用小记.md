@@ -60,7 +60,7 @@ Command move needs 2 arguments maximum
 
 **7.**
 
-`-P`=`--progress` 显示实时传输进度（与 `-v` 的区别在于进度是【实时】更新的）。
+`-P` = `--progress` 显示实时传输进度（与 `-v` 的区别在于进度是【实时】更新的）。
 
 **8.**
 
@@ -76,7 +76,7 @@ Command move needs 2 arguments maximum
 
 **11.**
 
-Rclone 配置文件路径为 `/root/.config/rclone/rlcone.conf` ，在 VPS 重装系统或迁移前可以备份下来免去重新配置的麻烦。
+Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf` ，在 VPS 重装系统或迁移前可以备份下来免去重新配置的麻烦。
 
 **12.**
 
