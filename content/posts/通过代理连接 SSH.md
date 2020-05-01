@@ -57,7 +57,7 @@ ssh user@server -o "ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p"
 
 其他配置比如修改 SSH 配置文件，除了路径不同（Linux 一般在 `~/.ssh/config`），内容的格式是一样的，参照上文即可。
 
-
+---
 
 *参考链接：*
 
