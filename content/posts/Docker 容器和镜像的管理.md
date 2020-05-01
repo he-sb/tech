@@ -37,6 +37,8 @@ docker pull <容器 ID 或容器名称> # 拉取新镜像
 docker run <容器 ID 或容器名称>  # 启动新容器
 ```
 
+---
+
 *参考链接：*
 
 1. [docker常规操作——删除容器实例、删除镜像_运维_Michel Liu-CSDN博客](https://blog.csdn.net/Michel4Liu/article/details/80890661)
