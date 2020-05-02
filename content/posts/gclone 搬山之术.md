@@ -131,7 +131,7 @@ service_account_file_path = /root/AutoRclone/accounts/
 
     1. 不要使用 `gclone copy` ，而用 `gclone sync` 命令；
     
-    2. 跑完一遍 `sync` 后使用 `rclone size` 分别查看【源盘】和【目的盘】的文件数和大小（`size` 命令使用 gclone 会有点 bug ，所以此处切换回 Rclone），如果【源盘】大于目标盘，说明没复制完全，多跑几次 `sync` 命令后再比较，直到【目的盘】大于【源盘】，说明有重复文件了，此时使用 `dedupe` 命令对【目的盘】去重；
+    2. 跑完一遍 `sync` 后使用 `rclone size` 分别查看【源盘】和【目的盘】的文件数和大小（`size` 命令使用 gclone 会有点 bug ，所以此处切换回 Rclone），如果【源盘】大于目标盘，说明没复制完全，多跑几次 `sync` 命令后再比较，直到【目的盘】大于【源盘】，说明有重复文件了，此时使用 `dedupe` 命令对【目的盘】去重（命令使用参考 [这篇文章](/posts/usage-of-rclone/) ；
     
     3. 再次 `size` 查看文件数，如果【源盘】文件数大于【目的盘】，就重复 `sync` ，如果【源盘】小于【目的盘】，就使用 `dedupe` 去重；
     
