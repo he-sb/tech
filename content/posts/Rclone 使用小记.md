@@ -81,3 +81,7 @@ Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf` ，在 VPS 重�
 **12.**
 
 `--drive-server-side-across-configs` 参数可在团队盘复制中使用 Server Side Copy ，不占用服务器流量和带宽。
+
+**13.**
+
+`rclone dedupe drive_name:path` 命令可以对云盘文件去重，当文件夹路径相同时会合并，文件 MD5 相同时会删除重复的，仅保留一份，MD5 不同时的默认是交互式操作，询问你保留那个。有大量重复文件时可以使用 `--dedupe-mode MODE` 参数来指定处理策略，`MODE` 可以为 `interactive`（默认），`skip` ，`first` ，`newest` ，`oldest` ，`largest` ，`smallest` ，`rename` ，顾名思义即可。
