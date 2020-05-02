@@ -17,19 +17,19 @@ draft = false
 
 停止 `Docker` 服务
 
-```shell
+```bash
 systemctl stop docker
 ```
 
 查看当前 `Docker` 版本
 
-```shell
+```bash
 rpm -qa | grep docker
 ```
 
 卸载旧的软件包
 
-```shell
+```bash
 yum erase docker \
 docker-client \
 docker-client-latest \
@@ -45,7 +45,7 @@ docker-ce
 
 删除相关配置文件
 
-```shell
+```bash
 find /etc/systemd -name '*docker*' -exec rm -f {} \;
 find /lib/systemd -name '*docker*' -exec rm -f {} \;
 rm -rf /var/lib/docker   # 删除已有的镜像和容器,非必要
@@ -56,13 +56,13 @@ rm -rf /var/run/docker
 
 安装依赖
 
-```shell
-yum install -y yum-utils  device-mapper-persistent-data lvm2
+```bash
+yum install -y yum-utils device-mapper-persistent-data lvm2
 ```
 
-添加 `yum` 源
+添加 yum 源
 
-```shell
+```bash
 yum-config-manager \
 --add-repo \
 https://download.docker.com/linux/centos/docker-ce.repo
@@ -70,20 +70,20 @@ https://download.docker.com/linux/centos/docker-ce.repo
 
 安装最新版本
 
-```shell
+```bash
 yum install -y docker-ce
 ```
 
 启动 `Docker` 并添加开机自启
 
-```shell
+```bash
 systemctl enable docker
 systemctl start docker
 ```
 
 查看当前运行的 `Docker` 版本
 
-```shell
+```bash
 docker version
 ```
 
@@ -91,7 +91,7 @@ docker version
 
 先访问 [https://github.com/docker/compose/releases/latest](https://github.com/docker/compose/releases/latest) 查看最新版本 `Docker-Compose` 的版本号，如 `1.25.4` ，然后执行以下命令来安装
 
-```shell
+```bash
 # 下载 1.25.4 版 Docker-Compose 到 /usr/bin 目录下
 curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 
