@@ -85,3 +85,7 @@ Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf` ，在 VPS 重�
 **13.**
 
 `rclone dedupe drive_name:path` 命令可以对云盘文件去重，当文件夹路径相同时会合并，文件 MD5 相同时会删除重复的，仅保留一份，MD5 不同时的默认是交互式操作，询问你保留那个。有大量重复文件时可以使用 `--dedupe-mode MODE` 参数来指定处理策略，`MODE` 可以为 `interactive`（默认），`skip` ，`first` ，`newest` ，`oldest` ，`largest` ，`smallest` ，`rename` ，顾名思义即可。
+
+**14.**
+
+`--tpslimit float` 参数限制每秒钟的请求数（默认值为 0 ，即不限制），在操作大量文件时不使用此参数的话很可能触发网盘的 API 限制。
