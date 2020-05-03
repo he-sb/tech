@@ -8,7 +8,9 @@ slug = "usage-of-gclone"
 draft = false
 +++
 
-Google Drive 是个好东西，无限容量（普通用户容量为 15 G ，不要问俺无限容量是怎么做到的，懂的都懂）配合上 Rclone 这样的 API 工具，简直是资源收集 / 收藏的神器，不过谷歌对于每个账户的 API 限制是 750 G / 24 H ，对于各位搬山道人来说每天只能搬运 750 G 的资源肯定是不够的。最近了解到一个神器 - gclone（项目地址：[https://github.com/donwa/gclone](https://github.com/donwa/gclone)），可以看作是 Rclone 的升级版，借助它，再搭配一些奇技淫巧，就可以突破每天 750 G 的 API 限制了。
+Google Drive 是个好东西，无限容量（相关内容科普请看这篇文章：[市面常见Goolge Drive无限容量的种类及个人认知 - 科学小怪人的实验室](https://blog.vwert.com/CloudStorage/GoogleDriveUnlimited.html) ，感谢科学家大佬的科普）配合上 Rclone 这样的 API 工具，简直是资源收集 / 收藏的神器。
+
+不过谷歌对于每个账户的 API 限制是 750 G / 24 H ，对于各位搬山道人来说每天只能搬运 750 G 的资源肯定是不够的。最近了解到一个新的神器 - gclone（项目地址：[https://github.com/donwa/gclone](https://github.com/donwa/gclone)），可以看作是 Rclone 的升级版，借助它，再搭配一些奇技淫巧，就可以突破每天 750 G 的 API 限制了。
 
 原理是这样的，单日 750 G 的限制是谷歌对每个账号进行的限制，而我们可以借助谷歌开发者平台创建一些项目（Project），每个项目下可以创建很多服务账号（即 Service Accounts ，以下简称 SA），每个 SA 都有自己的 API ，也就是说每个 SA 每天都有 750 G 的限额。通过赋予这些 SA 对于【源盘】（即待转存资源的存放位置，可以是个人盘的共享目录，团队盘或团队盘内的文件夹）和【目的盘】（即资源转存后的存放位置，可以是团队盘或团队盘内的文件夹）的编辑权限，再通过 gclone ，当每个 SA 达到 750 G 限制后自动切换，就可以突破单账号的单日 750 G 限制。
 
@@ -140,6 +142,10 @@ service_account_file_path = /root/AutoRclone/accounts/
     4. 重复以上步骤，直到 `rclone size` 后【源盘】和【目的盘】的文件数和大小严格相等。
 
     这个问题多出现在【源盘】是个人盘的共享文件夹，且包含的文件数较多的时候，因为个人盘的 API 有点 bug ，会导致分享的文件数较多时，通过 API 操作时读取到的文件列表不全，需要等待一段时间才能读取完全，团队盘一般不会出现这个问题。
+
+## 5.致谢
+
+为了保护隐私就不对大佬们一一致谢了，感谢在折腾配置 gclone 过程中为俺提供过帮助的各位 Albany 校友，让俺这个菜鸡逐渐走上了 Google Drive 这条不归路……
 
 ---
 
