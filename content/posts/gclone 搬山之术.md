@@ -83,7 +83,7 @@ service_account_file_path = /root/AutoRclone/accounts/
 
 命令参数参考 Rclone ，都是一样的，直接将 `rclone` 换成 `gclone` 即可无障碍使用；
 
-唯一不一样的地方在于，原版 Rclone 如果跨团队盘或者共享文件夹，需要多个配置盘符用于操作，gclone 支持对目录和文件的 ID 进行操作：
+唯一不一样的地方在于，原版 Rclone 如果跨团队盘或者共享文件夹，需要多个配置盘符用于操作，gclone 支持对目录和文件的 ID 进行操作，搬运别人公开分享的文件时非常方便：
 
 1. 目录 ID ：
 
@@ -114,6 +114,10 @@ service_account_file_path = /root/AutoRclone/accounts/
     ```bash
     gclone copy gc:{共享文件的 ID} gc:{【目的盘】ID}/media/  --drive-server-side-across-configs
     ```
+
+如何查看团队盘，文件夹以及文件的 ID ：
+
+* 浏览器中打开对应的团队盘 / 文件夹 / 文件，此时查看地址栏中类似 `https://drive.google.com/drive/u/2/folders/0App-QeDCIy_mUk9PVA` 这样的地址，其中末尾的 `0App-QeDCIy_mUk9PVA` 就是相应的团队盘 / 文件夹 / 文件对应的 ID 了，如果是别人分享出来的内容，那么结尾一般会多 `?usp=sharing` 这一段，把这段删掉，只保留 ID 就可以了。
 
 ## 4.一些注意事项
 
