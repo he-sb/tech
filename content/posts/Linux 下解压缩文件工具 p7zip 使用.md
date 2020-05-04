@@ -9,6 +9,8 @@ comments = true
 draft = false
 +++
 
+**系统环境：** CentOS 7 x64
+
 ## 安装 p7zip
 
 默认 CentOS 7 没有安装 p7zip ，默认源里面也没有这个包，需要先安装 epel 源：
