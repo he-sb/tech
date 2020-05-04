@@ -8,6 +8,8 @@ slug = "usage-of-gclone"
 draft = false
 +++
 
+**系统环境：** CentOS 7 x64
+
 Google Drive 是个好东西，无限容量（相关内容科普请看这篇文章：[市面常见Goolge Drive无限容量的种类及个人认知 - 科学小怪人的实验室](https://blog.vwert.com/CloudStorage/GoogleDriveUnlimited.html) ，感谢科学家大佬的科普）配合上 Rclone 这样的 API 工具，简直是资源收集 / 收藏的神器。
 
 不过谷歌对于每个账户的 API 限制是 750 G / 24 H ，对于各位搬山道人来说每天只能搬运 750 G 的资源肯定是不够的。最近了解到一个新的神器 - gclone（项目地址：[https://github.com/donwa/gclone](https://github.com/donwa/gclone)），可以看作是 Rclone 的升级版，借助它，再搭配一些奇技淫巧，就可以突破每天 750 G 的 API 限制了。
@@ -16,7 +18,7 @@ Google Drive 是个好东西，无限容量（相关内容科普请看这篇文�
 
 其中，每个谷歌账号可以创建最多 12 个项目，每个项目下可以生成最多 100 个 SA ，即使只使用 1 个项目，也可以实现一天搬运 1 x 100 x 750 G = 75 T ，相信对大部分人来说已经足够了，不够的话多创建几个项目就行（注意每个团队盘最多添加 600 个账号）。
 
-以下是配置过程，本文基于 CentOS 7 x64 服务器。
+以下是配置过程：
 
 ## 1.借助 AutoRclone 批量生成 SA
 
