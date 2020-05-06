@@ -155,7 +155,7 @@ service_account_file_path = /root/AutoRclone/accounts/
 
 为了保护隐私就不对大佬们一一致谢了，感谢在折腾配置 gclone 过程中为俺提供过帮助的各位 Albany 校友，让俺这个菜鸡逐渐走上了 Google Drive 这条不归路……
 
-补充：感谢 @google_drive 群的黄屁股和 @fxxkrlab 两位大佬指正本文缺点。
+补充：感谢 @google_drive 群的黄屁股和 @fxxkrlab 两位大佬指正本文错误。
 
 ---
 
