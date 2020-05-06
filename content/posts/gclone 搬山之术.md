@@ -139,11 +139,13 @@ service_account_file_path = /root/AutoRclone/accounts/
 
     1. 首先对【源盘】执行 `rclone dedupe` 命令，确保源盘无重复文件，命令用法参考 [这篇文章](/posts/usage-of-rclone/) ；
 
-    1. 不要使用 `gclone copy` ，而用 `gclone sync` 命令；
+    1. ~~不要使用 `gclone copy` ，而用 `gclone sync` 命令；~~
+
+        上面这条有误导，因为俺主要用来备份，【源盘】和【目的盘】文件结构是精确一致的。如果你【目的盘】还有其他文件，直接 `sync` 会导致目的盘被覆盖为源盘，请慎用此命令。
     
-    2. 跑完一遍 `sync` 后使用 `rclone size` 分别查看【源盘】和【目的盘】的文件数和大小（`size` 命令使用 gclone 会有点 bug ，所以此处切换回 Rclone），如果【源盘】大于目标盘，说明没复制完全，多跑几次 `sync` 命令后再比较，直到【目的盘】大于【源盘】，说明有重复文件了，此时使用 `dedupe` 命令对【目的盘】去重；
+    2. 跑完一遍 ~~`sync`~~ `copy` 后使用 `rclone size` 分别查看【源盘】和【目的盘】的文件数和大小（`size` 命令使用 gclone 会有点 bug ，所以此处切换回 Rclone），如果【源盘】大于目标盘，说明没复制完全，多跑几次 ~~`sync`~~ `copy` 命令后再比较，直到【目的盘】大于【源盘】，说明有重复文件了，此时使用 `dedupe` 命令对【目的盘】去重；
     
-    3. 再次 `size` 查看文件数，如果【源盘】文件数大于【目的盘】，就重复 `sync` 命令，如果【源盘】小于【目的盘】，就使用 `dedupe` 命令去重；
+    3. 再次 `size` 查看文件数，如果【源盘】文件数大于【目的盘】，就重复 ~~`sync`~~ `copy` 命令，如果【源盘】小于【目的盘】，就使用 `dedupe` 命令去重；
     
     4. 重复以上步骤，直到 `rclone size` 后【源盘】和【目的盘】的文件数和大小严格相等。
 
@@ -152,6 +154,8 @@ service_account_file_path = /root/AutoRclone/accounts/
 ## 5.致谢
 
 为了保护隐私就不对大佬们一一致谢了，感谢在折腾配置 gclone 过程中为俺提供过帮助的各位 Albany 校友，让俺这个菜鸡逐渐走上了 Google Drive 这条不归路……
+
+补充：感谢 @google_drive 群的黄屁股和 @fxxkrlab 两位大佬指正本文缺点。
 
 ---
 
