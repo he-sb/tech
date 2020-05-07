@@ -89,3 +89,9 @@ Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf` ，在 VPS 重�
 **14.**
 
 `--tpslimit float` 参数限制每秒钟的事务数（默认值为 0 ，即不限制），在操作大量文件时，不使用此参数的话很可能触发网盘的 API 资源开销限制。
+
+---
+
+*参考链接：*
+
+1. [Documentation - Rclone](https://rclone.org/docs/)
