@@ -127,6 +127,10 @@ source ~/.zshrc
 
 <!-- todo -->
 
+## 6.修改家目录为英文
+
+<!-- todo -->
+
 ## 附：包管理说明
 
 Arch 系的 Linux 发行版，软件包来源有两个，Community（Arch 官方仓库），AUR（Arch User Repository, Arch 用户仓库）。用户将软件放在 AUR ，Arch 官方则定期挑选 AUR 里的优秀程序到 community，实际表现为 Community 为 AUR 的子集，Community 有的应用 AUR 都有，但 AUR 内有而 Community 没有的那部分软件可能在系统上的运行表现不大稳定。
