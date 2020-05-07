@@ -76,13 +76,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
     ```
 2. 更改当前用户的默认终端：
     ```bash
-    chsh -s full-path-to-shell
+    chsh -s /bin/zsh
     ```
 3. 更改 root 用户的默认终端：
     ```bash
     sudo su
-    chsh -s full-path-to-shell
-    su none-root-user-name
+    chsh -s /bin/zsh
+    su USERNAME
     ```
 
 3.更换 Oh My Zsh 主题：
@@ -123,18 +123,27 @@ autoload -U compinit && compinit
 source ~/.zshrc
 ```
 
+## 5.安装中文字体和输入法
+
+<!-- todo -->
+
 ## 附：包管理说明
 
 Arch 系的 Linux 发行版，软件包来源有两个，Community（Arch 官方仓库），AUR（Arch User Repository, Arch 用户仓库）。用户将软件放在 AUR ，Arch 官方则定期挑选 AUR 里的优秀程序到 community，实际表现为 Community 为 AUR 的子集，Community 有的应用 AUR 都有，但 AUR 内有而 Community 没有的那部分软件可能在系统上的运行表现不大稳定。
 
-Manjaro 自带的桌面程序软件中心（pamac-manager）既可以安装 Community 程序也可以安装 AUR 程序，区别是 AUR 程序会显示【构建】而不是【安装】；但在终端中通过自带的 pacman 只能安装 Community 程序，想要安装 AUR 程序则需要安装额外的包管理器，之前很多教程内的 yaourt 已经停止维护了，个人使用 yay 。
+Manjaro 自带的桌面程序软件中心（pamac-manager）既可以安装 Community 程序也可以安装 AUR 程序，区别是 AUR 程序会显示【构建】而不是【安装】；但在终端中通过自带的 pacman 只能安装 Community 程序，想要安装 AUR 程序则需要安装额外的包管理器，之前很多教程内的 yaourt 已经停止维护了，个人使用 yay （详细介绍请看官方 Wiki：[AUR helpers (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/AUR_helpers_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) ）。
 
 下面是一些包管理器的常用命令。
 
 ### pacman
 
 ```bash
-sudo pacman -Syu  //同步软件库并更新系统到最新状态
+sudo pacman -Syu  # 同步软件库并更新系统到最新状态
+sudo pacman -S 软件名  # 安装
+sudo pacman -R 软件名  # 删除单个软件包，保留其全部已经安装的依赖关系
+sudo pacman -Rs 软件名  # 除指定软件包，及其所有未被其他已安装软件包使用的依赖关系
+sudo pacman -Ss 软件名  # 查找软件
+sudo pacman -Qs  # 搜索已安装的包
 ```
 <!-- todo -->
 
