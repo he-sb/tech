@@ -83,7 +83,7 @@ service_account_file_path = /root/AutoRclone/accounts/
 
 用法：
 
-命令参数参考 Rclone ，都是一样的，直接将 `rclone` 换成 `gclone` 即可无障碍使用；
+命令参数参考 Rclone ，都是一样的，直接将 `rclone` 换成 `gclone` 即可无障碍使用（Rclone 怎么用呢，请参考 [这篇文章](/posts/usage-of-rclone/) ）；
 
 唯一不一样的地方在于，原版 Rclone 如果跨团队盘或者共享文件夹，需要多个配置盘符用于操作，gclone 支持对目录和文件的 ID 进行操作，搬运别人公开分享的文件时非常方便：
 
