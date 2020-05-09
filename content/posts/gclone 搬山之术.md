@@ -85,6 +85,8 @@ gclone --version
 vim ~/.config/rclone/rclone.conf
 ```
 
+> 默认的配置文件路径在这里，不确定的话可以输入 `rclone config file` 来查看。
+
 在最后加上下面内容：
 
 ```conf
