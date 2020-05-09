@@ -133,6 +133,14 @@ service_account_file_path = /root/AutoRclone/accounts/
     gclone copy gc:{共享文件的 ID} gc:{【目的盘】ID}/media/  --drive-server-side-across-configs
     ```
 
+> 注意：命令中如果使用 ID 格式来指定路径，需要用花括号括起来，不然程序会认为那一串乱码一样的东西是文件夹名字而不是目录 ID。
+
+举个栗子：
+
+```bash
+gclone copy gc:{0App-QeDCIy_mUk9PVA} gc:{10zOvIf8yBmIuZgBfC3rcDKWHIlODZjXF}/media/  --drive-server-side-across-configs -P
+```
+
 如何查看团队盘，文件夹以及文件的 ID ：
 
 * 浏览器中打开对应的团队盘 / 文件夹 / 文件，此时查看地址栏中类似 `https://drive.google.com/drive/u/2/folders/0App-QeDCIy_mUk9PVA` 这样的地址，其中末尾的 `0App-QeDCIy_mUk9PVA` 就是相应的团队盘 / 文件夹 / 文件对应的 ID 了，如果是别人分享出来的内容，那么结尾一般会多 `?usp=sharing` 这一段，把这段删掉，只保留 ID 就可以了。
