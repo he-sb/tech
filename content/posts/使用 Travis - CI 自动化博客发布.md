@@ -172,6 +172,8 @@ after_script:  # 部署至 Github Pages
 
 该方案目前还存在一点小 bug —— 每次自动构建并发布后网站内所有文章的修改日期均为构建时的最新时间，目前并不知道该如何修改……
 
+附上在本博客主题下提交的 Issue 供大家参考：[开启了 git info 但 Travis-CI 自动构建的文章修改日期始终为最新 · Issue #107 · reuixiy/hugo-theme-meme](https://github.com/reuixiy/hugo-theme-meme/issues/107) 。
+
 ---
 
 *参考链接：*
