@@ -315,7 +315,8 @@ Please enter your choice: 2
 # 转换为白名单模式，只能查看指定的盘
 (Use comma to separate between drive IDs.)
 Enter white-list access control list of drives: *******************,*******************,*******************
-# 输入想显示的团队盘 ID，不知如何查看请参考【gclone 搬山之术】这篇文章
+# 输入想显示的团队盘 ID，有多个的话用英文逗号隔开分隔，
+# 不知如何查看请参考【gclone 搬山之术】这篇文章
 The user currently has following drives in its white-list access list:
     (1) *******************
     (2) *******************
