@@ -200,16 +200,22 @@ uglyURLs = false
         pre = "internal"
         post = "tags"
     [[menu.main]]
+        url = "/links/"
+        name = "友链"
+        weight = 5
+        pre = "internal"
+        post = "link"
+    [[menu.main]]
         url = "/about/"
         name = "关于"
-        weight = 5
+        weight = 6
         pre = "internal"
         post = "user-circle"
     [[menu.main]]
-        weight = 6
+        weight = 7
         identifier = "theme-switcher"
     # [[menu.main]]
-    #     weight = 7
+    #     weight = 8
     #     identifier = "lang-switcher"
 
 
