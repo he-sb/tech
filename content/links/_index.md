@@ -14,3 +14,5 @@ share = false
 - Zran's Blog：[梓然小屋](https://blog.zranl.cn/)
 
 - 护士衫下卖炸鸡的科学小怪人：[科学小怪人的实验室](https://blog.vwert.com/)
+
+- 醉僧：[醉僧 - 品酒读诗写代码！](https://zuiseng.com/)
