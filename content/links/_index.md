@@ -11,6 +11,8 @@ share = false
 
 - GamerNoTitle：[GamerNoTitle - 永远相信 美好的事情 即将发生 Always believe that good things will happen!](https://bili33.top/)
 
+- S T：[松松松的Blog – Do Not Go Gentle Into That Good Night](https://www.saltyfish.win/)
+
 - Wasabi 山葵酱：[山葵酱部落格](https://wasabi.fun/)
 
 - Zran's Blog：[梓然小屋](https://blog.zranl.cn/)
