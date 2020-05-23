@@ -66,6 +66,8 @@ yum install -y nodejs
 
 ### Golang toolchain
 
+**注意：如果你的系统不是 CentOS 7 x64，那么下面的方法可能不适用，请参考 Golang 官网的指导来安装：[https://golang.org/doc/install](https://golang.org/doc/install) 。**
+
 先安装 epel 源：
 
 ```bash
@@ -88,8 +90,6 @@ vi /etc/profile
 在最后加上以下内容：
 
 ```bash
-# GOROOT
-export GOROOT=/usr/lib/golang
 # GOPATH
 export GOPATH=/root/go
 # GOPATH bin
@@ -367,4 +367,4 @@ go run ./tools/adduser
 
 *参考链接：*
 
-1. [Linux 使用Yum安装Go和配置环境](Linux 使用Yum安装Go和配置环境)
+1. [Linux 使用Yum安装Go和配置环境](https://liangbogopher.github.io/2018/04/05/linux-install-go)
