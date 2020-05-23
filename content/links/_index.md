@@ -9,6 +9,8 @@ share = false
 
 格式为“<你的昵称>：<网站标题> <博客地址>”。
 
+- GamerNoTitle：[GamerNoTitle - 永远相信 美好的事情 即将发生 Always believe that good things will happen!](https://bili33.top/)
+
 - Wasabi 山葵酱：[山葵酱部落格](https://wasabi.fun/)
 
 - Zran's Blog：[梓然小屋](https://blog.zranl.cn/)
