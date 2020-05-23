@@ -36,6 +36,16 @@ draft = false
 
 ## 1.准备工作
 
+> 号外：
+> 
+> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的【Git】，【Node.js with NPM】和【Golang toolchain】这三部分，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
+>
+> ```
+> eval "$(curl -Lso- https://gist.githubusercontent.com/rixtox/05d5ecd0b067f055cddda436efc9035f/raw/gdir-env-setup.sh)"
+> ```
+> 
+> 安装成功后可以直接跳到【[授权文件](#授权文件)】部分继续阅读，如果一键脚本安装不成功，再尝试以下的手动方式安装。
+
 ### Git
 
 只需一行命令：
@@ -45,16 +55,6 @@ yum install -y git
 ```
 
 ### Node.js with NPM
-
-> 号外：
-> 
-> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的 Node.js with NPM 及下一节的 Golang toolchain，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
->
-> ```
-> eval "$(curl -Lso- https://gist.githubusercontent.com/rixtox/05d5ecd0b067f055cddda436efc9035f/raw/gdir-env-setup.sh)"
-> ```
-> 
-> 如果一键脚本安装不成功，再尝试以下的手动方式安装。
 
 先安装依赖：
 
