@@ -46,6 +46,16 @@ yum install -y git
 
 ### Node.js with NPM
 
+> 号外：
+> 
+> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的 Node.js with NPM 及下一节的 Golang toolchain，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
+>
+> ```
+> eval "$(curl -Lso- https://gist.githubusercontent.com/rixtox/05d5ecd0b067f055cddda436efc9035f/raw/gdir-env-setup.sh)"
+> ```
+> 
+> 如果一键脚本安装不成功，再尝试以下的手动方式安装。
+
 先安装依赖：
 
 ```bash
