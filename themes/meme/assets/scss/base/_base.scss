@@ -3,10 +3,13 @@ html, body {
     width: 100%;
     height: 100%;
     font-size: $fontSize;
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
 }
 
 body {
-    tab-size: $tabSize;
+    @include tabSize;
     color: var(--color-contrast-high);
     background-color: var(--color-bg);
     overflow-wrap: break-word;

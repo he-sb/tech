@@ -1,4 +1,4 @@
-简体中文 | 
+简体中文 |
 [English](https://github.com/reuixiy/hugo-theme-meme/blob/master/README.md)
 
 <div align="center"><img src="https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/static/icons/apple-touch-icon.png" /></div>
@@ -17,7 +17,7 @@ MemE 是一个强大且可高度定制的 [GoHugo](https://github.com/gohugoio/h
 
 https://gohugo.io/getting-started/quick-start/
 
-### 安装 Hugo（扩展版）
+### 安装 Hugo（`extended` 扩展版）
 
 对于 Arch Linux 的用户：
 
@@ -53,6 +53,14 @@ https://gohugo.io/getting-started/quick-start/
    ```sh
    ~/blog $ hugo server -D
    ```
+
+## 定制 MemE
+
+MemE 通过 Hugo 管道实现使用 SCSS 生成 CSS，而非静态的 CSS 文件，同时提供一个 [`_custom.scss`](https://github.com/reuixiy/hugo-theme-meme/blob/master/assets/scss/custom/_custom.scss) 文件以供用户定制。
+
+直接新建一个 `~/blog/assets/scss/custom/_custom.scss` 并将你自己的样式加入其中，就能覆盖主题的 `~/blog/themes/meme/assets/scss/custom/_custom.scss` 文件，且其会正确地被应用。
+
+事实上，在 Hugo 中你可以覆盖主题的任何模板，见这个非官方的镜像网页：<https://gohugobrasil.netlify.com/themes/customizing/>
 
 ## 更新 MemE
 
@@ -92,7 +100,6 @@ expiryDate | * | string
 `<taxonomies>` eg: categories, tags, series | * | array
 description | * | string, Markdown supported
 summary | * | string, Markdown supported
-keywords | * | array
 images | * | array
 slug | * | string
 url | * | string
@@ -122,7 +129,7 @@ dropCapAfterHr | drop cap after every horizontal rule tag? | boolean, override `
 deleteHrBeforeDropCap | delete horizontal rule tag before drop cap? | boolean, override `deleteHrBeforeDropCap` in `config.toml`, MemE only
 indent | indent instead of margin? | boolean, override `paragraphStyle` in `config.toml`, MemE only
 indentFirstParagraph | indent the first paragraph? | boolean, override `indentFirstParagraph` in `config.toml`, MemE only
-align | normal, justify, center | srting, if euqal to "normal", will override `enableJustify` in `config.toml`, MemE only
+align | normal, justify, center | string, if equal to "normal", will override `enableJustify` in `config.toml`, MemE only
 original | original? You can add the following 8 terms if you set `false`. The `author` is required, other optional | boolean, override `original` in `config.toml`, MemE only
 author | author of original post | string, MemE only
 link | link of original post | string, URL, MemE only

@@ -1,34 +1,13 @@
 // Back to Previous Mode & Respect System Preferences
-// `userPrefers`, `darkModeMediaQuery`, `lightModeMediaQuery` is defined in layouts/partials/head.html
 
-if (userPrefers === 'dark') {
-    changeMode('dark');
-} else if (userPrefers === 'light') {
-    changeMode('light');
-} else if (darkModeMediaQuery.matches) {
-    changeMode('dark');
-} else if (lightModeMediaQuery.matches) {
-    changeMode('light');
-}
+changeMode();
 
 // Reactive Dark Mode
 // https://web.dev/prefers-color-scheme/#reacting-on-dark-mode-changes
 // https://twitter.com/ChromeDevTools/status/1197175265643745282
 
-darkModeMediaQuery.addListener((e) => {
-    const darkModeOn = e.matches;
-    if (darkModeOn) {
-        changeModeMeta('dark');
-        changeMode('dark');
-    }
-});
-
-lightModeMediaQuery.addListener((e) => {
-    const lightModeOn = e.matches;
-    if (lightModeOn) {
-        changeModeMeta('light');
-        changeMode('light');
-    }
+window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+    changeMode();
 });
 
 // Theme Switcher
@@ -36,19 +15,18 @@ lightModeMediaQuery.addListener((e) => {
 
 const themeSwitcher = document.getElementById('theme-switcher');
 
-themeSwitcher.addEventListener('click', function() {
-    const currentMode = document.documentElement.getAttribute('data-theme');
-
-    if (currentMode === 'dark') {
-        changeModeMeta('light');
-        changeMode('light');
-        storePrefers('light');
-    } else {
-        changeModeMeta('dark');
-        changeMode('dark');
-        storePrefers('dark');
-    }
-});
+if (themeSwitcher) {
+    themeSwitcher.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (getCurrentTheme() == "dark") {
+            changeModeMeta('light');
+        } else {
+            changeModeMeta('dark');
+        }
+        changeMode();
+        storePrefers();
+    });
+}
 
 // Sync Across Tabs
 // https://codepen.io/tevko/pen/GgWYpg
@@ -56,24 +34,28 @@ themeSwitcher.addEventListener('click', function() {
 window.addEventListener('storage', function (event) {
     if (event.newValue === 'dark') {
         changeModeMeta('dark');
-        changeMode('dark');
     } else {
         changeModeMeta('light');
-        changeMode('light');
     }
+    changeMode();
 });
 
 // Functions
 
-function changeMode(theme) {
-    var isDark = theme === 'dark';
+function getCurrentTheme() {
+    return JSON.parse(window.getComputedStyle(document.documentElement, null).getPropertyValue("--theme-name"));
+}
 
-    // Change Theme Toggle Emoji
-    document.getElementById('theme-switcher').innerHTML = isDark ? '🌙' : '🌞';
+function changeMode() {
+    const isDark = getCurrentTheme() === 'dark';
+
+    // Change theme color meta
+    const themeColor = isDark ? '{{ .Site.Params.themeColorDark }}': '{{ .Site.Params.themeColor }}';
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
 
     // Change Chroma Code Highlight Theme
-    var oldChromaTheme = isDark ? 'chroma' : 'chroma-dark';
-    var newChromaTheme = isDark ? 'chroma-dark' : 'chroma';
+    const oldChromaTheme = isDark ? 'chroma' : 'chroma-dark';
+    const newChromaTheme = isDark ? 'chroma-dark' : 'chroma';
 
     [].slice.apply(document.getElementsByClassName(oldChromaTheme)).forEach((e) => {
         e.className = newChromaTheme;
@@ -100,6 +82,6 @@ function changeMode(theme) {
     {{ end }}
 }
 
-function storePrefers(theme) {
-    window.localStorage.setItem('theme', theme);
+function storePrefers() {
+    window.localStorage.setItem('theme', getCurrentTheme());
 }

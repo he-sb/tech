@@ -156,6 +156,12 @@
     {{ end }}
 {{ end }}
 
+{{ if and .Site.Params.enableDarkMode (eq .Site.Params.defaultTheme "dark") }}
+    $defaultTheme: dark;
+{{ else }}
+    $defaultTheme: light;
+{{ end }}
+
 @import "themes/light";
 
 // Dark Mode
@@ -341,6 +347,10 @@
     @import "components/highlight";
 {{ end }}
 
+{{ if .Site.Params.enableSocials }}
+    @import "components/socials";
+{{ end }}
+
 
 // Homepage Layout
 
@@ -422,6 +432,15 @@ $fofPoster: url({{ $fofPoster }});
     {{ end }}
 {{ end }}
 
+// Lunr search
+
+{{ if and (eq .Site.Params.headerLayout "flex") .Site.Params.enableLunrSearch }}
+    $enableLunrSearch: true;
+    @import "components/search";
+{{ else }}
+    $enableLunrSearch: false;
+{{ end }}
+
 
 // Responsive
 
@@ -432,6 +451,9 @@ $fofPoster: url({{ $fofPoster }});
 }
 
 @import "base/max-width";
+:root {
+    --max-width: #{$maxWidth};
+}
 @import "base/responsive";
 
 

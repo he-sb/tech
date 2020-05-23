@@ -1,4 +1,4 @@
-{{- printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }}
+{{- `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }}
 <!-- Reference: https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_default/rss.xml -->
 <!-- Reference: https://github.com/kaushalmodi/hugo-atom-feed/blob/master/layouts/_default/list.atom.xml -->
 <!-- Reference: https://validator.w3.org/feed/docs/rss2.html -->
@@ -12,10 +12,10 @@
 {{- end }}
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>{{ .Site.Title | safeHTML }}</title>
+        <title>{{ .Site.Title }}</title>
         <link>{{ .Permalink }}</link>
-        <description>{{ .Site.Params.siteDescription | safeHTML }}</description>
-        {{ printf `<generator>Hugo %s https://gohugo.io/</generator>` hugo.Version | safeHTML }}
+        <description>{{ .Site.Params.siteDescription }}</description>
+        <generator>Hugo {{ hugo.Version }} https://gohugo.io/</generator>
         {{ with .Site.LanguageCode }}
             <language>{{ . }}</language>
         {{ end }}
@@ -28,19 +28,18 @@
         {{ with .Site.Copyright }}
             <copyright>{{ . | plainify }}</copyright>
         {{ end }}
-        <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+        <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
         {{ with .OutputFormats.Get "SectionsRSS" }}
-            {{ printf `<atom:link rel="self" type=%q href=%q />` .MediaType .Permalink | safeHTML }}
+            <atom:link rel="self" type="{{ .MediaType }}" href="{{ .Permalink }}" />
         {{ end }}
         {{ range (where $pages "Section" "in" .Site.Params.mainSections) }}
             {{ $page := . }}
-            {{- partial "utils/author.html" $page -}}
-            {{- $author := ($page.Scratch.Get "author") -}}
+            {{- $author := partial "utils/author.html" $page -}}
             <item>
-                <title>{{ .Title | safeHTML }}</title>
+                <title>{{ .Title }}</title>
                 <link>{{ .Permalink }}</link>
                 <guid isPermaLink="true">{{ .Permalink }}</guid>
-                <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+                <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
                 {{ with $author.email }}
                     <author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>
                 {{ end }}
@@ -48,11 +47,10 @@
                     <copyright>{{ . | plainify }}</copyright>
                 {{- end }}
                 {{ if $.Site.Params.includeContent }}
-                    {{ printf `<description><![CDATA[%s]]></description>` .Content | safeHTML }}
+                    <description>{{ partial "utils/make-links-absolute.html" (dict "Deliver" . "content" .Content) | html }}</description>
                 {{ else }}
-                    {{- partial "utils/summary.html" $page -}}
-                    {{- $summary := .Description | default ($page.Scratch.Get "summary") -}}
-                    {{ printf `<description><![CDATA[%s]]></description>` $summary | safeHTML }}
+                    {{- $summary := .Description | default (partial "utils/summary.html" $page) -}}
+                    <description>{{ partial "utils/make-links-absolute.html" (dict "Deliver" . "content" $summary) | html }}</description>
                 {{ end }}
                 <!-- Sections -->
                 {{ if eq $.Site.Params.categoryBy "sections" }}

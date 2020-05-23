@@ -10,27 +10,39 @@
         {{ range .Site.Menus.main }}
             {{ if and (eq .Identifier "theme-switcher") $.Site.Params.enableDarkMode }}
                 {{ if eq $.Site.Params.headerLayout "flex" }}
-                    <li class="menu-item">
-                        {{ partial "components/dark-mode.html" $ctx }}
-                    </li>
+                    {{ $switcher := partial "components/dark-mode.html" $ctx }}
+                    {{ with $switcher }}
+                        <li class="menu-item">
+                            {{ . }}
+                        </li>
+                    {{ end }}
                 {{ end }}
             {{ else if eq .Identifier "lang-switcher" }}
                 {{ if and $.Site.IsMultiLingual $.Site.Params.enableLangToggle }}
                     {{ if eq $.Site.Params.headerLayout "flex" }}
-                        <li class="menu-item">
-                            {{ partial "components/multilingual.html" $ctx }}
-                        </li>
+                        {{ $switcher := partial "components/multilingual.html" $ctx }}
+                        {{ with $switcher }}
+                            <li class="menu-item">
+                                {{ . }}
+                            </li>
+                        {{ end }}
                     {{ end }}
+                {{ end }}
+            {{ else if eq .Identifier "search" }}
+                {{ if and $.Site.Params.enableLunrSearch (eq $.Site.Params.headerLayout "flex") }}
+                    {{- $iconName := (string .Post) -}}
+                    <li class="menu-item search-item">
+                        {{ partial "components/search.html" (dict "Deliver" $ctx "iconName" $iconName) }}
+                    </li>
                 {{ end }}
             {{ else }}
                 <li class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
                     {{- $linkType := (string .Pre) -}}
                     <a href="{{ .URL }}"{{ if eq $linkType "external" }} target="_blank" rel="external noopener"{{ end }}>
                         {{- $iconName := (string .Post) -}}
-                        {{- $icon := (index $.Site.Data.SVG $iconName) -}}
-                        {{- printf `%s` (replace $icon "icon" (printf `icon %s` .Identifier)) | safeHTML -}}
+                        {{- partial "utils/icon.html" (dict "Deliver" $ "name" $iconName "class" .Identifier) -}}
                         {{- with .Name -}}
-                            {{- printf `<span class="menu-item-name">%s</span>` . | safeHTML -}}
+                            <span class="menu-item-name">{{ . }}</span>
                         {{- end -}}
                     </a>
                 </li>

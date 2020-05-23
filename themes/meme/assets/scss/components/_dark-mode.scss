@@ -1,23 +1,24 @@
 #theme-switcher {
-    cursor: pointer;
-    position: relative;
+    color: var(--color-contrast-medium);
+    transition: color $duration;
     z-index: 4;
+
+    &:hover {
+        color: var(--color-primary);
+    }
+
+    .icon {
+        margin-right: 0 !important;
+    }
 }
 
 [data-theme="dark"] {
     img {
         filter: brightness(50%);
     }
-    #theme-switcher, #lang-switcher {
-        opacity: 0.5;
-    }
 }
 
-@if ($headerLayoutFlex) {
-    #theme-switcher {
-        display: inline-block;
-    }
-} @else {
+@if (not $headerLayoutFlex) {
     #theme-switcher {
         padding: 1em;
         float: right;

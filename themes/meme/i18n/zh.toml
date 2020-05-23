@@ -12,7 +12,7 @@ other = "分钟"
 other = "目录"
 
 [readMore]
-other = "阅读全文"
+other = "阅读更多"
 
 [prevPage]
 other = "上一页"
@@ -50,6 +50,9 @@ other = "相关文章："
 [loadComments]
 other = "加载评论"
 
+[pageNotFound]
+other = "404 - 页面不存在"
+
 [fofLinkText]
 other = "送我回主页"
 
@@ -58,6 +61,13 @@ other = "已更新最新版本"
 
 [serviceWorkerUpdatedAction]
 other = "点击刷新"
+
+[searchResultsTitle]
+one = "找到 1 条关于「{{ .Term }}」的结果"
+other = "找到 {{ .Count }} 条关于「{{ .Term }}」的结果"
+
+[searchResultsNone]
+other = "没有找到关于「{{ .Term }}」的结果"
 
 
 [twitter]

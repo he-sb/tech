@@ -1,4 +1,4 @@
-English | 
+English |
 [简体中文](https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md)
 
 <div align="center"><img src="https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/static/icons/apple-touch-icon.png" /></div>
@@ -54,6 +54,14 @@ For users of other systems, see: https://gohugo.io/getting-started/installing/
    ~/blog $ hugo server -D
    ```
 
+## Customize MemE
+
+MemE uses SCSS via [Hugo Pipes](https://gohugo.io/hugo-pipes/introduction/) to generate CSS instead of static CSS file and provides a [`_custom.scss`](https://github.com/reuixiy/hugo-theme-meme/blob/master/assets/scss/custom/_custom.scss) for customization.
+
+Just create a `~/blog/assets/scss/custom/_custom.scss` and add your own styles into this file. Your `_custom.scss` will override `~/blog/themes/meme/assets/scss/custom/_custom.scss` and your custom CSS will be applied correctly.
+
+Actually, you can override any template of theme in Hugo, see this *unofficial mirror* page: https://gohugobrasil.netlify.com/themes/customizing/
+
 ## Update MemE
 
 ```sh
@@ -92,7 +100,6 @@ expiryDate | * | string
 `<taxonomies>` eg: categories, tags, series | * | array
 description | * | string, Markdown supported
 summary | * | string, Markdown supported
-keywords | * | array
 images | * | array
 slug | * | string
 url | * | string
@@ -122,7 +129,7 @@ dropCapAfterHr | drop cap after every horizontal rule tag? | boolean, override `
 deleteHrBeforeDropCap | delete horizontal rule tag before drop cap? | boolean, override `deleteHrBeforeDropCap` in `config.toml`, MemE only
 indent | indent instead of margin? | boolean, override `paragraphStyle` in `config.toml`, MemE only
 indentFirstParagraph | indent the first paragraph? | boolean, override `indentFirstParagraph` in `config.toml`, MemE only
-align | normal, justify, center | srting, if euqal to "normal", will override `enableJustify` in `config.toml`, MemE only
+align | normal, justify, center | string, if equal to "normal", will override `enableJustify` in `config.toml`, MemE only
 original | original? You can add the following 8 terms if you set `false`. The `author` is required, other optional | boolean, override `original` in `config.toml`, MemE only
 author | author of original post | string, MemE only
 link | link of original post | string, URL, MemE only
