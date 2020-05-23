@@ -219,10 +219,10 @@ uglyURLs = false
     [[menu.main]]
         weight = 7
         identifier = "theme-switcher"
-    [[menu.main]]
-        weight = 8
-        identifier = "search"
-        post = "search"
+    # [[menu.main]]
+    #     weight = 8
+    #     identifier = "search"
+    #     post = "search"
     # [[menu.main]]
     #     weight = 8
     #     identifier = "lang-switcher"
@@ -1283,7 +1283,7 @@ uglyURLs = false
 
     # 说明：需要开启 `SearchIndex` 的输出
 
-    enableLunrSearch = true
+    enableLunrSearch = false
     # 说明：https://lunrjs.com/
 
 
