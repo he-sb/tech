@@ -192,30 +192,35 @@ uglyURLs = false
         weight = 2
         pre = "internal"
         post = "archive"
+        identifier = "posts"
     [[menu.main]]
         url = "/categories/"
         name = "分类"
         weight = 3
         pre = "internal"
         post = "th"
+        identifier = "categories"
     [[menu.main]]
         url = "/tags/"
         name = "标签"
         weight = 4
         pre = "internal"
         post = "tags"
+        identifier = "tags"
     [[menu.main]]
         url = "/links/"
         name = "友链"
         weight = 5
         pre = "internal"
         post = "link"
+        identifier = "links"
     [[menu.main]]
         url = "/about/"
         name = "关于"
         weight = 6
         pre = "internal"
         post = "user-circle"
+        identifier = "about"
     [[menu.main]]
         weight = 7
         identifier = "theme-switcher"
