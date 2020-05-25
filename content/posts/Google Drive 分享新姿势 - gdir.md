@@ -38,11 +38,7 @@ draft = false
 
 > 号外：
 > 
-> > 更新：
-> > 
-> > 项目更新了，去除了对于 Node.js 和 NPM 的依赖，因此以下手动教程中的【Node.js with NPM】这一节可以略过；作者的一键脚本也进行了相应的更新，以下操作不受影响。
-> > 
-> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的【Git】， ~~【Node.js with NPM】~~ 和【Golang toolchain】这 ~~三~~ 两部分，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
+> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的【Git】和【Golang toolchain】这两部分，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
 >
 > ```
 > eval "$(curl -Lso- https://gist.githubusercontent.com/rixtox/05d5ecd0b067f055cddda436efc9035f/raw/gdir-env-setup.sh)"
@@ -56,26 +52,6 @@ draft = false
 
 ```bash
 yum install -y git
-```
-
-### Node.js with NPM
-
-先安装依赖：
-
-```bash
-yum install gcc-c++ make
-```
-
-执行官方脚本：
-
-```bash
-curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-```
-
-安装 Node.js：
-
-```bash
-yum install -y nodejs
 ```
 
 ### Golang toolchain
