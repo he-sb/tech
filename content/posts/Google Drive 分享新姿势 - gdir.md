@@ -38,7 +38,7 @@ draft = false
 
 > 号外：
 > 
-> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的【Git】和【Golang toolchain】这两部分，适用于 CentOS，Debian，Ubuntu 系统，只需执行下面这一条命令即可：
+> gdir 项目作者（不是俺哈）写了个一键脚本来方便大家安装本节的【Git】和【Golang toolchain】这两部分，适用于 CentOS，Debian，Ubuntu，ArchLinux，MacOS 系统，只需执行下面这一条命令即可：
 >
 > ```
 > eval "$(curl -Lso- https://gist.githubusercontent.com/rixtox/05d5ecd0b067f055cddda436efc9035f/raw/gdir-env-setup.sh)"
