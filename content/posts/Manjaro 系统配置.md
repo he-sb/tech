@@ -79,6 +79,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
     su USERNAME
     ```
 
+且重启系统后若 zsh 有更新，Oh My Zsh 会自动提示。
+
 2.更换 Oh My Zsh 主题：
 
 编辑 `~/.zshrc` 这个文件，找到 `ZSH_THEME` 字段，将后面的值修改为 `"ys"` （俺使用 [ys](https://github.com/ohmyzsh/ohmyzsh/wiki/themes#ys) 这个主题），然后 `source ~/.zshrc` 使修改生效。
