@@ -19,7 +19,7 @@ draft = true
 client 原始数据 -> 封装为 WebSocket -> TLS加密 -> (CDN) -> server 解密后反代至 V2Ray 端口 -> 该干嘛干嘛
 ```
 
-全过程模拟正常 `HTTPS` 流量，最大程度避免被墙。
+全过程模拟正常 HTTPS 流量，最大程度避免被墙。
 
 ## 准备工作
 
@@ -34,7 +34,7 @@ timedatectl set-ntp true    # 启用时间自动同步
 ntpq -p    # 同步时间
 ```
 
-### 安装 `BBR` 加速
+### 安装 BBR 加速
 
 首先下载并运行四合一脚本（[Github地址](https://github.com/chiakge/Linux-NetSpeed/)）
 
@@ -58,7 +58,7 @@ chmod +x tcp.sh
 yum update -y
 ```
 
-### 安装 `Docker` 和 `Docker-Compose`
+### 安装 Docker 和 Docker-Compose
 
 安装依赖
 
@@ -66,7 +66,7 @@ yum update -y
 yum install -y yum-utils  device-mapper-persistent-data lvm2
 ```
 
-添加 `yum` 源
+添加 yum 源
 
 ```shell
 yum-config-manager \
@@ -74,7 +74,7 @@ yum-config-manager \
 https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-安装最新版本 `Docker` 并添加开机自启
+安装最新版本 Docker 并添加开机自启
 
 ```shell
 yum install -y docker-ce
@@ -82,7 +82,7 @@ systemctl enable docker
 systemctl start docker
 ```
 
-安装 `Docker-Compose` 
+安装 Docker-Compose 
 
 ```shell
 curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
@@ -91,7 +91,7 @@ chmod +x /usr/local/bin/docker-compose
 
 ### 域名和 CDN 部分
 
-`TLS` 要求域名作为前提。
+TLS 要求域名作为前提。
 
 * 域名在 Freenom 申请免费的即可
 * CDN 可以使用 CloudFlare 免费套餐
@@ -135,7 +135,7 @@ errors stdout
 vi /root/config/json
 ```
 
-`V2Ray` 的配置文件，注意把其中 `id` 对应的值替换为自己的
+V2Ray 的配置文件，注意把其中 `id` 对应的值替换为自己的
 
 ```json
 {
@@ -185,7 +185,7 @@ version: '3'
 services:
   v2ray:
     container_name: v2ray
-    image: v2ray/official
+    image: teddysun/v2ray
     restart: always
     volumes:
     - ./config.json:/etc/v2ray/config.json
@@ -212,11 +212,11 @@ services:
 docker-compose up -d
 ```
 
-一切正常的话此时 `V2Ray` 应该可以正常使用了。
+一切正常的话此时 V2Ray 应该可以正常使用了。
 
 ## 完善 CDN（可选）
 
-若上一步 `V2Ray` 可以正常工作，此时就可以回到 CF 开启 CDN 了。
+若上一步 V2Ray 可以正常工作，此时就可以回到 CF 开启 CDN 了。
 
 1. `DNS` 页签：将云朵图标点亮
 2. `SSL` 页签：模式选择 `Full`
@@ -240,7 +240,7 @@ docker-compose up -d
 
 ### 执行 `docker-compose` 提示 `permission deny`
 
-关闭 `Selinux` 即可
+关闭 Selinux 即可
 
 ```shell
 #查看SELinux状态（如果 SELinux status 参数为 enabled 即为开启状态）
@@ -269,15 +269,17 @@ firewall-cmd --zone=public -add-port=22/tcp --permanent
 * 重启防火墙：`firewall-cmd --reload`
 * 再次确认已开启端口：`firewall-cmd --list-ports`
 
-### `Docker` 相关
+### Docker 相关
 
 * 查看容器基本信息： `docker ps -a`
 * 查看反代是否生效，即访问域名，看能否访问正常网站。如果不生效，执行 `docker logs docker-id` 查看原因
-* 反代生效基本就没啥问题了，测试 `V2Ray` 能否正常工作
-* 如果 `Docker` 有问题，先 stop：`docker stop docker-id` ，再删除容器：`docker rm docker-id` ，最后再次执行 `docker-compose up -d` ，看是否正常 
+* 反代生效基本就没啥问题了，测试 V2Ray 能否正常工作
+* 如果 Docker 有问题，先 stop：`docker stop docker-id` ，再删除容器：`docker rm docker-id` ，最后再次执行 `docker-compose up -d` ，看是否正常 
 
 ---
 
 *参考链接：*
 
 1. [v2ray(vmess+ss)+ws+tls+cdn](https://www.notion.so/v2ray-vmess-ss-ws-tls-cdn-acc54f01f4c747d694cca1a9172b09f6)
+
+2. [teddysun/v2ray - Docker Hub](https://hub.docker.com/r/teddysun/v2ray)
