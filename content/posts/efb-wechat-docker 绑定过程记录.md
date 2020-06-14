@@ -46,7 +46,7 @@ Telegram中每位用户有一个唯一的数字ID，可通过Bot来查询，以�
 
 ### 启动Docker并登陆
 
-Docker使用[mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat)这个镜像，尝试了一圈这个是启动最省心的。
+Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) 这个镜像，尝试了一圈这个是启动最省心的。
 
 使用这条命令来启动镜像
 
@@ -67,7 +67,7 @@ docker logs -f efbwechat
 ### Some Tips
 
 1. 若运行Docker的机器在国外而登陆微信的手机在国内，会有微信网页版登陆权限被封禁的风险。
-2. 运行Docker期间手机微信不可长期不在线（此处“长期”指超过24小时。。），否则网页版会被替下线，需重新登陆。
+2. 运行Docker期间手机微信不可长期不在线（此处“长期”指超过24小时。。），否则网页版会被踢下线，需重新登陆。
 3. 可以在Telegram内新建若干群组并拉进之前建好的微信Bot进群，并将各个微信群、好友、公众号等 `link` 至相应群组即可实现方便的私聊/免打扰等功能，自行探索。
 
 ## 老司机使用
