@@ -72,7 +72,7 @@ docker logs -f efbwechat
 
 ## 老司机使用
 
-此镜像的配置文件在容器内 `/opt/app/ehforward_configt/profiles/default` 目录下，`tgdata.db` 文件位置在 `/opt/app/ehforward_config/profiles/default/blueset.telegram/tgdata.db`，如服务器重装或迁移时，备份相应文件并在重新部署容器时挂载至对应位置即可。
+此镜像的配置文件在容器内 `/opt/app/ehforward_config/profiles/default` 目录下，`tgdata.db` 文件位置在 `/opt/app/ehforward_config/profiles/default/blueset.telegram/tgdata.db`，如服务器重装或迁移时，备份相应文件并在重新部署容器时挂载至对应位置即可。
 
 备份和挂载这个过程还在~~咕咕咕~~学习中，估计要~~咕~~学到下次重装服务器了。。
 
