@@ -65,7 +65,7 @@ sudo pacman -S zsh
 2.安装 Oh My Zsh ：
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 安装完 Oh My Zsh 后会提示替换默认的 shell 为 zsh ，若没有提示的话按照下面的步骤手动替换：
