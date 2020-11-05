@@ -114,10 +114,12 @@ plugins=(git)
 
 ```conf
 ...
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
 autoload -U compinit && compinit
 ...
 ```
+
+其中 sudo 是 ohmyzsh 自带的插件，可以在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便。
 
 最后使修改后的配置生效：
 
