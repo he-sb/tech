@@ -8,13 +8,23 @@ slug = "configuration-after-installing-manjaro"
 draft = true
 +++
 
-终于告别了辣鸡 Windows 系统了，从 Win 10 到 LTSC ，再到 Windows Server 2019 ，就没有一个不出 bug 的，还是早日投奔 Linux 的怀抱吧。目前更换了主力系统为 [Manjaro](https://manjaro.org/) ，这是一个基于 [Arch Linux](https://www.archlinux.org/) 的衍生发行版本，继承了 Arch 滚动更新和 AUR 软件包极为丰富的优点，稳定性也十分优秀，适合长期使用。Manjaro 官方镜像按照桌面环境的不同，分为 XFCE ，KDE ，GNOME 三个版本，个人选择的是 KDE 桌面环境，更为顺手一点。
+终于告别了辣鸡 Windows 系统了，从 Win 10 到 LTSC ，再到 Windows Server 2019 ，就没有一个不出 bug 的，还是早日投奔 Linux 的怀抱吧，至少出了 Bug 也可以自己折腾。目前更换了主力系统为 [Manjaro](https://manjaro.org/) ，这是一个基于 [Arch Linux](https://www.archlinux.org/) 的衍生发行版本，继承了 Arch 滚动更新和 AUR 软件包极为丰富的优点，稳定性也十分优秀，适合长期使用。Manjaro 官方镜像按照桌面环境（DE）的不同，分为 XFCE ，KDE ，GNOME 三个版本，个人选择的是 KDE 桌面环境，更为顺手一点。
 
 下面记录一下配置过程，一来方便自己将来万一重装后的恢复，二来方便有需要的朋友们做个参考。
 
+## 0.更换国内镜像源
+
+在终端中执行下面这条命令：
+
+```bash
+sudo pacman-mirrors -i -c China -m rank
+```
+
+在弹出的对话框中选择一个最快的就可以了，多选几个也并不能加快速度。。
+
 ## 1.替换自带的 Vi 为 Vim
 
-系统自带的 Vi 体验简直令人发指，没有方向键， Backspace 也会变成莫名其妙的符号，直接卸载：
+系统自带的 Vi 体验简直令人发指，没有方向键（方向键是 h/j/k/l 这四个键来控制的。。）， Backspace 也会变成莫名其妙的符号，直接卸载：
 
 ```bash
 sudo pacman -Rs vi
@@ -114,12 +124,12 @@ plugins=(git)
 
 ```conf
 ...
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions)
+plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract)
 autoload -U compinit && compinit
 ...
 ```
 
-其中 sudo 是 ohmyzsh 自带的插件，可以在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便。
+其中 sudo 和 extract 是 ohmyzsh 自带的插件，前者的作用是在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便，后者整合了常用的解压文件的命令别名，解压文件时只需 `extract <filename>` 就可以，不再需要记忆不同格式的解压命令。
 
 最后使修改后的配置生效：
 
@@ -127,7 +137,11 @@ autoload -U compinit && compinit
 source ~/.zshrc
 ```
 
-## 5.安装中文字体和输入法
+## 5.安装和配置字体
+
+<!-- todo -->
+
+## 6.安装和配置中文输入法
 
 <!-- todo -->
 
@@ -168,3 +182,7 @@ sudo pacman -Qs  # 搜索已安装的包
 1. [与Manjaro相见恨晚 - 山炮不二](https://xsinger.me/diy/857.html)
 
 2. [Manjaro 个人新装配置 | 禾七博客](https://leay.net/2019/12/18/manjaro/)
+
+3. [Manjaro-KDE配置全攻略 - 知乎](https://zhuanlan.zhihu.com/p/114296129)
+
+4. [manjaro 安装配置总结 | Marsvet's Blog | Where there's a start, there's a finish.](https://www.marsvet.top/2020-08-04/Install-and-configure-manjaro/)
