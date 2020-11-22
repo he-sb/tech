@@ -58,21 +58,43 @@ sudo pacman -Sy archlinuxcn-keyring
 sudo pacman -Syy
 ```
 
-## 3.配置环境变量
+## 3.安装 yay 并配置包管理器走代理
 
-目的是使终端也走代理，这样就不需要添加国内镜像源了：
+3.1 安装 yay
 
-<!-- mellow 透明代理/ proxychains /环境变量调用 V2Ray -->
+yay 是一个 Go 语言编写的 AUR 助手，有时官方仓库内没有的软件，只能通过 AUR 来安装。详细介绍请移步文末 :)
+
+```bash
+sudo pacman -S yay
+```
+
+之后安装软件就不需要 `sudo pacman` 了，yay 兼容 pacman 的命令，下文如无特殊说明，均用 `yay` 来代替 `sudo pacman` 。
+
+3.2 让包管理器走代理
+
+首先参考 [简易配置终端代理](/posts/use-proxy-in-terminal) 设置好系统代理，然后
+
+```bash
+sudo vim /etc/sudoers
+```
+
+添加下面这行：
+
+```conf
+Defaults env_keep += "ftp_proxy http_proxy https_proxy"
+```
+
+保存即可，现在代理的环境变量会自动传递给 sudo 和 pacman 了，yay 会自动读取 `http_proxy` 和 `https_proxy` 的值，不需要特殊设置（其实 pacman 也能自动读取，但是 pacman 使用时要加上 sudo，而环境变量不会自动传递给 sudo，所以需要特殊设置一下；而且因为 yay 有些命令会调用 `sudo pacman`，所以哪怕只用 yay 也是需要设置这一步的 Orz）。
 
 ## 4.安装并配置 zsh
 
-1.安装 zsh ：
+4.1 安装 zsh ：
 
 ```bash
-sudo pacman -S zsh
+yay -S zsh
 ```
 
-2.安装 Oh My Zsh ：
+4.2 安装 Oh My Zsh ：
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -97,11 +119,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 且重启系统后若 zsh 有更新，Oh My Zsh 会自动提示。
 
-3.更换 Oh My Zsh 主题：
+4.3 更换 Oh My Zsh 主题：
 
 编辑 `~/.zshrc` 这个文件，找到 `ZSH_THEME` 字段，将后面的值修改为 `"ys"` （俺使用 [ys](https://github.com/ohmyzsh/ohmyzsh/wiki/themes#ys) 这个主题），然后 `source ~/.zshrc` 使修改生效。
 
-4.安装 Oh My Zsh 插件：
+4.4 安装 Oh My Zsh 插件：
 
 ```bash
 # zsh-syntax-highlighting（代码高亮）
@@ -145,11 +167,15 @@ source ~/.zshrc
 
 <!-- todo -->
 
-## 6.修改家目录为英文
+## 7.修改家目录为英文
 
 <!-- todo -->
 
-## 7.备份当前系统配置，重装后一键恢复
+## 8.个人常用软件列表
+
+<!-- todo -->
+
+## 9.备份当前系统配置，重装后一键恢复
 
 <!-- todo -->
 
@@ -157,23 +183,38 @@ source ~/.zshrc
 
 Arch 系的 Linux 发行版，软件包来源有两个，Community（Arch 官方仓库），AUR（Arch User Repository, Arch 用户仓库）。用户将软件放在 AUR ，Arch 官方则定期挑选 AUR 里的优秀程序到 community，实际表现为 Community 为 AUR 的子集，Community 有的应用 AUR 都有，但 AUR 内有而 Community 没有的那部分软件可能在系统上的运行表现不大稳定。
 
-Manjaro 自带的桌面程序软件中心（pamac-manager）既可以安装 Community 程序也可以安装 AUR 程序，区别是 AUR 程序会显示【构建】而不是【安装】；但在终端中通过自带的 pacman 只能安装 Community 程序，想要安装 AUR 程序则需要安装额外的包管理器，之前很多教程内的 yaourt 已经停止维护了，个人使用 yay （详细介绍请看官方 Wiki：[AUR helpers (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/AUR_helpers_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) ）。
+Manjaro 自带的桌面程序软件中心（pamac-manager）既可以安装 Community 程序也可以安装 AUR 程序，区别是 AUR 程序会显示【构建】而不是【安装】；但在终端中通过自带的 pacman 只能安装 Community 程序，想要安装 AUR 程序则需要安装额外的包管理器，之前很多教程内的 yaourt 已经停止维护了，个人使用 yay （详细介绍请移步官方 Wiki：[AUR helpers (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/AUR_helpers_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) ）。
 
-下面是一些包管理器的常用命令。
+下面是一些包管理器的常用参数：
 
-### pacman
+1.pacman
 
 ```bash
-sudo pacman -Syu  # 同步软件库并更新系统到最新状态
-sudo pacman -S 软件名  # 安装
-sudo pacman -R 软件名  # 删除单个软件包，保留其全部已经安装的依赖关系
-sudo pacman -Rs 软件名  # 除指定软件包，及其所有未被其他已安装软件包使用的依赖关系
-sudo pacman -Ss 软件名  # 查找软件
-sudo pacman -Qs  # 搜索已安装的包
+sudo pacman -Syu  # 同步软件包数据库并更新系统
+sudo pacman -S <packagename>  # 安装软件包
+sudo pacman -R <packagename>  # 删除单个软件包，保留其全部已经安装的依赖关系
+sudo pacman -Rs <packagename>  # 删除指定软件包，及其所有未被其他已安装软件包使用的依赖关系
+sudo pacman -Rd <packagename>   # 删除软件包，不检查依赖关系
+sudo pacman -Ss <keyword>>  # 查找含关键字的软件包
+sudo pacman -Qs <keyword>   # 搜索已安装的包
 ```
-<!-- todo -->
 
-### yay
+2.yay
+
+兼容 pacman 的命令行参数，这部分命令只需简单地将 `sudo pacman` 替换为 `yay` 即可，例如：
+
+```bash
+yay -Syu    # 等价于 sudo pacman -Syu
+yay -S <packagename> # 等价于 sudo pacman -S <packagename>
+```
+
+其他参数类比即可。除此之外还可以：
+
+```bash
+yay <keyword>   # 搜索含关键字的软件包，输入序号安装对应的结果项，支持多选和反选
+                # 若无需要安装的结果，输入 q 后回车退出
+                # 搜索结果包含 Community 和 AUR 仓库内的包
+```
 
 ---
 
@@ -186,3 +227,5 @@ sudo pacman -Qs  # 搜索已安装的包
 3. [Manjaro-KDE配置全攻略 - 知乎](https://zhuanlan.zhihu.com/p/114296129)
 
 4. [manjaro 安装配置总结 | Marsvet's Blog | Where there's a start, there's a finish.](https://www.marsvet.top/2020-08-04/Install-and-configure-manjaro/)
+
+5. [pacman (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
