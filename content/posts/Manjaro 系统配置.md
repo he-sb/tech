@@ -3,7 +3,7 @@ title = "Manjaro 系统配置"
 description = " "
 date = "2020-04-15T20:59:24+08:00"
 categories = ["Linux"]
-tags = ["Manjaro"]
+tags = ["Manjaro","zsh","AUR"]
 slug = "configuration-after-installing-manjaro"
 draft = true
 +++
@@ -118,6 +118,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
     ```
 
 且重启系统后若 zsh 有更新，Oh My Zsh 会自动提示。
+
+> 如果不小心关掉了更新提示，可以执行 `omz update` 手动更新。
 
 4.3 更换 Oh My Zsh 主题：
 
