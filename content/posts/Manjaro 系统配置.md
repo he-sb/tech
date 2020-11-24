@@ -148,10 +148,12 @@ plugins=(git)
 
 ```conf
 ...
-plugins=(git sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract)
+plugins=(sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract)
 autoload -U compinit && compinit
 ...
 ```
+
+不开启内置的 git 插件是因为这只是自带的一大堆 alias，而且很少会用到。
 
 其中 sudo 和 extract 是 ohmyzsh 自带的插件，前者的作用是在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便，后者整合了常用的解压文件的命令别名，解压文件时只需 `extract <filename>` 就可以，不再需要记忆不同格式的解压命令。
 
