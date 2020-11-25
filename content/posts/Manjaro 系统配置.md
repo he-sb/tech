@@ -173,7 +173,74 @@ source ~/.zshrc
 
 ## 7.修改家目录为英文
 
-<!-- todo -->
+如果系统语言设置为了中文，那么用户的家目录（也就是 `~` / `/home/<username>/` 这个目录）下的默认文件夹名字会全部变为中文，类似这样：
+
+```bash
+[he-sb@HE-SB-Manjaro ~]$ ls
+公共 模板 视频 图片 文档 下载 音乐 桌面
+[he-sb@HE-SB-Manjaro ~]$
+```
+
+在某些情况下会比较的不方便（比如你和按一样有点强迫症……）。不过上网搜索的话，网上的教程大部分是将系统语言切换为英文再切换回来，虽然可以达到目的，但很不优雅，正好看到了 [这篇教程](https://mogeko.me/2019/060/) ，详细解释请看原文，以下是 TLDR 版的操作记录：
+
+```bash
+vim ~/.config/user-dirs.dirs
+```
+
+这个文件内容现在是下面这样：
+
+```conf
+# This file is written by xdg-user-dirs-update
+# If you want to change or add directories, just edit the line you're
+# interested in. All local changes will be retained on the next run.
+# Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+# homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+# absolute path. No other format is supported.
+# 
+XDG_DESKTOP_DIR="$HOME/桌面"
+XDG_DOWNLOAD_DIR="$HOME/下载"
+XDG_TEMPLATES_DIR="$HOME/模板"
+XDG_PUBLICSHARE_DIR="$HOME/公共"
+XDG_DOCUMENTS_DIR="$HOME/文档"
+XDG_MUSIC_DIR="$HOME/音乐"
+XDG_PICTURES_DIR="$HOME/图片"
+XDG_VIDEOS_DIR="$HOME/视频"
+```
+
+将内容修改为这样（就是修改下文件夹名称）：
+
+```conf
+# This file is written by xdg-user-dirs-update
+# If you want to change or add directories, just edit the line you're
+# interested in. All local changes will be retained on the next run.
+# Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+# homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+# absolute path. No other format is supported.
+# 
+XDG_DESKTOP_DIR="$HOME/Desktop"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_TEMPLATES_DIR="$HOME/Templates"
+XDG_PUBLICSHARE_DIR="$HOME/Public"
+XDG_DOCUMENTS_DIR="$HOME/Documents"
+XDG_MUSIC_DIR="$HOME/Music"
+XDG_PICTURES_DIR="$HOME/Pictures"
+XDG_VIDEOS_DIR="$HOME/Videos"
+```
+
+然后挨个重命名已有的文件夹：
+
+```bash
+mv $HOME/桌面 $HOME/Desktop
+mv $HOME/下载 $HOME/Downloads
+mv $HOME/模板 $HOME/Templates
+mv $HOME/公共 $HOME/Public
+mv $HOME/文档 $HOME/Documents
+mv $HOME/音乐 $HOME/Music
+mv $HOME/图片 $HOME/Pictures
+mv $HOME/视频 $HOME/Videos
+```
+
+最后重启就好了。
 
 ## 8.个人常用软件列表
 
@@ -233,3 +300,5 @@ yay <keyword>   # 搜索含关键字的软件包，输入序号安装对应的�
 4. [manjaro 安装配置总结 | Marsvet's Blog | Where there's a start, there's a finish.](https://www.marsvet.top/2020-08-04/Install-and-configure-manjaro/)
 
 5. [pacman (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+
+6. [如何将 Home 目录下的文件夹设置为英文 | Mogeko`s Blog](https://mogeko.me/2019/060/)
