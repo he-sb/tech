@@ -39,7 +39,7 @@ ssh user@server -o "ProxyCommand C:\Windows\connect.exe -S 127.0.0.1:1080 %h %p"
 
 ## Linux 系统
 
-使用 nc ，即 netcat ，这是一个强大的网络工具，不过许多发行版默认没有安装，需要手动安装，CentOS 可以使用 `yum install nc` 来安装，Manjaro 使用 `sudo pacman -S netcat` 来安装。
+使用 nc ，即 netcat ，这是一个强大的网络工具，不过许多发行版默认没有安装，需要手动安装，CentOS 可以使用 `yum install nc` 来安装，Manjaro 使用 `sudo pacman -S openbsd-netcat` 来安装。
 
 用法和上文中 Windows 下使用 connect 类似，只是 nc 的参数和 connect 略有不同，下面举个栗子：
 
