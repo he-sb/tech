@@ -17,30 +17,28 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.safecrlf true
           git config --global core.ignorecase false
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Clone Repository  # 拉取源码
-        run: |
+        run:
           git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
 
       - name: Setup Hugo  # 安装 hugo (version: v0.66.0)
         run: |
-          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb
-          sudo dpkg -i hugo.deb
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
           hugo version
 
       - name: Build  # 构建网站
-        run: |
-          cd he-sb/tech
-          hugo --gc --minify --cleanDestinationDir
+        run:
+          cd he-sb/tech && hugo --gc --minify --cleanDestinationDir
 
       - name: Deploy  # 部署至 GitHub Pages
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
+          TARGET_REPO: "he-sb/tech"
         run: |
-          cd he-sb/tech/public
-          git init
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          cd he-sb/tech/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
-          git push --force --quiet "https://$SECRET@github.com/${GITHUB_REPOSITORY}" master:gh-pages
+          git push --force --quiet "https://$SECRET@github.com/$TARGET_REPO" master:gh-pages
