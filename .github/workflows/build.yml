@@ -9,9 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2  # 拉取源码
-        with:
-          fetch-depth: 0  # 指定拉取所有历史
+      - uses: actions/checkout@v1  # 拉取源码
 
       - name: Setup Hugo  # 使用指定版本的 hugo
         uses: peaceiris/actions-hugo@v2
