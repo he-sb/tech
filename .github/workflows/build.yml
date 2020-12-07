@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2  # 拉取源码
+          fetch-depth: 0  # 指定拉取所有历史
 
       - name: Setup Hugo  # 使用指定版本的 hugo
         uses: peaceiris/actions-hugo@v2
