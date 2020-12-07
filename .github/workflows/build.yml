@@ -21,7 +21,6 @@ jobs:
       - name: Clone Repository  # 拉取源码
         run: |
           git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
-          cd he-sb/tech
 
       - name: Setup Hugo  # 安装 hugo (version: v0.66.0)
         run: |
@@ -30,13 +29,15 @@ jobs:
           hugo version
 
       - name: Build  # 构建网站
-        run: hugo --gc --minify --cleanDestinationDir
+        run: |
+          cd he-sb/tech
+          hugo --gc --minify --cleanDestinationDir
 
       - name: Deploy  # 部署至 GitHub Pages
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
         run: |
-          cd ./public
+          cd he-sb/tech/public
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
