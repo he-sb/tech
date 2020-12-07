@@ -92,7 +92,7 @@ install:  # 安装依赖
   - sudo dpkg -i hugo.deb
 
 script:
-  - hugo  # 生成网站
+  - hugo --minify  # 生成网站
 
 deploy:
   provider: pages  # 部署到 Github Pages
@@ -140,7 +140,7 @@ install:  # 安装依赖
   - sudo dpkg -i hugo.deb
 
 script:
-  - hugo  # 生成网站
+  - hugo --minify  # 生成网站
 
 after_script:  # 部署至 Github Pages
   - cd ./public
