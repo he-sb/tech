@@ -36,9 +36,9 @@ jobs:
       - name: Deploy  # 部署至 GitHub Pages
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
-          TARGET_REPO: "he-sb/tech"
+          TARGET_REPO: "github.com/he-sb/tech.git"
         run: |
           cd he-sb/tech/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
-          git push --force --quiet "https://$SECRET@github.com/$TARGET_REPO" master:gh-pages
+          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:gh-pages
