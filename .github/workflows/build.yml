@@ -11,7 +11,6 @@ jobs:
     env:
       TZ: Asia/Shanghai
     steps:
-      # - uses: actions/checkout@v1  # 拉取源码
       - name: Git Configuration  # 配置 git
         run: |
           git config --global core.quotePath false
@@ -24,21 +23,23 @@ jobs:
           git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
           cd he-sb/tech
 
-      - name: Setup Hugo  # 使用指定版本的 hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.66.0'
-          extended: true
+      - name: Setup Hugo  # 安装 hugo (version: v0.66.0)
+        run: |
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.66.0/hugo_extended_0.66.0_Linux-64bit.deb
+          sudo dpkg -i hugo.deb
+          hugo version
 
       - name: Build  # 构建网站
         run: hugo --gc --minify --cleanDestinationDir
 
       - name: Deploy  # 部署至 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}  # 使用 Personal Access Token
-          publish_branch: gh-pages  # 部署至 gh-pages 分支
-          force_orphan: true  # 不保留部署分支的提交历史
-          commit_message: ${{ github.event.head_commit.message }}  # 使用源码的提交信息
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+        env:
+          SECRET: ${{ secrets.PERSONAL_TOKEN }}
+        run: |
+          cd ./public
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
+          git push --force --quiet "https://$SECRET@github.com/${GITHUB_REPOSITORY}" master:gh-pages
