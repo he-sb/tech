@@ -8,8 +8,21 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
+    env:
+      TZ: Asia/Shanghai
     steps:
-      - uses: actions/checkout@v1  # 拉取源码
+      # - uses: actions/checkout@v1  # 拉取源码
+      - name: Git Configuration  # 配置 git
+        run: |
+          git config --global core.quotePath false
+          git config --global core.autocrlf false
+          git config --global core.safecrlf true
+          git config --global core.ignorecase false
+
+      - name: Clone Repository  # 拉取源码
+        run: |
+          git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
+          cd he-sb/tech
 
       - name: Setup Hugo  # 使用指定版本的 hugo
         uses: peaceiris/actions-hugo@v2
