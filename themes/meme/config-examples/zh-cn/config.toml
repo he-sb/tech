@@ -135,14 +135,15 @@ uglyURLs = false
     baseName = "rss"
 
 # lunr.js 的搜索索引
-[outputFormats.SearchIndex]
-    mediaType = "application/json"
-    baseName = "search"
+# [outputFormats.SearchIndex]
+#     mediaType = "application/json"
+#     baseName = "search"
 
 # Hugo 的输出控制
 [outputs]
     page = ["HTML"]
-    home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
+    # home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
+    home = ["HTML", "SectionsAtom", "SectionsRSS"]
     section = ["HTML"]
     # 类别
     taxonomyTerm = ["HTML"]
@@ -216,10 +217,10 @@ uglyURLs = false
     [[menu.main]]
         weight = 7
         identifier = "lang-switcher"
-    [[menu.main]]
-        weight = 8
-        identifier = "search"
-        post = "search"
+    # [[menu.main]]
+    #     weight = 8
+    #     identifier = "search"
+    #     post = "search"
 
 
 
@@ -378,6 +379,9 @@ uglyURLs = false
     # 是否显示每一分类下的文章数
     displayPostsCount = true
 
+    # 设置一个非负数来限制每一分类下展示的文章数
+    limitPostsLimit = -1
+
 
     ######################################
     # 标签页面
@@ -486,6 +490,9 @@ uglyURLs = false
     #      话。类似，如果你开启深色模式并将默认
     #      模式修改为它，即使你隐藏开关，你的读
     #      者依然可能以浅色模式模式阅读你的博客。
+    #      除非，你开启下方这个选项。
+
+    overrideSystemPreferences = false
 
 
     ######################################
@@ -568,6 +575,9 @@ uglyURLs = false
     # 说明：文章的 Front Matter 中的 `mermaid`
     #      的优先级高于此处
 
+    mermaidTheme = 'default'
+    mermaidThemeDark = 'dark'
+
 
     ######################################
     # 评论
@@ -588,8 +598,6 @@ uglyURLs = false
     valineAppId = ""
     valineAppKey = ""
     valinePlaceholder = "Just go go"
-    valineNotify = false
-    valineVerify = false
     valinePath = ""
     valineAvatar = "mm"
     valineMeta = ["nick", "mail", "link"]
@@ -597,9 +605,13 @@ uglyURLs = false
     valineLang = "zh-cn"
     valineVisitor = false
     valineHighlight = true
-    avatarForce = false
+    valineAvatarForce = false
     valineRecordIP = false
     valineServerURLs = ""
+    valineEmojiCDN = ""
+    valineEmojiMaps = {}
+    valineEnableQQ = false
+    valineRequiredFields = []
     # 说明：https://valine.js.org/
 
     ## Utterances
@@ -1276,7 +1288,7 @@ uglyURLs = false
 
     # 说明：需要开启 `SearchIndex` 的输出
 
-    enableLunrSearch = true
+    enableLunrSearch = false
     # 说明：https://lunrjs.com/
 
 

@@ -26,7 +26,7 @@
             <webMaster>{{ . }}{{ with $.Site.Author.name }} ({{ . }}){{ end }}</webMaster>
         {{ end }}
         {{ with .Site.Copyright }}
-            <copyright>{{ . | plainify }}</copyright>
+            <copyright>{{ . | plainify | htmlUnescape }}</copyright>
         {{ end }}
         <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
         {{ with .OutputFormats.Get "SectionsRSS" }}
@@ -36,7 +36,7 @@
             {{ $page := . }}
             {{- $author := partial "utils/author.html" $page -}}
             <item>
-                <title>{{ .Title }}</title>
+                <title>{{ (partial "utils/title.html" (dict "$" . "title" .Title)).rawTitle }}</title>
                 <link>{{ .Permalink }}</link>
                 <guid isPermaLink="true">{{ .Permalink }}</guid>
                 <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
@@ -44,13 +44,13 @@
                     <author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>
                 {{ end }}
                 {{ with $author.copyright -}}
-                    <copyright>{{ . | plainify }}</copyright>
+                    <copyright>{{ . | plainify | htmlUnescape }}</copyright>
                 {{- end }}
                 {{ if $.Site.Params.includeContent }}
-                    <description>{{ partial "utils/make-links-absolute.html" (dict "Deliver" . "content" .Content) | html }}</description>
+                    <description>{{ partial "utils/make-links-absolute.html" (dict "$" . "content" .Content) | html }}</description>
                 {{ else }}
                     {{- $summary := .Description | default (partial "utils/summary.html" $page) -}}
-                    <description>{{ partial "utils/make-links-absolute.html" (dict "Deliver" . "content" $summary) | html }}</description>
+                    <description>{{ partial "utils/make-links-absolute.html" (dict "$" . "content" $summary) | html }}</description>
                 {{ end }}
                 <!-- Sections -->
                 {{ if eq $.Site.Params.categoryBy "sections" }}

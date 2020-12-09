@@ -1,19 +1,19 @@
 <!-- https://schema.org/ -->
 <!-- https://json-ld.org/ -->
 <!-- https://search.google.com/structured-data/testing-tool -->
-{{- $Deliver := .Deliver -}}
+{{- $ := index . "$" -}}
 {{- $description := .description -}}
 {{- $baseURLWithLangFix := print `/` | absLangURL -}}
 <!-- Title -->
-{{- $rawTitle := (partial "utils/title.html" $Deliver).rawTitle -}}
+{{- $rawTitle := (partial "utils/title.html" (dict "$" $ "title" $.Title)).rawTitle -}}
 <!-- Date -->
-{{- $dates := partial "utils/date.html" $Deliver -}}
+{{- $dates := partial "utils/date.html" $ -}}
 <!-- Author -->
-{{- $author := partial "utils/author.html" $Deliver -}}
+{{- $author := partial "utils/author.html" $ -}}
 <!-- Images -->
-{{- $images := partial "utils/images.html" $Deliver -}}
+{{- $images := partial "utils/images.html" $ -}}
 
-{{- if $Deliver.IsHome -}}
+{{- if $.IsHome -}}
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -22,14 +22,14 @@
         "dateModified": {{ $dates.modDate }},
         "url": {{ $baseURLWithLangFix }},
         "description": {{ $description }},
-        {{ with $Deliver.Site.Params.siteLogo -}}
+        {{ with $.Site.Params.siteLogo -}}
         "image": {{ . | absURL }},
         {{ end -}}
         {{ with $author -}}
         "author": {
             "@type": "Person",
             {{ with .motto -}}
-            "description": {{ . | plainify }},
+            "description": {{ . | plainify | htmlUnescape }},
             {{ end -}}
             {{ with .email -}}
             "email": {{ . }},
@@ -46,28 +46,28 @@
         },
         {{ end -}}
         {{ with $author.copyright -}}
-        "license": {{ . | plainify }},
+        "license": {{ . | plainify | htmlUnescape }},
         {{ end -}}
         "name": {{ $rawTitle }}
     }
 </script>
-{{- else if and $Deliver.IsPage (in $Deliver.Site.Params.mainSections $Deliver.Section) -}}
+{{- else if and $.IsPage (in $.Site.Params.mainSections $.Section) -}}
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "datePublished": {{ $dates.pubDate }},
         "dateModified": {{ $dates.modDate }},
-        "url": {{ $Deliver.Permalink }},
+        "url": {{ $.Permalink }},
         "headline": {{ $rawTitle }},
         "description": {{ $description }},
-        "inLanguage" : "{{ $Deliver.Site.LanguageCode }}",
-        "articleSection": {{ $Deliver.Section }},
-        "wordCount": {{ $Deliver.WordCount }},
+        "inLanguage" : "{{ $.Site.LanguageCode }}",
+        "articleSection": {{ $.Section }},
+        "wordCount": {{ $.WordCount }},
         {{ with $images -}}
         "image": {{ . }},
         {{ else -}}
-        {{ with $Deliver.Site.Params.siteLogo -}}
+        {{ with $.Site.Params.siteLogo -}}
         "image": {{ . | absURL }},
         {{ end -}}
         {{ end -}}
@@ -75,7 +75,7 @@
         "author": {
             "@type": "Person",
             {{ with .motto -}}
-            "description": {{ . | plainify }},
+            "description": {{ . | plainify | htmlUnescape }},
             {{ end -}}
             {{ with .email -}}
             "email": {{ . }},
@@ -92,12 +92,12 @@
         },
         {{ end -}}
         {{ with $author.copyright -}}
-        "license": {{ . | plainify }},
+        "license": {{ . | plainify | htmlUnescape }},
         {{ end -}}
         "publisher": {
             "@type": "Organization",
-            "name": {{ $Deliver.Site.Title }},
-            {{ with $Deliver.Site.Params.siteLogo -}}
+            "name": {{ $.Site.Title }},
+            {{ with $.Site.Params.siteLogo -}}
             "logo": {
                 "@type": "ImageObject",
                 "url": {{ . | absURL }}
@@ -118,23 +118,23 @@
         "@type": "WebPage",
         "datePublished": {{ $dates.pubDate }},
         "dateModified": {{ $dates.modDate }},
-        "url": {{ $Deliver.Permalink }},
+        "url": {{ $.Permalink }},
         "name": {{ $rawTitle }},
         "description": {{ $description }},
         {{ with $images -}}
         "image": {{ . }},
         {{ else -}}
-        {{ with $Deliver.Site.Params.siteLogo -}}
+        {{ with $.Site.Params.siteLogo -}}
         "image": {{ . | absURL }},
         {{ end -}}
         {{ end -}}
         {{ with $author.copyright -}}
-        "license": {{ . | plainify }},
+        "license": {{ . | plainify | htmlUnescape }},
         {{ end -}}
         "publisher": {
             "@type": "Organization",
-            "name": {{ $Deliver.Site.Title }},
-            {{ with $Deliver.Site.Params.siteLogo -}}
+            "name": {{ $.Site.Title }},
+            {{ with $.Site.Params.siteLogo -}}
             "logo": {
                 "@type": "ImageObject",
                 "url": {{ . | absURL }}
