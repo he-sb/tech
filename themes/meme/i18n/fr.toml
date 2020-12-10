@@ -2,66 +2,66 @@
 other = "…"
 
 [colon]
-other = ": "
+other = " : "
 
 [minute]
 one = "min"
-other = "min"
+other = "min."
 
 [tocTitle]
-other = "Isi kandungan"
+other = "Contenus"
 
 [readMore]
-other = "Baca lagi"
+other = "Lire Plus"
 
 [prevPage]
-other = "Terbaru"
+other = "Récent"
 
 [nextPage]
-other = "Lama"
+other = "Ancien"
 
 [copy]
-other = "Salinan"
+other = "Copier"
 
 [copied]
-other = "Disalin!"
+other = "Copié !"
 
 [copyrightAuthor]
-other = "Pengarang"
+other = "Auteur"
 
 [copyrightLink]
-other = "Sambungan"
+other = "Lien"
 
 [copyrightLicense]
-other = "Lesen"
+other = "Licence"
 
 [shareOn]
-other = "Dikongsikan:"
+other = "Partage sur : "
 
 [shareOnTitle]
-other = "Dikongsikan "
+other = "Partage sur "
 
 [shareViaTitle]
-other = "Dikongsikan di "
+other = "Partage via "
 
 [relatedPosts]
-other = "Sila lihat:"
+other = "Lire aussi : "
 
 [loadComments]
-other = "Berikan komen?"
+other = "Charger les Commentaires ?"
 
 [pageNotFound]
-other = "404 - Halaman tidak dijumpa"
+other = "404 - Page non trouvée"
 
 [fofLinkText]
-other = "Kembali ke asal"
+other = "Retour à la Maison"
 
 [searchResultsTitle]
-one = "Jumpa satu halaman untuk “{{ .Term }}”"
-other = "Jumpa {{ .Count }} halaman untuk “{{ .Term }}”"
+one = "Trouvé un résultat pour “{{ .Term }}”"
+other = "Trouvé {{ .Count }} résultats pour “{{ .Term }}”"
 
 [searchResultsNone]
-other = "Tidak jumpa sebarang halaman untuk “{{ .Term }}”"
+other = "Aucun résultat pour “{{ .Term }}”"
 
 
 # Socials
@@ -98,40 +98,40 @@ other = "QR Code"
 # Used for `i18nMonth`
 
 [january]
-other = "Januari"
+other = "Janvier"
 
 [february]
-other = "Februari"
+other = "Février"
 
 [march]
-other = "Mac"
+other = "Mars"
 
 [april]
-other = "April"
+other = "Avril"
 
 [may]
-other = "Mei"
+other = "Mai"
 
 [june]
-other = "Jun"
+other = "Juin"
 
 [july]
-other = "Julai"
+other = "Juillet"
 
 [august]
-other = "Ogos"
+other = "Août"
 
 [september]
-other = "September"
+other = "Septembre"
 
 [october]
-other = "Oktober"
+other = "Octobre"
 
 [november]
-other = "November"
+other = "Novembre"
 
 [december]
-other = "Disember"
+other = "Décembre"
 
 
 # Numbers
