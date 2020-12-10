@@ -24,9 +24,9 @@ jobs:
         run:
           git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
 
-      - name: Setup Hugo  # 安装 hugo (version: v0.73.0)
+      - name: Setup Hugo  # 安装 hugo (version: v0.79.0)
         run: |
-          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.73.0/hugo_extended_0.73.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_extended_0.79.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
           hugo version
 
       - name: Build  # 构建网站
