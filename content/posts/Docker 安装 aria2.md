@@ -77,7 +77,7 @@ firewall-cmd --reload
 * `-e PUID=$UID` , `-e PGID=$GID` ：容器内账户 UID 与 GID 继承自当前用户，详见 [Understanding PUID and PGID](https://docs.linuxserver.io/general/understanding-puid-and-pgid) ；
 * `-v ~/aria2-config:/config` ：配置文件目录映射，使配置文件持久化，冒号左边为宿主机路径，可自定义，路径内不要有中文；
 * `-v ~/downloads:/downloads` ： 下载目录映射，冒号左边为宿主机路径，可自定义，路径内不要有中文；
-* `-e SPECIAL_MODE=rclone` ：开启下载完成后自动上传网盘功能，需将 rclone 配置文件（默认路径 `~/.config/rclone/rclone.conf`）复制至 aria2-pro 配置文件目录，然后修改 aria2-pro 配置文件目录下 `script.conf` 文件内的 `drive-name` 和 `drive-dir` 这两个选项即可。
+* `-e SPECIAL_MODE=rclone` ：开启下载完成后自动上传网盘功能，需将 rclone 配置文件（默认路径 `~/.config/rclone/rclone.conf`）复制至 aria2-pro 配置文件目录，然后修改 aria2-pro 配置文件目录下 `script.conf` 文件内的 `drive-name` 和 `drive-dir` 这两个选项即可；不需要这个功能的话可以直接删掉这一行。
 
 ## 注意事项
 
