@@ -165,7 +165,7 @@ after_script:  # 部署至 Github Pages
     详细参数请看 Travis-CI 官方文档： [Customizing the Build # Skipping a Build - Travis CI](https://docs.travis-ci.com/user/customizing-the-build#skipping-a-build)
 
 * 个人使用时以上两种情况均采用 [【3.2 源文件与站点文件在不同 repo】](#32-源文件与站点文件在不同-repo) 的配置，把最后的 `master:master` 冒号后面的分支名改成比如 `gh-pages` 就可以了，实测速度会快很多，仅需 22s ，使用 Travis-CI 的 Deploy 配置需要 30s + ，有点慢。
-    
+
     缺点是部署 GitHub Pages 的仓库/分支会失去提交历史（因为部署时的 `git push` 使用了 `--force` 参数），不过无伤大雅，反正这个仅是最终发布版本，源码部分的提交历史不受影响。
 
 * 在博客根目录下新建一个 `.gitignore` 文件，里面写上不需要被 git 追踪的文件或文件夹，可以避免上传无用文件浪费带宽和仓库体积，下面是俺个人的 `.gitignore` 文件内容，供大家参考：
@@ -178,7 +178,26 @@ after_script:  # 部署至 Github Pages
 
 其中 `public` 文件夹是本地生成的网站静态文件，因为使用了 CI 服务进行自动构建，所以不需要同步这个，仅用于在本地调试使用；`resource` 是在本地运行 `hugo server` 命令预览调试时生成的资源文件夹，同理也不需要同步；`hugo.exe` 是本地的 hugo 程序，同样是本地调试用的。
 
-## 5.一点小问题
+## 5.尾声
+
+好了，现在发布新文章只需要在博客根目录下执行：
+
+```bash
+git add .
+git commit -m "New article added."
+git push
+```
+
+三行命令就可以搞定，博客的构建和发布全部是 CI 自动完成的，git 只用来对博客源码进行版本控制，十分安逸。
+
+另外，如果是对已有文章的修改，没有新增或删除文件的话，可以用 `git commit` 的 `-a` 参数来跳过暂存区，只需两行命令就可以了：
+
+```bash
+git commit -am "Article updated."
+git push
+```
+
+~~又可以省一个步骤。~~
 
 该方案目前还存在一点小 bug —— 每次自动构建并发布后网站内所有文章的修改日期均为构建时的最新时间，目前并不知道该如何修改……
 
