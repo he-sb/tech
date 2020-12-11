@@ -55,7 +55,15 @@ location /admin/service/registration/validateDevice {
     add_header Access-Control-Allow-Credentials true;
 ```
 
-然后给伪站添加上自签名证书，可以使用 OpenSSL 或者国密自己签，也可以到文末附录部分直接使用俺的，除了证书有效期以外都是一样的。
+然后给伪站添加上自签名证书，需要的是这三个文件：
+
+- 密钥：`mb3admin.com.key`
+- 证书：`mb3admin.com.pem`
+- 根证书文件：`mb3admin.com.crt`
+
+其中【根证书文件】其实就是【证书】文件的后半部分（参考后文【附录】部分的文件内容），【密钥】和【证书】这俩在签发的时候是成对生成的，自己打开【证书】文件复制出来后半部分保存一下就好了。
+
+可以使用 OpenSSL 或者国密自己签，也可以到后文【附录】部分直接使用俺的，除了证书有效期以外都是一样的。
 
 ### 客户端系统对伪站的根证书添加信任
 
@@ -85,6 +93,7 @@ sudo trust extract-compat
 
 - Windows / Android / IOS / MacOS / xxOS 客户端怎么破解
 - 如何建立伪站
+- 自签名证书怎么搞
 - 如何修改 HOSTS / 劫持本机 DNS
 - ……
 
