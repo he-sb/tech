@@ -96,7 +96,7 @@ jobs:
 
 经过仔细对比 Actions 和 Travis CI 的构建日志，俺终于确认了问题是 `git checkout` 操作引起的（详情见 [这个 Issues](https://github.com/reuixiy/hugo-theme-meme/issues/107) 中的相关讨论），但还不确定这是 hugo 的问题还是 MemE 主题的问题。
 
-目前俺的解决办法是手写 Actions 配置文件，而不是像很多教程中提到的通过组合已有的 actions 来实现，虽然看起来逼格不够，但确实解决了问题，而且也比较方便复用。
+俺的解决办法是手写 Actions 配置文件，而不是像很多教程中提到的通过组合已有的 actions 来实现，虽然看起来逼格不够，但确实解决了问题，而且也比较方便复用。
 
 ---
 
