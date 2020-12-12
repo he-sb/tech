@@ -1,9 +1,10 @@
 name: Github-Pages
 
+# 在 master 分支更新时触发构建
 on:
   push:
     branches:
-      - master  # 在 master 分支更新时触发构建
+      - master
 
 jobs:
   deploy:
@@ -11,7 +12,8 @@ jobs:
     env:
       TZ: Asia/Shanghai
     steps:
-      - name: Git Configuration  # 配置 git
+      # 配置 git
+      - name: Git Configuration
         run: |
           git config --global core.quotePath false
           git config --global core.autocrlf false
@@ -20,25 +22,29 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Clone Repository  # 拉取源码
+      # 拉取源码
+      - name: Clone Repository
         run:
-          git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
+          git clone --branch=master --quiet https://github.com/he-sb/tech.git site
 
-      - name: Setup Hugo  # 安装 hugo (version: v0.79.0)
+      # 安装 hugo (v0.79.0)
+      - name: Setup Hugo
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_extended_0.79.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
           hugo version
 
-      - name: Build  # 构建网站
+      # 构建网站
+      - name: Build
         run:
-          cd he-sb/tech && hugo --gc --minify --cleanDestinationDir
+          cd site && hugo --gc --minify --cleanDestinationDir
 
-      - name: Deploy  # 部署至 GitHub Pages
+      # 部署至 GitHub Pages
+      - name: Deploy
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
           TARGET_REPO: "github.com/he-sb/tech.git"
         run: |
-          cd he-sb/tech/public && git init
+          cd site/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
           git push --force --quiet "https://$SECRET@$TARGET_REPO" master:gh-pages
