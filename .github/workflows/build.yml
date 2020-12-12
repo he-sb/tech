@@ -14,6 +14,7 @@ jobs:
       SOURCE_REPO: "he-sb/tech.git"
       TARGET_REPO: "he-sb/tech.git"
       TARGET_BRANCH: "gh-pages"
+      SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
       # 配置 git
       - name: Git Configuration
@@ -43,8 +44,6 @@ jobs:
 
       # 部署至 GitHub Pages
       - name: Deploy
-        env:
-          SECRET: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           cd site/public && git init
           git add .

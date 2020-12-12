@@ -50,7 +50,7 @@ jobs:
       # 拉取源码
       - name: Clone Repository
         run:
-          git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
+          git clone --branch=master --quiet https://github.com/he-sb/tech.git site
 
       # 安装 hugo (v0.79.0)
       - name: Setup Hugo
@@ -61,24 +61,25 @@ jobs:
       # 构建网站
       - name: Build
         run:
-          cd he-sb/tech && hugo --gc --minify --cleanDestinationDir
+          cd site && hugo --gc --minify --cleanDestinationDir
 
       # 部署至 GitHub Pages
       - name: Deploy
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
           TARGET_REPO: "github.com/he-sb/tech.git"
+          TARGET_BRANCH: "gh-pages"
         run: |
-          cd he-sb/tech/public && git init
+          cd site/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
-          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:gh-pages
+          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:$TARGET_BRANCH
 ```
 
 对其中需要修改的部分分别作下说明：
 
 - `Clone Repository`：拉取源码，需要将其中的 `https://github.com/he-sb/tech.git` 改为你自己的博客【源码】所在的仓库地址；
-- `
+- `Deploy`：部署至 GitHub Pages，需要将 `TARGET_REPO` 的值改为需要部署的仓库；
 
 > 此处插句题外话，本博客之前使用 Travis CI 时有个历史遗留问题，就是每次自动构建完毕后，所有文章的修改时间都会变成【执行自动构建】的时间（详见 [使用 Travis CI 自动化博客发布](/posts/using-travis-ci-to-automate-publishing-blogs-on-github-pages/) 这篇文章的【尾声】部分），这个问题在刚转到 GitHub Actions 时依然存在。经过仔细对比 Actions 和 Travis CI 的构建日志，俺终于确认了问题是 `git checkout` 操作引起的（详情见 [这个 Issues](https://github.com/reuixiy/hugo-theme-meme/issues/107) 中的相关讨论），但还不确定这是 hugo 的问题还是 MemE 主题的问题。
 > 
