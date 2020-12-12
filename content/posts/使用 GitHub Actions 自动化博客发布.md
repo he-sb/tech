@@ -10,17 +10,26 @@ draft = true
 
 本博客之前是 [通过 Travis CI 来自动构建](/posts/using-travis-ci-to-automate-publishing-blogs-on-github-pages) 的，而 [Actions](https://github.com/features/actions) 是 GitHub 自家的 CI 服务，提供的构建环境更好，配置更容易，也和 GitHub 其他服务比如 Pages 结合的更紧密，从结果来看，体验还是非常不错的，下面是俺的配置过程，供参考。
 
-首先在博客根目录下新建一个 Actions 的配置文件，路径为 `.github/workflows/build.yml`，此处俺使用的文件名是 `build.yml`，这个文件用来指导 GitHub Actions 自动构建时将如何操作。
+## Access Token
 
-俺的配置文件内容如下：
+<!-- todo -->
+
+## 编辑配置文件
+
+GitHub Ac­tions 的配置文件叫做 work­flow 文件（官方中文翻译为“工作流程文件”），存放在代码仓库的 `.github/workflows` 目录中，采用 YAML 格式，文件名任意，后缀名统一为 `.yml`，GitHub 只要发现 `.github/workflows` 目录里面有 `.yml` 文件，就会按照文件中所指定的触发条件在符合条件时自动运行该文件中的工作流程。
+
+那么先新建一个配置文件，路径为 `.github/workflows/build.yml`，此处俺使用的文件名是 `build.yml`，这个文件用来定义 GitHub Actions 自动构建时将如何操作。
+
+然后将之前配置好的 `.travis.yml` 稍作修改就可以了：
 
 ```yaml
 name: Github-Pages
 
+# 在 master 分支更新时触发构建
 on:
   push:
     branches:
-      - master  # 在 master 分支更新时触发构建
+      - master
 
 jobs:
   deploy:
@@ -28,7 +37,8 @@ jobs:
     env:
       TZ: Asia/Shanghai
     steps:
-      - name: Git Configuration  # 配置 git
+      # 配置 git
+      - name: Git Configuration
         run: |
           git config --global core.quotePath false
           git config --global core.autocrlf false
@@ -37,20 +47,24 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Clone Repository  # 拉取源码
+      # 拉取源码
+      - name: Clone Repository
         run:
           git clone --branch=master --quiet https://github.com/he-sb/tech.git he-sb/tech
 
-      - name: Setup Hugo  # 安装 hugo (version: v0.79.0)
+      # 安装 hugo (v0.79.0)
+      - name: Setup Hugo
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_extended_0.79.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
           hugo version
 
-      - name: Build  # 构建网站
+      # 构建网站
+      - name: Build
         run:
           cd he-sb/tech && hugo --gc --minify --cleanDestinationDir
 
-      - name: Deploy  # 部署至 GitHub Pages
+      # 部署至 GitHub Pages
+      - name: Deploy
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
           TARGET_REPO: "github.com/he-sb/tech.git"
@@ -61,7 +75,10 @@ jobs:
           git push --force --quiet "https://$SECRET@$TARGET_REPO" master:gh-pages
 ```
 
-其中，
+对其中需要修改的部分分别作下说明：
+
+- `Clone Repository`：拉取源码，需要将其中的 `https://github.com/he-sb/tech.git` 改为你自己的博客【源码】所在的仓库地址；
+- `
 
 > 此处插句题外话，本博客之前使用 Travis CI 时有个历史遗留问题，就是每次自动构建完毕后，所有文章的修改时间都会变成【执行自动构建】的时间（详见 [使用 Travis CI 自动化博客发布](/posts/using-travis-ci-to-automate-publishing-blogs-on-github-pages/) 这篇文章的【尾声】部分），这个问题在刚转到 GitHub Actions 时依然存在。经过仔细对比 Actions 和 Travis CI 的构建日志，俺终于确认了问题是 `git checkout` 操作引起的（详情见 [这个 Issues](https://github.com/reuixiy/hugo-theme-meme/issues/107) 中的相关讨论），但还不确定这是 hugo 的问题还是 MemE 主题的问题。
 > 
