@@ -43,8 +43,9 @@ jobs:
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
           TARGET_REPO: "github.com/he-sb/tech.git"
+          TARGET_BRANCH: "gh-pages"
         run: |
           cd site/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
-          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:gh-pages
+          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:$TARGET_BRANCH
