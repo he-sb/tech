@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       TZ: Asia/Shanghai
-      SOURCE_REPO: "he-sb/tech.git"
-      TARGET_REPO: "he-sb/tech.git"
+      SOURCE_REPO: "he-sb/tech"
+      TARGET_REPO: "he-sb/tech"
       TARGET_BRANCH: "gh-pages"
       SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
@@ -33,9 +33,8 @@ jobs:
 
       # 安装 hugo (v0.79.0)
       - name: Setup Hugo
-        run: |
-          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_extended_0.79.0_Linux-64bit.deb && sudo dpkg -i hugo.deb
-          hugo version
+        run:
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.79.0/hugo_extended_0.79.0_Linux-64bit.deb && sudo dpkg -i hugo.deb && hugo version
 
       # 构建网站
       - name: Build
