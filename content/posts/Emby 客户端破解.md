@@ -3,9 +3,9 @@ title = "Emby 客户端破解"
 description = " "
 date = "2020-12-10T19:32:32+08:00"
 categories = ["奇技淫巧"]
-tags = ["emby"]
+tags = ["emby","证书","Manjaro"]
 slug = "cracking-emby-client"
-draft = true
+draft = false
 +++
 
 ## 前言
