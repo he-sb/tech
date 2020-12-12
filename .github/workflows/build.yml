@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       TZ: Asia/Shanghai
+      SOURCE_REPO: "he-sb/tech.git"
+      TARGET_REPO: "he-sb/tech.git"
+      TARGET_BRANCH: "gh-pages"
     steps:
       # 配置 git
       - name: Git Configuration
@@ -25,7 +28,7 @@ jobs:
       # 拉取源码
       - name: Clone Repository
         run:
-          git clone --branch=master --quiet https://github.com/he-sb/tech.git site
+          git clone --branch=master --quiet https://github.com/$SOURCE_REPO site
 
       # 安装 hugo (v0.79.0)
       - name: Setup Hugo
@@ -42,10 +45,8 @@ jobs:
       - name: Deploy
         env:
           SECRET: ${{ secrets.PERSONAL_TOKEN }}
-          TARGET_REPO: "github.com/he-sb/tech.git"
-          TARGET_BRANCH: "gh-pages"
         run: |
           cd site/public && git init
           git add .
           git commit -m "Update Blog By GitHub Actions With Build ${GITHUB_RUN_NUMBER}"
-          git push --force --quiet "https://$SECRET@$TARGET_REPO" master:$TARGET_BRANCH
+          git push --force --quiet "https://$SECRET@github.com/$TARGET_REPO" master:$TARGET_BRANCH
