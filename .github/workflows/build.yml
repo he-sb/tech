@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       TZ: Asia/Shanghai
-      SOURCE_REPO: "he-sb/tech"
-      TARGET_REPO: "he-sb/tech"
-      TARGET_BRANCH: "gh-pages"
+      SOURCE_REPO: "he-sb/tech"  # 博客源码仓库
+      TARGET_REPO: "he-sb/tech"  # 博客部署仓库
+      TARGET_BRANCH: "gh-pages"  # 博客部署的分支名
       SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
-      # 配置 git
+      # 配置 git，避免一些莫名其妙的错误
       - name: Git Configuration
         run: |
           git config --global core.quotePath false
