@@ -8,7 +8,7 @@ slug = "using-travis-ci-to-automate-publishing-blogs-on-github-pages"
 draft = false
 +++
 
-本博客使用 [Hugo](https//gohugo.io/) 生成，[Github Pages](https://pages.github.com/) 服务来部署，新建一篇文章并发布，常规的操作流程是这样的：
+本博客使用 [Hugo](https//gohugo.io/) 生成，部署在 [Github Pages](https://pages.github.com/) 上，新建一篇文章并发布，常规的操作流程是这样的：
 
 ```bash
 hugo new posts/new-article.md
