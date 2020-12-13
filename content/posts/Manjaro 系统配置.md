@@ -287,6 +287,8 @@ yay <keyword>   # 搜索含关键字的软件包，输入序号安装对应的�
                 # 搜索结果包含 Community 和 AUR 仓库内的包
 ```
 
+_GitHub Issues #19_
+
 ---
 
 *参考链接：*
