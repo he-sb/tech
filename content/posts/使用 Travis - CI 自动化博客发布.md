@@ -3,7 +3,7 @@ title = "使用 Travis CI 自动化博客发布"
 description = " "
 date = "2020-03-27T16:48:47+08:00"
 categories = ["奇技淫巧"]
-tags = ["travis-ci","github"]
+tags = ["travis-ci","github","hugo"]
 slug = "using-travis-ci-to-automate-publishing-blogs-on-github-pages"
 draft = false
 +++
