@@ -3,7 +3,7 @@ title = "使用 GitHub Actions 自动化博客发布"
 description = " "
 date = "2020-12-12T14:52:32+08:00"
 categories = ["奇技淫巧"]
-tags = ["actions","github"]
+tags = ["actions","github","hugo"]
 slug = "using-github-actions-to-automate-publishing-blogs-on-github-pages"
 draft = false
 +++
