@@ -10,7 +10,7 @@ draft = false
 
 ## 前言
 
-本博客是使用 [Hugo](https//gohugo.io/) 生成的纯静态博客，部署在 [Github Pages](https://pages.github.com/) 上。这里记录一下搭建过程，希望能帮到有需要的朋友。
+本博客是使用 [Hugo](https//gohugo.io/) 生成的纯静态博客，部署在 [Github Pages](https://pages.github.com/) 上。这里讲解一下搭建过程，希望能帮到有需要的朋友。
 
 准备工作
 
