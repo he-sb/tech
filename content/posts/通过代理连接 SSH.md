@@ -65,3 +65,5 @@ ssh user@server -o "ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p"
 2. [Windows 下配置 SSH 走 Shadowsocks 代理 – 兴趣使然的博客](https://one-piece.blue/pc-software/ssh-via-shadowsocks/)
 
 3. [ssh怎样通过代理登录远程主机 | Bruce's Blog](https://www.xiebruce.top/650.html)
+
+4. [编程随想的博客: 扫盲 netcat（网猫）的 N 种用法——从“网络诊断”到“系统入侵”](https://program-think.blogspot.com/2019/09/Netcat-Tricks.html)
