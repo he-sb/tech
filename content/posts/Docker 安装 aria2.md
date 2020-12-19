@@ -83,7 +83,13 @@ firewall-cmd --reload
 
 1. 远程调用 aria2 时下载目录务必设置为 `/downloads` ，即容器内默认路径，实际下载的文件会出现在上一步中【自定义映射的宿主机路径】下，否则会将文件下载至容器内部，需要手动从容器中 copy 出来，比较麻烦；
 
-2. 想到了再补充。
+2. 有问题的话先重装：
+    1. `docker rm -f aria2-pro`
+    2. `docker rmi p3terx/aria2-pro`
+    3. `rm -rf ~/aria2-config`
+    4. `./aria2-pro-run.sh`
+
+3. 想到了再补充。
 
 ---
 
