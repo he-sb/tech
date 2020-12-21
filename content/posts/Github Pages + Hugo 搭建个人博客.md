@@ -176,5 +176,6 @@ git push
     - [MeiK2333/github-style](https://github.com/MeiK2333/github-style)
     - [mrmierzejewski/hugo-theme-console: A minimal, responsive and light theme for Hugo inspired by Linux console.](https://github.com/mrmierzejewski/hugo-theme-console)
     - [MunifTanjim/minimo: Minimo - Minimalist theme for Hugo](https://github.com/MunifTanjim/minimo)
+    - [wangchucheng/hugo-eureka: Eureka is a feature-rich and highly customizable Hugo theme.](https://github.com/wangchucheng/hugo-eureka)
     - [xianmin/hugo-theme-jane: A readable & concise theme for Hugo](https://github.com/xianmin/hugo-theme-jane)
     - [yihui/hugo-xmin: eXtremely Minimal Hugo theme: about 150 lines of code in total, including HTML and CSS (with no dependencies)](https://github.com/yihui/hugo-xmin)
