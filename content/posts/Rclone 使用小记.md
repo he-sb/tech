@@ -8,7 +8,6 @@ slug = "usage-of-rclone"
 comments = true
 draft = false
 +++
-**系统环境：** CentOS 7 x64
 
 前几天用 Rclone 挂载好了 Google Drive（[使用Rclone挂载Google Drive](/posts/mount-google-drive-as-local-disk-with-rclone)），使用过程中遇到一点问题，记录一下。
 
@@ -40,33 +39,35 @@ Command move needs 2 arguments maximum
 
 **2.**
 
-后来在移动完一个含子目录的文件夹后发现虽然该文件夹及子文件夹内所有内容都移动完毕了，但剩下空的文件夹都没有删，又搜索了一下发现可以在 `rclone move` 命令后加参数 `--delete-empty-src-dirs` 来在移动完成后将源路径下的空文件夹删掉（其实上一条报错信息内也写了，怪自己蠢没注意……）。
+后来在移动完一个含子目录的文件夹后发现虽然该文件夹及子文件夹内所有内容都移动完毕了，但剩下空的文件夹都没有删，又搜索了一下发现可以在 `rclone move` 命令后加上标志 `--delete-empty-src-dirs` 来在移动完成后将源路径下的空文件夹删掉（其实上一条报错信息内也写了，怪自己蠢没注意……）。
 
 **3.**
 
-`-v` 参数用于输出 Rclone 当前操作的进度；
+`-v` 标志用于输出 Rclone 当前操作的结果；
 
-`-vv` 参数可以输出更详细的进度。
+`-vv` 标志可以输出更详细的结果。
 
 **4.**
 
-`--transfers [int]` 参数修改线程数，即同时开始传输的文件数，避免占用资源（主要是内存）过多，该参数默认值为 `4` 。
+`--transfers [int]` 标志修改线程数，即同时开始传输的文件数，避免占用资源（主要是内存）过多，该标志的默认参数值为 `4` 。
 
 **5.**
 
-`--bwlimit` 参数可以限制同步时占用的带宽，可以用此命令来避免触发 GD 的 API 每天 750G 的流量限制，此时使用 `--bwlimit 8M` 即可。
+`--bwlimit` 标志可以限制同步时占用的带宽，可以用此标志来避免触发 GD 的 API 每天 750G 的流量限制，此时使用 `--bwlimit 8M` 即可。
 
 **6.**
 
-`--disable copy` 参数禁用 server side copy ，同样用于突破单日 750G 的 API 流量限制。
+`--disable copy` 标志禁用 server side copy ，同样用于突破单日 750G 的 API 流量限制。
 
 **7.**
 
-`-P` = `--progress` 显示实时传输进度（与 `-v` 的区别在于进度是【实时】更新的）。
+`-P` = `--progress` 显示实时传输进度。
+
+该标志与 `-v` 的区别在于，`-P` 标志输出的是当前命令的执行【进度】，而 `-v` / `-vv` 输出的是命令的执行【结果】。（没错，这两个可以组合起来用，即 `-vP` 或 `-vvP`，可以同时显示实时进度和操作结果，不妨一试～）
 
 **8.**
 
-`--ignore-existing` 跳过目标处已存在的【文件名相同但 hash 不同】的文件，不加此参数会使用来源覆盖目标处，但如果 hash 相同即使不加此参数也会跳过。
+`--ignore-existing` 跳过目标处已存在的【文件名相同但 hash 不同】的文件，不加此标志会使用来源覆盖目标处，但如果 hash 相同即使不加此标志也会跳过。
 
 **9.**
 
@@ -82,15 +83,15 @@ Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf`，或执行 `rcl
 
 **12.**
 
-`--drive-server-side-across-configs` 参数可在团队盘复制中使用 Server Side Copy ，不占用服务器流量和带宽。
+`--drive-server-side-across-configs` 标志可在团队盘复制中使用 Server Side Copy ，不占用服务器流量和带宽。
 
 **13.**
 
-`rclone dedupe drive_name:path` 命令可以对云盘文件去重，当文件夹路径相同时会合并，文件 MD5 相同时会删除重复的，仅保留一份，MD5 不同时的默认是交互式操作，询问你保留那个。有大量重复文件时可以使用 `--dedupe-mode MODE` 参数来指定处理策略，`MODE` 可以为 `interactive`（默认），`skip` ，`first` ，`newest` ，`oldest` ，`largest` ，`smallest` ，`rename` ，顾名思义即可。
+`rclone dedupe drive_name:path` 命令可以对云盘文件去重，当文件夹路径相同时会合并，文件 MD5 相同时会删除重复的，仅保留一份，MD5 不同时的默认是交互式操作，询问你保留那个。有大量重复文件时可以使用 `--dedupe-mode MODE` 标志来指定处理策略，`MODE` 可以为 `interactive`（默认），`skip` ，`first` ，`newest` ，`oldest` ，`largest` ，`smallest` ，`rename` ，顾名思义即可。
 
 **14.**
 
-`--tpslimit FLOAT` 参数限制每秒钟的事务数（默认值为 0 ，即不限制），在操作大量文件时，不使用此参数的话很可能触发网盘的 API 资源开销限制。
+`--tpslimit FLOAT` 标志限制每秒钟的事务数（默认值为 0 ，即不限制），在操作大量文件时，不使用此参数的话很可能触发网盘的 API 资源开销限制。
 
 ---
 
