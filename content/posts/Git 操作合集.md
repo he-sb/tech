@@ -29,19 +29,19 @@ git config --global core.ignorecase false
 
 ## 命令相关
 
-- 初始化本地仓库
+· 初始化本地仓库
 
 ```bash
 git init
 ```
 
-- 添加远程仓库
+· 添加远程仓库
 
 ```bash
 git remote add <remote_name> <url>
 ```
 
-- 向远程仓库提交
+· 向远程仓库提交
 
 ```bash
 # 第一次提交时需添加 -u 参数关联本地与远程分支
@@ -54,7 +54,7 @@ git push <remote_name> <local_branch>:<remote_branch>
 git push <remote_name>
 ```
 
-- 从远程仓库拉取更新
+· 从远程仓库拉取更新
 
 ```bash
 # 指定远程仓库与分支
@@ -63,19 +63,19 @@ git pull <remote_name> <remote_branch>:<local_branch>
 git pull
 ```
 
-- 查看当前当前仓库已添加的远程仓库
+· 查看当前当前仓库已添加的远程仓库
 
 ```bash
 git remote
 ```
 
-- 跳过暂存区提交改动
+· 跳过暂存区提交改动
 
 如果本次操作只有对文件的【修改】，而没有【新增】或【删除】文件，可以直接用 `git commit -am "<commit messages>"` 来提交修改，省略掉 `git add` 操作。
 
 `-a` 选项跳过了暂存区，直接提交了所有修改过的已跟踪的文件。
 
-- 利用 commit 信息关闭 Issues
+· 利用 commit 信息关闭 Issues
 
 在提交改动到【默认分支】时，通过在 commit message 中加入 `<keyword> #<issues number>` 来使本次提交关闭相应的 Issues，并在对应 Issues 中关联引用本次提交。
 
@@ -85,7 +85,7 @@ git remote
 git commit -m "Commit message example. Close #666"
 ```
 
-- 使 `git status` 信息更加现代化
+· 使 `git status` 信息更加现代化
 
 ```bash
 git status -sb
