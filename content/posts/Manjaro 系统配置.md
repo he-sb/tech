@@ -1,16 +1,16 @@
 +++
 title = "Manjaro 系统配置"
 description = " "
-date = "2020-04-15T20:59:24+08:00"
+date = "2020-11-10T20:59:24+08:00"
 categories = ["Linux"]
 tags = ["Manjaro","zsh","AUR"]
 slug = "configuration-after-installing-manjaro"
-draft = true
+draft = false
 +++
 
 终于告别了辣鸡 Windows 系统了，从 Win 10 到 LTSC ，再到 Windows Server 2019 ，就没有一个不出 bug 的，还是早日投奔 Linux 的怀抱吧，至少出了 Bug 也可以自己折腾。目前更换了主力系统为 [Manjaro](https://manjaro.org/) ，这是一个基于 [Arch Linux](https://www.archlinux.org/) 的衍生发行版本，继承了 Arch 滚动更新和 AUR 软件包极为丰富的优点，稳定性也十分优秀，适合长期使用。Manjaro 官方镜像按照桌面环境（DE）的不同，分为 XFCE ，KDE ，GNOME 三个版本，个人选择的是 KDE 桌面环境，更为顺手一点。
 
-下面记录一下配置过程，一来方便自己将来万一重装后的恢复，二来方便有需要的朋友们做个参考。
+下面记录一下配置过程（缓慢施工中），一来方便自己将来万一重装后的恢复，二来方便有需要的朋友们做个参考。
 
 ## 0.更换国内镜像源
 
@@ -20,7 +20,7 @@ draft = true
 sudo pacman-mirrors -i -c China -m rank
 ```
 
-在弹出的对话框中选择一个最快的就可以了，多选几个也并不能加快速度。。
+在弹出的对话框中选择一个最快（或最顺眼的）的就可以了，多选几个也并不能加快速度。
 
 ## 1.替换自带的 Vi 为 Vim
 
@@ -72,19 +72,19 @@ sudo pacman -S yay
 
 3.2 让包管理器走代理
 
-首先参考 [简易配置终端代理](/posts/use-proxy-in-terminal) 设置好系统代理，然后
+首先参考 [简易配置终端代理](/posts/use-proxy-in-terminal) 设置好系统的终端代理环境变量，然后
 
 ```bash
 sudo vim /etc/sudoers
 ```
 
-添加下面这行：
+在最后添加下面这行：
 
 ```conf
 Defaults env_keep += "ftp_proxy http_proxy https_proxy"
 ```
 
-保存即可，现在代理的环境变量会自动传递给 sudo 和 pacman 了，yay 会自动读取 `http_proxy` 和 `https_proxy` 的值，不需要特殊设置（其实 pacman 也能自动读取，但是 pacman 使用时要加上 sudo，而环境变量不会自动传递给 sudo，所以需要特殊设置一下；而且因为 yay 有些命令会调用 `sudo pacman`，所以哪怕只用 yay 也是需要设置这一步的 Orz）。
+保存即可，现在代理的环境变量会自动传递给 sudo 和 pacman 了，yay 会自动读取 `http_proxy` 和 `https_proxy` 的值，不需要特殊设置（其实 pacman 是可以自动读取代理的环境变量的，但是 pacman 使用时要加上 sudo，而环境变量不会自动传递给 sudo，所以此处需要特殊设置一下；又因为 yay 有些命令会调用 `sudo pacman`，所以哪怕只用 yay 也是需要设置这一步的 Orz）。
 
 ## 4.安装并配置 zsh
 
@@ -165,11 +165,11 @@ source ~/.zshrc
 
 ## 5.安装和配置字体
 
-<!-- todo -->
+*todo*
 
 ## 6.安装和配置中文输入法
 
-<!-- todo -->
+*todo*
 
 ## 7.修改家目录为英文
 
@@ -181,7 +181,7 @@ source ~/.zshrc
 [he-sb@HE-SB-Manjaro ~]$
 ```
 
-在某些情况下会比较的不方便（比如你和按一样有点强迫症……）。不过上网搜索的话，网上的教程大部分是将系统语言切换为英文再切换回来，虽然可以达到目的，但很不优雅，正好看到了 [这篇教程](https://mogeko.me/2019/060/) ，详细解释请看原文，以下是 TLDR 版的操作记录：
+在某些情况下会比较的不方便（比如你和俺一样有点强迫症……）。不过上网搜索的话，网上的教程大部分是将系统语言切换为英文再切换回来，虽然可以达到目的，但很不优雅，正好看到了 [这篇教程](https://mogeko.me/2019/060/) ，详细解释请看原文，以下是 TLDR 版的操作记录：
 
 ```bash
 vim ~/.config/user-dirs.dirs
@@ -244,11 +244,11 @@ mv $HOME/视频 $HOME/Videos
 
 ## 8.个人常用软件列表
 
-<!-- todo -->
+*todo*
 
 ## 9.备份当前系统配置，重装后一键恢复
 
-<!-- todo -->
+*todo*
 
 ## 附：包管理说明
 
@@ -261,13 +261,33 @@ Manjaro 自带的桌面程序软件中心（pamac-manager）既可以安装 Comm
 1.pacman
 
 ```bash
-sudo pacman -Syu  # 同步软件包数据库并更新系统
-sudo pacman -S <packagename>  # 安装软件包
-sudo pacman -R <packagename>  # 删除单个软件包，保留其全部已经安装的依赖关系
-sudo pacman -Rs <packagename>  # 删除指定软件包，及其所有未被其他已安装软件包使用的依赖关系
-sudo pacman -Rd <packagename>   # 删除软件包，不检查依赖关系
-sudo pacman -Ss <keyword>>  # 查找含关键字的软件包
-sudo pacman -Qs <keyword>   # 搜索已安装的包
+# 同步软件包数据库并更新系统
+# y 是更新包数据库，yy 可以强制更新包数据库
+# u 是更新软件包
+sudo pacman -Syu
+# 安装软件包
+sudo pacman -S <package_name>
+# 安装指定仓库中的包，例如 extra 仓库
+sudo pacman -S extra/<package_name>
+# 在包数据库中查找含关键字的软件包
+sudo pacman -Ss <keyword>
+# 清除软件缓存
+# 即 /var/cache/pacman/pkg 目录下的文件
+sudo pacman -Sc
+# 删除单个软件包，保留其全部已经安装的依赖关系
+sudo pacman -R <package_name>
+# 删除指定软件包，及其所有未被其他已安装软件包使用的依赖关系
+sudo pacman -Rs <package_name>
+# 删除软件包，不检查依赖关系
+sudo pacman -Rd <package_name>
+# 列出已安装软件所包含的文件的列表
+sudo pacman -Ql <package_name>
+# 搜索已安装的包
+sudo pacman -Qs <keyword>
+# 从本地文件安装软件包
+pacman -U package.tar.zx
+# 显示软件包的依赖树
+pactree <package_name>
 ```
 
 2.yay
@@ -275,16 +295,19 @@ sudo pacman -Qs <keyword>   # 搜索已安装的包
 兼容 pacman 的命令行参数，这部分命令只需简单地将 `sudo pacman` 替换为 `yay` 即可，例如：
 
 ```bash
-yay -Syu    # 等价于 sudo pacman -Syu
-yay -S <packagename> # 等价于 sudo pacman -S <packagename>
+# 等价于 sudo pacman -Syu
+yay -Syu
+# 等价于 sudo pacman -S <package_name>
+yay -S <packagename>
 ```
 
 其他参数类比即可。除此之外还可以：
 
 ```bash
-yay <keyword>   # 搜索含关键字的软件包，输入序号安装对应的结果项，支持多选和反选
-                # 若无需要安装的结果，输入 q 后回车退出
-                # 搜索结果包含 Community 和 AUR 仓库内的包
+# 搜索含关键字的软件包，输入序号安装对应的结果项，支持多选和反选
+# 若无需要安装的项，输入 q 后回车退出
+# 搜索结果包含 Community 和 AUR 仓库内的包
+yay <keyword>
 ```
 
 _GitHub Issues #19_
