@@ -14,15 +14,15 @@ draft = false
 
 ### 新建Telegram Bot
 
-找 [@BotFather](https://telegram.me/botfather) 创建个用来对接微信的Bot，向它发送 `/newbot` 启动向导，期间需设置Bot的 `name` 和 `user name` ，注意 `user name` 必须以 `bot` 结尾，创建完毕后@BotFather会返回一个密钥（Token），先记录下来备用。
+找 [@BotFather](https://telegram.me/botfather) 创建个用来对接微信的 Bot，向它发送 `/newbot` 启动向导，期间需设置 Bot 的 `name` 和 `user name` ，注意 `user name` 必须以 `bot` 结尾，创建完毕后 @BotFather 会返回一个密钥（Token），先记录下来备用。
 
-**注意，此Bot名与密钥不要提供给任何人，否则可能导致聊天信息泄露等风险。**
+> **注意，此 Bot 名与密钥不要提供给任何人，否则可能导致聊天信息泄露等风险。**
 
-接下来配置刚建好的Bot：
+接下来配置刚建好的 Bot：
 
-* 发送 `/setprivacy` 到@BotFather，选择刚创建好的Bot，选择 `Disable` 。
-* 发送 `/setjoingroups` 到@BotFather，选择刚创建好的Bot，选择 `Enable`。
-* 发送 `/setcommands` 到@BotFather，选择刚创建好的Bot，发送以下内容：
+* 发送 `/setprivacy` 到 @BotFather，选择刚创建好的 Bot，选择 `Disable` 。
+* 发送 `/setjoingroups` 到 @BotFather，选择刚创建好的 Bot，选择 `Enable`。
+* 发送 `/setcommands` 到 @BotFather，选择刚创建好的 Bot，发送以下内容：
 ```
 link - 将回话绑定到Telegram群组
 chat - 生成会话头
@@ -32,7 +32,7 @@ extra - 获取更多功能
 
 ### 获取 User ID
 
-Telegram中每位用户有一个唯一的数字ID，可通过Bot来查询，以下是一些个人目前已知的Bot：
+Telegram 中每位用户有一个唯一的数字 ID，可通过 Bot 来查询，以下是一些个人目前已知的 Bot：
 
 * [@get_id_bot](https://t.me/get_id_bot) 发送 `/start`
 * [@XYMbot](https://t.me/xymbot) 发送 `/whois`
@@ -42,9 +42,9 @@ Telegram中每位用户有一个唯一的数字ID，可通过Bot来查询，以�
 * [@userinfobot](https://t.me/userinfobot) 发送任意内容
 * [@orzdigbot](https://t.me/orzdigbot) 发送 `/user`
 
-获得自己的User ID后记录下来备用。
+获得自己的 User ID 后记录下来备用。
 
-### 启动Docker并登陆
+### 启动 Docker 并登陆
 
 Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) 这个镜像，尝试了一圈这个是启动最省心的。
 
@@ -54,7 +54,7 @@ Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) �
 docker run -d -t --name "efbwechat" -e TOKEN="aaa" -e ADMIN="bbb" mikubill/efbwechat
 ```
 
-将其中的 `aaa` 替换为之前保存的 `Token` 的值，`bbb` 替换为User ID即可。
+将其中的 `aaa` 替换为之前保存的 `Token` 的值，`bbb` 替换为 User ID。
 
 启动镜像没有报错的话输入下面这条命令
 
@@ -66,9 +66,9 @@ docker logs -f efbwechat
 
 ### Some Tips
 
-1. 若运行Docker的机器在国外而登陆微信的手机在国内，会有微信网页版登陆权限被封禁的风险。
-2. 运行Docker期间手机微信不可长期不在线（此处“长期”指超过24小时。。），否则网页版会被踢下线，需重新登陆。
-3. 可以在Telegram内新建若干群组并拉进之前建好的微信Bot进群，并将各个微信群、好友、公众号等 `link` 至相应群组即可实现方便的私聊/免打扰等功能，自行探索。
+1. 若运行Docker的机器在国外而登陆微信的手机在国内，会有微信网页版登陆权限被封禁的风险；
+2. 运行Docker期间手机微信不可长期不在线（此处“长期”指超过24小时。。），否则网页版会被踢下线，需重新登陆；
+3. 可以在Telegram内新建若干群组并拉之前建好的微信 Bot 进群，并将各个微信群、好友、公众号等 `link` 至相应群组即可实现方便的私聊 / 免打扰等功能，自行探索。
 
 ## 老司机使用
 
