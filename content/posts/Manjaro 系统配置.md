@@ -310,8 +310,6 @@ yay -S <packagename>
 yay <keyword>
 ```
 
-_GitHub Issues #19_
-
 ---
 
 *参考链接：*
