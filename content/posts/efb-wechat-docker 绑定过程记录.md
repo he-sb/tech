@@ -46,15 +46,35 @@ Telegram 中每位用户有一个唯一的数字 ID，可通过 Bot 来查询，
 
 ### 启动 Docker 并登陆
 
-Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) 这个镜像，尝试了一圈这个是启动最省心的。
+~~Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) 这个镜像，尝试了一圈这个是启动最省心的。~~
 
-使用这条命令来启动镜像
+> 2020/12/30 更换镜像为 [yhndnzj/efb](https://hub.docker.com/r/yhndnzj/efb) ，因为之前的很久不更新了，而且配置复用太麻烦，也不支持发送 GIF。
+
+首先执行这个命令来初始化配置文件：
 
 ```bash
-docker run -d -t --name "efbwechat" -e TOKEN="aaa" -e ADMIN="bbb" mikubill/efbwechat
+curl -fsSL https://github.com/YHNdnzj/efb-docker/raw/master/init.sh | bash
 ```
 
-将其中的 `aaa` 替换为之前保存的 `Token` 的值，`bbb` 替换为 User ID。
+上面的脚本会在 `/etc/ehforwarderbot` 这个路径下生成默认的配置文件，修改一下：
+
+```bash
+vi /etc/ehforwarderbot/profiles/wechat/blueset.telegram/config.yaml
+```
+
+文件内容是这样的：
+
+```bash
+token: "TOKEN"
+admins: 
+- ID
+```
+
+把第一行引号中的 `TOKEN` 替换为刚才新建 Bot 时保存的 Token，第三行的 `ID` 替换为刚才保存的 Telegram User ID，然后启动镜像：
+
+```bash
+docker run -d -e EFB_PROFILE=wechat --name efb-wechat -v /etc/ehforwarderbot:/etc/ehforwarderbot yhndnzj/efb
+```
 
 启动镜像没有报错的话输入下面这条命令
 
@@ -62,7 +82,7 @@ docker run -d -t --name "efbwechat" -e TOKEN="aaa" -e ADMIN="bbb" mikubill/efbwe
 docker logs -f efbwechat
 ```
 
-不出意外的话稍等片刻终端内即会显示二维码，打开手机微信扫描，确认登陆即可。
+不出意外的话，稍等片刻终端内即会显示二维码，打开手机微信扫描，确认登陆即可。
 
 ### Some Tips
 
@@ -72,9 +92,7 @@ docker logs -f efbwechat
 
 ## 老司机使用
 
-此镜像的配置文件在容器内 `/opt/app/ehforward_config/profiles/default` 目录下，`tgdata.db` 文件位置在 `/opt/app/ehforward_config/profiles/default/blueset.telegram/tgdata.db`，如服务器重装或迁移时，备份相应文件并在重新部署容器时挂载至对应位置即可。
-
-备份和挂载这个过程还在~~咕咕咕~~学习中，估计要~~咕~~学到下次重装服务器了。。
+此镜像的配置文件在 `/etc/ehforwarderbot` 这个文件夹内，如服务器重装或迁移时，备份这个文件夹并在重新部署容器时挂载上即可。
 
 ---
 
@@ -83,3 +101,4 @@ docker logs -f efbwechat
 1. [EFB How-to: Send and Receive Messages from WeChat on Telegram (zh-CN) — 1A23 Blog](https://blog.1a23.com/2017/01/09/EFB-How-to-Send-and-Receive-Messages-from-WeChat-on-Telegram-zh-CN/#0x030-创建-Telegram-Bot)
 2. [Mikubill/efb-wechat-docker: EFB WeChat Slave Docker Ver.](https://github.com/Mikubill/efb-wechat-docker)
 3. [为docker文件挂载指定卷的问题 · Issue #7 · Mikubill/efb-wechat-docker](https://github.com/Mikubill/efb-wechat-docker/issues/7)
+4. [YHNdnzj/efb-docker: Docker image for ehForwarderBot](https://github.com/YHNdnzj/efb-docker)
