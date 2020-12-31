@@ -84,7 +84,7 @@ sudo vim /etc/sudoers
 Defaults env_keep += "ftp_proxy http_proxy https_proxy"
 ```
 
-保存即可，现在代理的环境变量会自动传递给 sudo 和 pacman 了，yay 会自动读取 `http_proxy` 和 `https_proxy` 的值，不需要特殊设置（其实 pacman 是可以自动读取代理的环境变量的，但是 pacman 使用时要加上 sudo，而环境变量不会自动传递给 sudo，所以此处需要特殊设置一下；又因为 yay 有些命令会调用 `sudo pacman`，所以哪怕只用 yay 也是需要设置这一步的 Orz）。
+保存即可，现在代理的环境变量会自动传递给 sudo 和 pacman 了，yay 会自动读取 `http_proxy` 和 `https_proxy` 的值，不需要特殊设置（其实 pacman 是可以自动读取代理的环境变量的，但是 pacman 使用时要加上 sudo，而环境变量不会自动传递给 sudo，所以此处需要特殊设置一下；又因为 yay 有些命令会调用 sudo，所以哪怕只用 yay 也是需要设置这一步的 Orz）。
 
 ## 4.安装并配置 zsh
 
