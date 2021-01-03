@@ -169,7 +169,7 @@ wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.c
 vi client-linux.py
 ```
 
-将其中的 `SERVER` , `USERNAME` , `PASSWORD` , `PORT` 分别修改为上文中服务端配置文件内自定义的值（ `port` 为【服务端】定义的与客户端通信端口，默认为 35601 ，若未修改过，此项可以不更改）后保存，然后执行：
+将其中的 `SERVER` , `USER` , `PASSWORD` , `PORT` 分别修改为上文中服务端配置文件内自定义的值（`port` 为【服务端】定义的与客户端通信端口，默认为 35601 ，若未修改过，此项可以不更改；`USER` 为【服务端】配置文件定义的 `username`）后保存，然后执行：
 
 ```bash
 python client-linux.py
