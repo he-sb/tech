@@ -82,7 +82,7 @@ systemctl enable docker
 systemctl start docker
 ```
 
-安装 Docker-Compose 
+安装 Docker-Compose
 
 ```shell
 curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
@@ -240,11 +240,11 @@ docker-compose up -d
 
 ### 执行 `docker-compose` 提示 `permission deny`
 
-关闭 Selinux 即可
+关闭 Selinux 即可：
 
 ```shell
 #查看SELinux状态（如果 SELinux status 参数为 enabled 即为开启状态）
-/usr/sbin/sestatus -v 
+/usr/sbin/sestatus -v
 
 #临时关闭
 setenforce 0
@@ -274,7 +274,7 @@ firewall-cmd --zone=public -add-port=22/tcp --permanent
 * 查看容器基本信息： `docker ps -a`
 * 查看反代是否生效，即访问域名，看能否访问正常网站。如果不生效，执行 `docker logs docker-id` 查看原因
 * 反代生效基本就没啥问题了，测试 V2Ray 能否正常工作
-* 如果 Docker 有问题，先 stop：`docker stop docker-id` ，再删除容器：`docker rm docker-id` ，最后再次执行 `docker-compose up -d` ，看是否正常 
+* 如果 Docker 有问题，先 stop：`docker stop docker-id` ，再删除容器：`docker rm docker-id` ，最后再次执行 `docker-compose up -d` ，看是否正常
 
 ---
 
