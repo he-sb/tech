@@ -15,7 +15,7 @@ share = false
 
 - Wasabi 山葵酱：[山葵酱部落格](https://wasabi.fun/)
 
-- Zran's Blog：[梓然小屋](https://blog.zranl.cn/)
+- Zran's Blog：[梓然小屋](https://blog.zranl.cc/)
 
 - 荒淫骚鬼：[Galahad](https://focus.expert/)
 
