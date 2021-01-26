@@ -79,7 +79,7 @@ docker run -d -e EFB_PROFILE=wechat --name efb-wechat -v /etc/ehforwarderbot:/et
 启动镜像没有报错的话输入下面这条命令
 
 ```bash
-docker logs -f efbwechat
+docker logs -f efb-wechat
 ```
 
 不出意外的话，稍等片刻终端内即会显示二维码，打开手机微信扫描，确认登陆即可。
