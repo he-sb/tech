@@ -38,6 +38,8 @@ sudo pacman -Sy vim
 
 ## 2.添加 ArchLinuxCN 源
 
+> 不建议添加此源，Manjaro 上游的包库更新要比 Arch 慢，可能会导致一些蛋疼的兼容性问题。
+
 首先编辑 `/etc/pacman.conf` 这个文件，在末尾添加以下内容：
 
 ```conf
