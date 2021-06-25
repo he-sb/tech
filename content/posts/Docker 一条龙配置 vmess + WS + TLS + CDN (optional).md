@@ -132,7 +132,7 @@ errors stdout
 ### `config.json`
 
 ```shell
-vi /root/config/json
+vi /root/config.json
 ```
 
 V2Ray 的配置文件，注意把其中 `id` 对应的值替换为自己的
