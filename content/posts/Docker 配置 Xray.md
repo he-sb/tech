@@ -13,6 +13,32 @@ draft = true
 
 ## 前言
 
+## 准备工作
+
+相比 [Docker 配置 vmwss + WS + TLS + CDN (optional)](Docker%20一条龙配置%20vmess%20+%20WS%20+%20TLS%20+%20CDN%20(optional).md)，本文新增了证书申请步骤，不再使用 Caddy 自动申请。
+
+首先安装 acme.sh：
+
+```shell
+wget -O -  https://get.acme.sh | sh
+```
+
+使 acme.sh 命令生效：
+
+```shell
+. .bashrc
+```
+
+开启 acme.sh 自动更新：
+
+```shell
+acme.sh --upgrade --auto-upgrade
+```
+
+acme.sh --register-account -m 0he.sb0@gmail.com
+acme.sh --issue -d hd.fkgfw.men --standalone --keylength ec-256 --force
+acme.sh --install-cert -d hd.fkgfw.men --ecc --fullchain-file /root/cert/hd.fkgfw.men.crt --key-file /root/hd.fkgfw.men.key
+
 ## 编辑配置文件
 
 ### `Caddyfile`
@@ -21,16 +47,12 @@ draft = true
 vi /root/Caddyfile
 ```
 
-`Caddy` 的配置文件，包含两部分，走 `/` 的流量反代正常网站，走 `/path` 的流量反代至 `XRay` 监听的端口
+`Caddy` 的配置文件，回落至此的流量默认反代正常网站
 
 ```
 hd.fkgfw.men {
 gzip
 tls 0he.sb0@gmail.com
-proxy /path v2ray:44333 {
-websocket
-header_upstream -Origin
-}
 proxy / https://v2ex.com
 # write log to stdout for docker
 log stdout
@@ -41,7 +63,7 @@ errors stdout
 ### `config.json`
 
 ```shell
-vi /root/config/json
+vi /root/config.json
 ```
 
 XRay 的配置文件，注意把其中 `id` 对应的值替换为自己的
@@ -65,6 +87,10 @@ XRay 的配置文件，注意把其中 `id` 对应的值替换为自己的
                 ],
                 "decryption": "none",
                 "fallbacks": [
+                    {
+                        "dest": 80,
+                        "xver": 1
+                    },
                     {
                         "path": "/vlsws", // 必须换成自定义的 PATH
                         "dest": 1234,
@@ -160,20 +186,14 @@ services:
     image: teddysun/xray
     restart: always
     volumes:
-    - ./xray:/etc/xray
-    expose:
-    - "443"
+    - ./config.json:/etc/xray/config.json
+    network_mode: "host"
 
   caddy:
     container_name: caddy
-    image: abiosoft/caddy
+    image: teddysun/caddy
     restart: always
     volumes:
-    - ./Caddyfile:/etc/Caddyfile:ro
-    - ./caddyCertificates:/root/.caddy
-    environment:
-    - ACME_AGREE=true
-    ports:
-    - "80:80"
-    - "443:443"
+    - /root/Caddyfile:/etc/caddy/Caddyfile:ro
+    network_mode: "host"
 ```
