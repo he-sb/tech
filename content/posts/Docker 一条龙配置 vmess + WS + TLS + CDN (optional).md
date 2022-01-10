@@ -153,7 +153,7 @@ V2Ray 的配置文件，注意把其中 `id` 对应的值替换为自己的
         "clients": [
             {
             "id": "12345678-90ab-cdef-ghij-klmnopq12345",
-            "alterId": 4
+            "alterId": 32
             }
         ]
         },
