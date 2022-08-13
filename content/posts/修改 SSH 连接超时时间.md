@@ -20,8 +20,8 @@ vi /etc/ssh/sshd_config
 
 ```bash
 TCPKeepAlive yes    # 开启 TCP 长连接
-ClientAliveInterval 600    # 代表超时阈值，单位秒，比如本行代表客户端 600 秒（10 分钟）无响应算超时一次
-ClientAliveCountMax 6    # 允许的超时次数，本行表示超时 6 次后断开连接
+ClientAliveInterval 300    # 代表超时阈值，单位秒，比如本行代表客户端 300 秒（5 分钟）无响应算超时 1 次
+ClientAliveCountMax 144    # 允许的超时次数，本行表示超时 144 次（5 x 144 = 720 分钟，即 12 小时）后断开连接
 ```
 
 修改好后重启sshd服务即可
