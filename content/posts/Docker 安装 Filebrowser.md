@@ -40,14 +40,14 @@ docker run -d \
     -v /PATH_OF_DATABASE/filebrowser.db:/database.db \
     --user $(id -u):$(id -g) \
     -p 8080:80 \
-    --restart=always \
+    --restart=unless-stopped \
     filebrowser/filebrowser
 ```
 
 参数说明：
 
 - `CUSTOM_PATH`：用于展示的目录，也就是 File Browser 可控制的根目录，可以自定义，如果有多个的话，参见后文的进阶配置部分
-- `PATH_OF_DATABASE`：存放数据库文件的目录，这一段可以自定义，不过记得在这个目录下手动创建一个名为 `filebrowser.db` 的新【文件】，否则 Docker 会自动在指定的目录下创建一个名为 `filebrowser.db` 的新【目录】而非新【文件】，但容器内的 File Browser 程序还是将这个新【目录】当作数据库文件来读写，会导致错误
+- `PATH_OF_DATABASE`：存放数据库文件的目录，这一段可以自定义，不过记得在这个目录下手动创建一个名为 `filebrowser.db` 的新【文件】（比如 `touch database.db` 命令），否则 Docker 会自动在指定的目录下创建一个名为 `filebrowser.db` 的新【目录】而非新【文件】，但容器内的 File Browser 程序还是将这个新【目录】当作数据库文件来读写，会导致错误
 - `-p`：冒号【左边】的 `8080` 代表外部访问服务时使用的端口，可以自己改，冒号【右边】的 `80` 是容器内部使用的端口，不要动它
 
 别忘了给这个脚本文件赋予可执行权限：
@@ -65,6 +65,42 @@ chmod +x Filebrowser-run.sh
 最后防火墙放行 `8080` 端口（或者你自定义的其他端口），不出意外的话访问服务器 IP:8080 就能看到 File Browser 的登录界面了，默认的帐号密码都是 `admin`，登录之后尽快改掉。
 
 ## 进阶配置
+
+### 使用 docker compose 部署
+
+上文中将 `docker run` 命令保存为 shell 脚本的方式，虽然达到了方便复用的目的，但是终归不是一个优雅的解决方式（比如还需要 `chmod +x` 来赋予可执行权限）。这里我们使用 docker compose 来部署，只需要修改好配置文件，对容器的启停管理都可以通过 `docker compose` 命令来执行。下面是 `docker-compose.yml` 配置文件的内容：
+
+```yml
+version: '3'
+
+services:
+  filbrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    user: $DOCKER_UID_GID
+    volumes:
+      - /CUSTOM_PATH:/srv
+      - /PATH_OF_DATABASE/database.db:/database.db
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1m'
+```
+
+配置文件的内容，主要是将上文中 `docker run` 命令的参数转化为了 docker compose 配置文件的参数，应该不需要过多解释。
+
+唯一需要一点 tricky 的是 `user` 参数，因为 docker compose 配置文件并不能直接获取到当前用户的 uid 和 gid，所以这里使用 `DOCKER_UID_GID` 环境变量来传入，需要在 `.bashrc` 或 `.zshrc` （如果你和俺一样使用了 zsh 的话）文件中追加一行：
+
+```bash
+export DOCKER_UID_GID="$(id -u):$(id -g)"
+```
+
+然后执行 `source .bashrc` 或 `source .zshrc` 来使环境变量生效。
+
+最后执行 `docker compose up -d` 即可。
 
 ### 读取多个目录
 
