@@ -19,8 +19,9 @@ vi /etc/ssh/sshd_config
 找到以下两项，先删掉行首的注释符 `#` ，再根据自己需求来改这两项的数置：
 
 ```bash
-ClientAliveInterval 600    #代表超时阈值，单位秒，比如本行代表600秒无输入算超时一次
-ClientAliveCountMax 6    #允许的超时次数，本行表示超时6次后断开连接
+TCPKeepAlive yes    # 开启 TCP 长连接
+ClientAliveInterval 600    # 代表超时阈值，单位秒，比如本行代表客户端 600 秒（10 分钟）无响应算超时一次
+ClientAliveCountMax 6    # 允许的超时次数，本行表示超时 6 次后断开连接
 ```
 
 修改好后重启sshd服务即可
