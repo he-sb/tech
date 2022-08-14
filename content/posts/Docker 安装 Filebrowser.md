@@ -1,5 +1,5 @@
 +++
-title = "Docker 安装 Filebrowser"
+title = "Docker 安装 File Browser"
 description = " "
 date = "2021-08-12T21:07:53+08:00"
 toc = true
