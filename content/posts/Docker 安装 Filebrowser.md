@@ -27,13 +27,13 @@ draft = false
 
 Docker 一条命令即可运行，不过为了可读性和方便复用，俺将这条 Docker 命令保存为了 Shell 脚本：
 
-```shell
+```bash
 vi Filebrowser-run.sh
 ```
 
 写入以下内容并保存：
 
-```shell
+```bash
 docker run -d \
     --name filebrowser \
     -v /CUSTOM_PATH:/srv \
@@ -52,13 +52,13 @@ docker run -d \
 
 别忘了给这个脚本文件赋予可执行权限：
 
-```shell
+```bash
 chmod +x Filebrowser-run.sh
 ```
 
 最后执行这个脚本：
 
-```shell
+```bash
 ./Filebrowser-run.sh
 ```
 
@@ -106,7 +106,7 @@ export DOCKER_UID_GID="$(id -u):$(id -g)"
 
 在上文运行容器的 Docker 命令中，将 `-v /CUSTOM_PATH:/srv \` 替换为下面的形式：
 
-```shell
+```bash
     -v /CUSTOM_PATH_1:/srv/CUSTOM_FOLDER_1 \
     -v /CUSTOM_PATH_2:/srv/CUSTOM_FOLDER_2 \
     ...
@@ -126,8 +126,18 @@ export DOCKER_UID_GID="$(id -u):$(id -g)"
 
 要使用自定义配置文件，在上文运行 Docker 的命令中，在第一行 `docker run -d \` 之后，最后一行 `filebrowser/filebrowser` 之前的任意位置新增一行：
 
-```shell
+```bash
     -v /PATH_TO_CUSTOM_CONFIG_FILE/.filebrowser.json:/.filebrowser.json \
+```
+
+如果是 docker compose 部署的，在配置文件 `docker-compose.yml` 的 `volumes` 小节增加一行：
+
+```json
+...
+    volumes:
+      - ...
+      - /PATH_TO_CUSTOM_CONFIG_FILE/.filebrowser.json:/.filebrowser.json
+...
 ```
 
 其中 `PATH_TO_CUSTOM_CONFIG_FILE` 是存放自定义配置文件的路径，`.filebrowser.json` 是自定义配置文件的文件名，配置文件是 `json` 格式的，默认的配置文件内容如下：
