@@ -334,7 +334,7 @@ uglyURLs = false
     # 说明：用于 JSON-LD、Open Graph
 
     # 站点的描述
-    siteDescription = "HE-SB的技术博客（踩坑记录）"
+    siteDescription = "HE-SB 的技术博客（踩坑记录）"
     # 说明：用于 HTML 的头部元数据、JSON-LD、
     #      Open Graph、Atom、RSS
 
