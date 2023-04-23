@@ -35,9 +35,9 @@ wget -O -  https://get.acme.sh | sh
 acme.sh --upgrade --auto-upgrade
 ```
 
-acme.sh --register-account -m 0he.sb0@gmail.com
-acme.sh --issue -d hd.fkgfw.men --standalone --keylength ec-256 --force
-acme.sh --install-cert -d hd.fkgfw.men --ecc --fullchain-file /root/cert/hd.fkgfw.men.crt --key-file /root/hd.fkgfw.men.key
+acme.sh --register-account -m test@example.com
+acme.sh --issue -d example.com --standalone --keylength ec-256 --force
+acme.sh --install-cert -d example.com --ecc --fullchain-file /root/cert/example.com.crt --key-file /root/example.com.key
 
 ## 编辑配置文件
 
@@ -50,9 +50,9 @@ vi /root/Caddyfile
 `Caddy` 的配置文件，回落至此的流量默认反代正常网站
 
 ```
-hd.fkgfw.men {
+example.com {
 gzip
-tls 0he.sb0@gmail.com
+tls test@example.com
 proxy / https://v2ex.com
 # write log to stdout for docker
 log stdout
