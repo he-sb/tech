@@ -3,7 +3,7 @@ title = "使用 HTTPS 连接 Aria2"
 description = " "
 date = "2020-04-03T21:28:38+08:00"
 categories = ["奇技淫巧"]
-tags = ["aria2","https"]
+tags = ["aria2","https","tls"]
 slug = "use-https-on-aria2"
 draft = false
 +++
