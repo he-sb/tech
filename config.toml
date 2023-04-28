@@ -34,7 +34,7 @@ footnoteReturnLinkContents = "↩"
 enableGitInfo = true
 
 # 是否生成 robots.txt 文件
-enableRobotsTXT = false
+enableRobotsTXT = true
 
 # 每一分页的文章数（仅对「文章摘要」首页布局有效）
 paginate = 5
