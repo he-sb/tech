@@ -1,7 +1,7 @@
 ##########################################
 # 站点配置
 
-baseURL = "https://tech.he-sb.top/"
+baseURL = "https://blog.he-sb.top/"
 title = "HE-SB-技术栈"
 languageCode = "zh-CN"
 hasCJKLanguage = true
