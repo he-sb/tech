@@ -150,7 +150,7 @@ uglyURLs = false
 
 # RSS & Atom 文章数限制
 [services.rss]
-    limit = -1
+    limit = 10
 
 
 
