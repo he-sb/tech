@@ -34,7 +34,7 @@ jobs:
       # 安装 hugo (v0.115.4)
       - name: Setup Hugo
         run:
-          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.115.4/hugo_extended_0.115.4_Linux-64bit.deb && sudo dpkg -i hugo.deb && hugo version
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.115.4/hugo_extended_0.115.4_Linux-amd64.deb && sudo dpkg -i hugo.deb && hugo version
 
       # 构建网站
       - name: Build
