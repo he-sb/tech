@@ -25,6 +25,12 @@
     $headerLayoutFlex: false;
 {{ end }}
 
+{{ if .Site.Params.enableHeaderAutoHide }}
+    $enableHeaderAutoHide: true;
+{{ else }}
+    $enableHeaderAutoHide: false;
+{{ end }}
+
 {{ if .Site.Params.enableNavToggle }}
     $enableNavToggle: true;
 
@@ -33,6 +39,12 @@
     {{ end }}
 {{ else }}
     $enableNavToggle: false;
+{{ end }}
+
+{{ if .Site.Params.displayBackToTopOnMobile }}
+    $displayBackToTopOnMobile: true;
+{{ else }}
+    $displayBackToTopOnMobile: false;
 {{ end }}
 
 {{ if .Site.Params.enableOverflowY }}
@@ -63,6 +75,8 @@
     $enableSmoothScroll: false;
 {{ end }}
 
+$baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
+
 
 // Utilities
 
@@ -73,6 +87,10 @@
 // Base
 
 @import "base/base";
+
+{{ if .Site.Params.customizeScrollbar }}
+    @import "base/scrollbar";
+{{ end }}
 
 
 // Typography
@@ -435,11 +453,11 @@ $fofPoster: url({{ $fofPoster }});
 
 // Lunr search
 
-{{ if and (eq .Site.Params.headerLayout "flex") .Site.Params.enableLunrSearch }}
-    $enableLunrSearch: true;
+{{ if and (eq .Site.Params.headerLayout "flex") (or .Site.Params.enableLunrSearch .Site.Params.enableAlgoliaSearch) }}
+    $enableSearch: true;
     @import "components/search";
 {{ else }}
-    $enableLunrSearch: false;
+    $enableSearch: false;
 {{ end }}
 
 

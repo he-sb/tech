@@ -5,63 +5,63 @@ other = "…"
 other = ": "
 
 [minute]
-one = "min."
-other = "min."
+one = "menit"
+other = "menit"
 
 [tocTitle]
-other = "Spis treści"
+other = "Daftar Isi"
 
 [readMore]
-other = "Czytaj więcej"
+other = "Selengkapnya"
 
 [prevPage]
-other = "Nowsze"
+other = "Sebelumnya"
 
 [nextPage]
-other = "Starsze"
+other = "Selanjutnya"
 
 [copy]
-other = "Kopiuj"
+other = "Salin"
 
 [copied]
-other = "Skopiowano!"
+other = "Tersalin!"
 
 [copyrightAuthor]
-other = "Autor"
+other = "Pengarang"
 
 [copyrightLink]
-other = "Link"
+other = "Tautan"
 
 [copyrightLicense]
-other = "Licencja"
+other = "Lisensi"
 
 [shareOn]
-other = "Share on:"
+other = "Bagikan ke:"
 
 [shareOnTitle]
-other = "Share on "
+other = "Bagikan "
 
 [shareViaTitle]
-other = "Share via "
+other = "Bagikan melalui "
 
 [relatedPosts]
-other = "Zobacz także:"
+other = "Tulisan lainnya:"
 
 [loadComments]
-other = "Załadować komentarze?"
+other = "Memuat Komentar?"
 
 [pageNotFound]
-other = "404 - Strona nie znaleziona"
+other = "404 - Tidak ditemukan"
 
 [fofLinkText]
-other = "Zabierz mnie do domu"
+other = "Arahkan ke Beranda"
 
 [searchResultsTitle]
-one = "Znaleziono wynik dla: “{{ .Term }}”"
-other = "Znaleziono {{ .Count }} wyniki/ów dla: “{{ .Term }}”"
+one = "Ditemukan satu hasil untuk “{{ .Term }}”"
+other = "Ditemukan {{ .Count }} hasil dari “{{ .Term }}”"
 
 [searchResultsNone]
-other = "Brak wyników dla: “{{ .Term }}”"
+other = "Tidak ditemukan hasil dari “{{ .Term }}”"
 
 
 # Socials
@@ -98,40 +98,40 @@ other = "QR Code"
 # Used for `i18nMonth`
 
 [january]
-other = "Styczeń"
+other = "Januari"
 
 [february]
-other = "Luty"
+other = "Februari"
 
 [march]
-other = "Marzec"
+other = "Maret"
 
 [april]
-other = "Kwiecień"
+other = "April"
 
 [may]
-other = "Maj"
+other = "Mei"
 
 [june]
-other = "Czerwiec"
+other = "Juni"
 
 [july]
-other = "Lipiec"
+other = "Juli"
 
 [august]
-other = "Sierpień"
+other = "Agustus"
 
 [september]
-other = "Wrzesień"
+other = "September"
 
 [october]
-other = "Październik"
+other = "Oktober"
 
 [november]
-other = "Listopad"
+other = "November"
 
 [december]
-other = "Grudzień"
+other = "Desember"
 
 
 # Numbers

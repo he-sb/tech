@@ -5,63 +5,63 @@ other = "…"
 other = ": "
 
 [minute]
-one = "min."
-other = "min."
+one = "perc"
+other = "perc"
 
 [tocTitle]
-other = "Spis treści"
+other = "Tartalom"
 
 [readMore]
-other = "Czytaj więcej"
+other = "Olvass továb"
 
 [prevPage]
-other = "Nowsze"
+other = "Újabb"
 
 [nextPage]
-other = "Starsze"
+other = "Korábbi"
 
 [copy]
-other = "Kopiuj"
+other = "Másol"
 
 [copied]
-other = "Skopiowano!"
+other = "Másolva!"
 
 [copyrightAuthor]
-other = "Autor"
+other = "Szerző"
 
 [copyrightLink]
 other = "Link"
 
 [copyrightLicense]
-other = "Licencja"
+other = "Licensz"
 
 [shareOn]
-other = "Share on:"
+other = "Oszd meg:"
 
 [shareOnTitle]
-other = "Share on "
+other = "Oszd meg a "
 
 [shareViaTitle]
-other = "Share via "
+other = "Oszd meg "
 
 [relatedPosts]
-other = "Zobacz także:"
+other = "Lásd még:"
 
 [loadComments]
-other = "Załadować komentarze?"
+other = "Töltse be a megjegyzéseket"
 
 [pageNotFound]
-other = "404 - Strona nie znaleziona"
+other = "404 - Az oldal nem található"
 
 [fofLinkText]
-other = "Zabierz mnie do domu"
+other = "Vissza a nyitólapra"
 
 [searchResultsTitle]
-one = "Znaleziono wynik dla: “{{ .Term }}”"
-other = "Znaleziono {{ .Count }} wyniki/ów dla: “{{ .Term }}”"
+one = "A “{{ .Term }}” kifejezésre egy eredményt találtam"
+other = "A “{{ .Term }}” kifejezésre {{ .Count }} eredményt találtam"
 
 [searchResultsNone]
-other = "Brak wyników dla: “{{ .Term }}”"
+other = "A “{{ .Term }}” kifejezésre nincs találat"
 
 
 # Socials
@@ -98,40 +98,40 @@ other = "QR Code"
 # Used for `i18nMonth`
 
 [january]
-other = "Styczeń"
+other = "Január"
 
 [february]
-other = "Luty"
+other = "Február"
 
 [march]
-other = "Marzec"
+other = "Március"
 
 [april]
-other = "Kwiecień"
+other = "Április"
 
 [may]
-other = "Maj"
+other = "Május"
 
 [june]
-other = "Czerwiec"
+other = "Június"
 
 [july]
-other = "Lipiec"
+other = "Július"
 
 [august]
-other = "Sierpień"
+other = "Augusztus"
 
 [september]
-other = "Wrzesień"
+other = "Szeptember"
 
 [october]
-other = "Październik"
+other = "Október"
 
 [november]
-other = "Listopad"
+other = "November"
 
 [december]
-other = "Grudzień"
+other = "December"
 
 
 # Numbers

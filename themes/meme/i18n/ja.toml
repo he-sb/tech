@@ -5,63 +5,63 @@ other = "…"
 other = ": "
 
 [minute]
-one = "min."
-other = "min."
+one = "分"
+other = "分"
 
 [tocTitle]
-other = "Spis treści"
+other = "目次"
 
 [readMore]
-other = "Czytaj więcej"
+other = "続きを読む"
 
 [prevPage]
-other = "Nowsze"
+other = "新しい記事"
 
 [nextPage]
-other = "Starsze"
+other = "古い記事"
 
 [copy]
-other = "Kopiuj"
+other = "コピー"
 
 [copied]
-other = "Skopiowano!"
+other = "コピー完了!"
 
 [copyrightAuthor]
-other = "Autor"
+other = "筆者"
 
 [copyrightLink]
-other = "Link"
+other = "リンク"
 
 [copyrightLicense]
-other = "Licencja"
+other = "ライセンス"
 
 [shareOn]
-other = "Share on:"
+other = "シェアする:"
 
 [shareOnTitle]
-other = "Share on "
+other = "シェアする: "
 
 [shareViaTitle]
-other = "Share via "
+other = "シェアする "
 
 [relatedPosts]
-other = "Zobacz także:"
+other = "関連記事:"
 
 [loadComments]
-other = "Załadować komentarze?"
+other = "コメントを読み込みますか?"
 
 [pageNotFound]
-other = "404 - Strona nie znaleziona"
+other = "404 - ページが見つかりません"
 
 [fofLinkText]
-other = "Zabierz mnie do domu"
+other = "ホームへ戻る"
 
 [searchResultsTitle]
-one = "Znaleziono wynik dla: “{{ .Term }}”"
-other = "Znaleziono {{ .Count }} wyniki/ów dla: “{{ .Term }}”"
+one = "“{{ .Term }}” の検索結果が 1 件見つかりました"
+other = "“{{ .Term }}” の検索結果が {{ .Count }} 件見つかりました"
 
 [searchResultsNone]
-other = "Brak wyników dla: “{{ .Term }}”"
+other = "“{{ .Term }}” の検索結果が見つかりませんでした"
 
 
 # Socials
@@ -98,40 +98,40 @@ other = "QR Code"
 # Used for `i18nMonth`
 
 [january]
-other = "Styczeń"
+other = "1月"
 
 [february]
-other = "Luty"
+other = "2月"
 
 [march]
-other = "Marzec"
+other = "3月"
 
 [april]
-other = "Kwiecień"
+other = "4月"
 
 [may]
-other = "Maj"
+other = "5月"
 
 [june]
-other = "Czerwiec"
+other = "6月"
 
 [july]
-other = "Lipiec"
+other = "7月"
 
 [august]
-other = "Sierpień"
+other = "8月"
 
 [september]
-other = "Wrzesień"
+other = "9月"
 
 [october]
-other = "Październik"
+other = "10月"
 
 [november]
-other = "Listopad"
+other = "11月"
 
 [december]
-other = "Grudzień"
+other = "12月"
 
 
 # Numbers

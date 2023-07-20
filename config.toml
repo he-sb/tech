@@ -89,6 +89,10 @@ uglyURLs = false
         endLevel = 6
         ordered = true
 
+# 压缩 HTML
+[minify.tdewolff.html]
+    keepWhitespace = false
+
 # 作者信息
 [author]
     # 名字
@@ -135,14 +139,21 @@ uglyURLs = false
     baseName = "rss"
 
 # lunr.js 的搜索索引
-# [outputFormats.SearchIndex]
-#     mediaType = "application/json"
-#     baseName = "search"
+[outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName = "search"
+
+# Algolia 的搜索索引
+[outputFormats.Algolia]
+    mediaType = "application/json"
+    baseName = "algolia"
+    isPlainText = true
+    notAlternative = true
 
 # Hugo 的输出控制
 [outputs]
     page = ["HTML"]
-    # home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
+    # home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex", "Algolia"]
     home = ["HTML", "SectionsAtom", "SectionsRSS"]
     section = ["HTML"]
     taxonomy = ["HTML"]
@@ -166,7 +177,7 @@ uglyURLs = false
 # 4. links      链接栏（关于页面的极简页脚）
 
 # 菜单内的配置说明如下：
-# url           链接地址
+# pageref/url   内链地址/外链地址
 # name          文本（留空（""）则无）
 # weight        位置
 # pre           内链（internal）或外链（external）
@@ -179,41 +190,41 @@ uglyURLs = false
 [menu]
     ## 菜单栏
     # [[menu.main]]
-    #     url = "/"
+    #     pageref = "/"
     #     name = "首页"
     #     weight = 1
     #     pre = "internal"
     #     post = "home"
     [[menu.main]]
-        url = "/posts/"
+        pageref = "/posts/"
         name = "归档"
         weight = 2
         pre = "internal"
         post = "archive"
         identifier = "posts"
     [[menu.main]]
-        url = "/categories/"
+        pageref = "/categories/"
         name = "分类"
         weight = 3
         pre = "internal"
         post = "th"
         identifier = "categories"
     [[menu.main]]
-        url = "/tags/"
+        pageref = "/tags/"
         name = "标签"
         weight = 4
         pre = "internal"
         post = "tags"
         identifier = "tags"
     [[menu.main]]
-        url = "/links/"
+        pageref = "/links/"
         name = "友链"
         weight = 5
         pre = "internal"
         post = "link"
         identifier = "links"
     [[menu.main]]
-        url = "/about/"
+        pageref = "/about/"
         name = "关于"
         weight = 6
         pre = "internal"
@@ -241,6 +252,10 @@ uglyURLs = false
 
     # 是否开启
     enableHeader = true
+
+    # 是否自动隐藏
+    enableHeaderAutoHide = true
+    # 说明：仅对弹性布局的顶栏有效
 
     # 是否在首页显示
     displayHeaderInHome = true
@@ -595,6 +610,9 @@ uglyURLs = false
     # 说明：文章的 Front Matter 中的 `comments`
     #      的优先级高于此处
 
+    # 直接加载评论，不需要手动点击按钮加载
+    autoLoadComments = true
+
     ## Disqus
     enableDisqus = false
     disqusShortname = ""
@@ -628,6 +646,23 @@ uglyURLs = false
     utterancesThemeDark = "photon-dark"
     utterancesLabel = "💬HE-SB-技术栈"
     # 说明：https://utteranc.es/
+
+    ## Gitalk
+    enableGitalk = false
+    gitalkClientID = "your_client_id"
+    gitalkClientSecret = "your_client_secret"
+    gitalkRepo = "your_repository"
+    gitalkOwner = "your_gitalk_owner"
+    gitalkAdmin = ["your_gitalk_admin"]
+    gitalkLable = ["Gitalk"]
+    gitalkDistractionFreeMode = false
+    gitalkPerPage = 10
+    gitalkLanguage = "en"
+    gitalkPagerDirection = "last"
+    gitalkCreateIssueManually = false
+    gitalkProxy = "https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"
+    gitalkEnableHotKey = true
+    # 说明：https://github.com/gitalk/gitalk
 
 
     ######################################
@@ -663,6 +698,15 @@ uglyURLs = false
     ## 广告单元
     enableGoogleAdUnits = false
     googleAdSlot = ""
+
+
+    ######################################
+    # Yandex.Metrika
+    # https://metrika.yandex.ru/
+
+    # 说明：仅在生产环境（production）下渲染
+
+    yandexMetrikaId = ""
 
 
     ######################################
@@ -784,8 +828,10 @@ uglyURLs = false
     ######################################
     # 分节标题锚点
 
-    # 是否开启
+    # 是否开启（全局设置）
     enableHeadingsAnchor = true
+    # 说明：文章的 Front Matter 中的 `anchor`
+    #      的优先级高于此处
 
     # 分节标题的级别范围
     headingsOpt = "1-6"
@@ -873,6 +919,11 @@ uglyURLs = false
     #      如果你喜欢在 Markdown 中手动插入
     #      `---` 以将文章的正文内容与脚注内容
     #      分隔开来，那么这项设置将会非常有用。
+
+
+    ######################################
+    # 滚动条
+    customizeScrollbar = true
 
 
     ######################################
@@ -1165,6 +1216,9 @@ uglyURLs = false
     # 是否在首页显示
     displayBackToTopInHome = true
 
+    # 是否在移动端显示
+    displayBackToTopOnMobile = false
+
     # 按钮图标
     backToTopIcon = "arrow-up"
 
@@ -1181,6 +1235,7 @@ uglyURLs = false
     # 是否在首页显示
     displayFooterInHome = true
 
+    displayCopyleftSymbol = false
     # 是否显示版权符号（©）
     displayCopyrightSymbol = false
 
@@ -1312,6 +1367,21 @@ uglyURLs = false
 
 
     ######################################
+    # Algolia search
+
+    # 说明：需要开启 `Algolia` 的输出，且需要每
+    #      次将生成的 algolia.json 文件上传到
+    #      Algolia
+
+    enableAlgoliaSearch = false
+
+    algoliaAppId = ""
+    algoliaApiKey = ""
+    algoliaIndexName = ""
+    # 说明：https://www.algolia.com/
+
+
+    ######################################
     # 404 页面
 
     # 视频封面
@@ -1321,3 +1391,36 @@ uglyURLs = false
     fofVideoWebm = ""
     fofVideoMp4 = ""
     # 说明：视频地址可留空（""）
+
+
+    ######################################
+    # 定制第三方库的地址
+
+    [params.lib]
+        host = "https://cdn.jsdelivr.net"
+        # 说明：设置为根（"/"）且将下方对应 path
+        #      设置，如果你想要直接从「本地」
+        #      加载某个库的话。比如：
+        #      将 path 设置为 "js/lib.min.js"，
+        #      并将文件放到你的 /static/js/lib.min.js
+    [params.lib.path]
+        clipboard = "/npm/clipboard-polyfill@2.8.6/dist/clipboard-polyfill.min.js"
+        instantsearch = "/npm/instantsearch.js@2/dist/instantsearch.min.js"
+        gitalk = "/npm/gitalk@1/dist/gitalk.min.js"
+        gitalk_css = "/npm/gitalk@1/dist/gitalk.css"
+        instantpage = "/npm/instant.page@5.1.0/instantpage.min.js"
+        katex = "/npm/katex@0.13.0/dist/katex.min.js"
+        katex_css = "/npm/katex@0.13.0/dist/katex.min.css"
+        katex_mhchem = "/npm/katex@0.13.0/dist/contrib/mhchem.min.js"
+        katex_auto_render = "/npm/katex@0.13.0/dist/contrib/auto-render.min.js"
+        lunr = "/npm/lunr@2.3.9/lunr.min.js"
+        lunr_tinyseg = "/npm/lunr-languages@1.4.0/tinyseg.js"
+        lunr_stemmer = "/npm/lunr-languages@1.4.0/min/lunr.stemmer.support.min.js"
+        lunr_lang = "/npm/lunr-languages@1.4.0/min/lunr.de.min.js"
+        mathjax = "/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"
+        medium_zoom = "/npm/medium-zoom@latest/dist/medium-zoom.min.js"
+        mermaid = "/npm/mermaid@8.8.3/dist/mermaid.min.js"
+        qrcode = "/npm/qrcode-generator@1.4.4/qrcode.min.js"
+        valine = "/npm/valine@1.4.14/dist/Valine.min.js"
+        busuanzi = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+        utterances = "https://utteranc.es/client.js"
