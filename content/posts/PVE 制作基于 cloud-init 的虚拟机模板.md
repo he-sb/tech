@@ -241,13 +241,13 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # 刷新 apt 缓存
-sudo apt-get update
+sudo apt update
 ```
 
 安装 docker 及 compose 插件：
 
 ```shell
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 配置 docker 免 sudo（可选）：
