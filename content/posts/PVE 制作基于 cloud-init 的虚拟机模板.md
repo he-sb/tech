@@ -267,7 +267,7 @@ docker version
 
 ```shell
 # 限制日志文件大小，并开启 ipv6
-sudo cat > /etc/docker/daemon.json << EOF
+sudo bash -c 'cat > /etc/docker/daemon.json' << EOF
 {
     "log-driver": "json-file",
     "log-opts": {
