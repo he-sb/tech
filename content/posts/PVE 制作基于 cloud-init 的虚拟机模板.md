@@ -288,6 +288,12 @@ EOF
 sudo systemctl reload docker && sudo systemctl restart docker
 ```
 
+允许 docker 开机自启动：
+
+```shell
+sudo systemctl enable docker
+```
+
 ### 清理善后
 
 需要安装的软件包全部安装完毕后，可以清理一下 apt 的缓存，毕竟是作为模板使用的虚拟机，硬盘空间尽量精简一些，加快后续克隆新虚拟机时的速度，克隆出来的虚拟机可以自行扩容硬盘后再添加其他软件。
