@@ -301,3 +301,4 @@ docker exec -it wallabag /var/www/wallabag/bin/console wallabag:import:redis-wor
 1. [wallabag/wallabag - Docker Image | Docker Hub](https://hub.docker.com/r/wallabag/wallabag)
 2. [Cannot upgrade to 2.6.0 / Issue with scheb_two_factor · Issue #6649 · wallabag/wallabag](https://github.com/wallabag/wallabag/issues/6649#issuecomment-1616021842)
 3. [Default user not created · Issue #6795 · wallabag/wallabag](https://github.com/wallabag/wallabag/issues/6795#issuecomment-1665284333)
+4. [Instagram, and Pocket import not working with redis. · Issue #209 · wallabag/docker](https://github.com/wallabag/docker/issues/209#issuecomment-663353829)
