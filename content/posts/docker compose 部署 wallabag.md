@@ -277,6 +277,24 @@ sudo chmod -R 777 data
 
 > 导入是异步进行的。一旦导入任务开始，一个外部 worker 就会一次处理一个 job。目前的服务是： **Redis**
 
+此时选择一个导入途径，比如俺选择了【Firefox】，然后点击“导入内容”，选择待导入的文件，点击“上传文件”，此时右上角应该会提示：
+
+> 导入情况摘要: 1 个项目正在等待导入。
+
+此时如果刷新一下【导入】页面，会发现右上角有个提示：
+
+> Messages in queue: 1
+
+多次刷新也之后提示这一句，看上去导入任务并没有开始的样子。。
+
+此时需要去手动执行一下同步任务才能开始：
+
+```shell
+docker exec -it wallabag /var/www/wallabag/bin/console wallabag:import:redis-worker firefox --env=prod
+```
+
+导入完成后，刷新一下 wallabag 网页，应该能看到导入的内容了。
+
 ---
 
 *参考链接：*
