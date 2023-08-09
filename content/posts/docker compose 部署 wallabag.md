@@ -6,7 +6,7 @@ toc = true
 categories = ["奇技淫巧"]
 tags = ["homelab","docker","wallabag","postgresql","traefik"]
 slug = "setup-wallabag-with-docker-compose"
-draft = true
+draft = false
 +++
 
 这是一篇在内网服务器上部署 wallabag 的踩坑过程记录，使用 docker compose 部署，并使用内网其他机器上已有的 PostgreSQL 数据库和 Redis 缓存，同时使用 traefik 作为前置的反向代理。
