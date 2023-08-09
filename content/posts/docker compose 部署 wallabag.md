@@ -154,13 +154,7 @@ labels 部分
 ### 创建数据库表结构
 
 ```shell
-# 进入 wallabag 容器
-docker exec -it wallabag sh
-# 下面的命令都是在容器内执行的
-# 首先进入程序目录
-cd /var/www/wallabag
-# 执行数据库迁移（用于创建正常的表结构）
-php bin/console doctrine:migrations:migrate --no-interaction --env=prod
+docker exec -it wallabag /var/www/wallabag/bin/console doctrine:migrations:migrate --no-interaction --env=prod
 ```
 
 中间会闪过若干个报错信息，先不用在意，能看到命令执行最后，输出了 `finished` 字样即可。此时刷新一下 wallabag 网页，应该可以正常展示登录界面了。
@@ -170,13 +164,7 @@ php bin/console doctrine:migrations:migrate --no-interaction --env=prod
 然而，此时无论输入什么用户名和密码（比如网上教程中都说 wallabag 刚安装好时的默认用户名密码都是 `wallabag` ），都会提示用户名密码错误，没法登录。这是因为容器刚启动时，因为创建新的数据库失败了，导致没有新建成功任何账户，而上文的数据库迁移命令仅能迁移已有的数据库表和模式，对于原本就没有的账户数据，并没有新增，这就导致了此时的数据库内实际上并没有任何用户数据。下面俺通过手动再执行一次安装命令，来解决这个问题。
 
 ```shell
-# 进入 wallabag 容器
-docker exec -it wallabag sh
-# 下面的命令都是在容器内执行的
-# 首先进入程序目录
-cd /var/www/wallabag
-# 重新启动安装流程
-php bin/console wallabag:install -e prod
+docker exec -it wallabag /var/www/wallabag/bin/console wallabag:install -e prod
 ```
 
 此时会有一些交互式的操作，俺在必要的地方增加了注释，注意看清提示信息再输入：
