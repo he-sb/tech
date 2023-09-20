@@ -22,7 +22,7 @@ yum install supervisor
 
 ```bash
 yum install -y epel-release
-````
+```
 
 完成后再执行上条命令安装 Supervisor 。
 
@@ -96,7 +96,7 @@ systemctl enable supervisord
 * `supervisorctl status` : 查看所有任务状态。
 * `supervisorctl reload` : 载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程。
 * `supervisorctl update` : 根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启。
-* 用 `stop` 停止的进程，`reload` 或 `update` 后都不会自动重启。 
+* 用 `stop` 停止的进程，`reload` 或 `update` 后都不会自动重启。
 
 ---
 
