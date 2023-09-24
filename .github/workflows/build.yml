@@ -31,10 +31,10 @@ jobs:
         run:
           git clone --branch=master --quiet https://github.com/$SOURCE_REPO site
 
-      # 安装 hugo (v0.115.4)
+      # 安装 hugo (v0.118.2)
       - name: Setup Hugo
         run:
-          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.115.4/hugo_extended_0.115.4_Linux-amd64.deb && sudo dpkg -i hugo.deb && hugo version
+          wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.118.2/hugo_extended_0.118.2_Linux-amd64.deb && sudo dpkg -i hugo.deb && hugo version
 
       # 构建网站
       - name: Build
