@@ -12,8 +12,6 @@ jobs:
     env:
       TZ: Asia/Shanghai
       SOURCE_REPO: "he-sb/tech"  # 博客源码仓库
-      TARGET_REPO: "he-sb/tech"  # 博客部署仓库
-      TARGET_BRANCH: "gh-pages"  # 博客部署的分支名
       SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
       # 配置 git，避免一些莫名其妙的错误
@@ -48,13 +46,13 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./public
+          path: site/public
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
     steps:
       - name: Deploy to GitHub Pages
