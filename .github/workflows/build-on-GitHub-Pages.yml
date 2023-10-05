@@ -12,7 +12,6 @@ jobs:
     env:
       TZ: Asia/Shanghai
       SOURCE_REPO: "he-sb/tech"  # 博客源码仓库
-      SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
       # 配置 git，避免一些莫名其妙的错误
       - name: Git Configuration
@@ -58,3 +57,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
