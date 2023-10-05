@@ -53,7 +53,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-22.04
-    needs: buildt
+    needs: build
     permissions:
       pages: write  # to deploy to Pages
       id-token: write  # to verify the deployment originates from an appropriate source
