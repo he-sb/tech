@@ -673,10 +673,11 @@ uglyURLs = false
     enableGoogleAnalytics = true
 
     # 跟踪代码的类型
-    trackingCodeType = "gtag"
+    trackingCodeType = "analytics"
     # 说明：gtag 或 analytics
 
-    trackingID = "UA-154589824-3"
+    # trackingID = "UA-154589824-3"
+    trackingID = "G-374187257"
 
 
     ######################################
