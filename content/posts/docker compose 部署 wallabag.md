@@ -21,7 +21,7 @@ draft = false
 
 言归正传，下面开始踩坑之旅。
 
-## 启动容器
+## 00. 启动容器
 
 首先新建一个文件夹，用来部署 wallabag：
 
@@ -149,7 +149,7 @@ labels 部分
 
 </details>
 
-## 解决问题
+## 01. 解决问题
 
 ### 创建数据库表结构
 
@@ -267,9 +267,14 @@ Starting wallabag ...
 sudo chmod -R 777 data
 ```
 
-最后再执行一下 `docker compose up -d` 重建一下容器就可以了（因为刚才修改了 compose 配置文件）。
+> 终究还是翻了一下官方的 [dockerfile](https://github.com/wallabag/docker/blob/master/Dockerfile) ，原来容器内的用户和组都是 `nobody` 。。。最根本的办法，就是在宿主机将挂载目录的归属指定为 `nobody` 用户和组。但是这个特殊的用户和组直接 `sudo chown nobody:nobody data` 是不行的，需要指定 `uid` 和 `gid` 才行：
+> ```shell
+> sudo chown -R 65534:65534 data
+> ``````
 
-## 小尾巴
+最后再执行一下 `docker compose up -d` 重建容器就可以了（因为刚才修改了 compose 配置文件）。
+
+## 02. 进阶教程
 
 ### 开启图片本地缓存
 
