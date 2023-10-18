@@ -24,20 +24,20 @@ draft = true
 - 写入指标文件需要用到 `sponge` 命令，包含在 `moreutils` 软件包中
 
 ```shell
-sudo apt update && sudo apt install -y smartmontools moreutils
+$ sudo apt update && sudo apt install -y smartmontools moreutils
 ```
 
 下载 [脚本](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/smartmon.sh) ，并赋予执行权限：
 
 ```shell
-wget https://raw.githubusercontent.com/prometheus-community/node-exporter-textfile-collector-scripts/master/smartmon.sh
-chmod +x ./smartmon.sh
+$ wget https://raw.githubusercontent.com/prometheus-community/node-exporter-textfile-collector-scripts/master/smartmon.sh
+$ chmod +x ./smartmon.sh
 ```
 
 先手动执行脚本输出一次指标：
 
 ```shell
-sudo /home/he-sb/node-exporter/smartmon.sh | sudo -u node-exporter sponge /var/lib/node_exporter/textfile_collector/smartmon.prom
+$ sudo /home/he-sb/node-exporter/smartmon.sh | sudo -u node-exporter sponge /var/lib/node_exporter/textfile_collector/smartmon.prom
 ```
 
 注意：
@@ -48,8 +48,8 @@ sudo /home/he-sb/node-exporter/smartmon.sh | sudo -u node-exporter sponge /var/l
 然后检查一下是否生成了指标文件，以及 node-exporter 是否正确的将指标文件采集并输出了：
 
 ```shell
-cat /var/lib/node_exporter/textfile_collector/smartmon.prom
-curl localhost:9100/metrics
+$ cat /var/lib/node_exporter/textfile_collector/smartmon.prom
+$ curl localhost:9100/metrics
 ```
 
 可以看到，node-exporter 输出的指标中，已经附加上了以 `smartmon_` 开头的指标，可以正常被 Prometheus 采集了。
@@ -57,7 +57,7 @@ curl localhost:9100/metrics
 接下来配置 crontab 定时任务，每分钟自动刷写一次文件：
 
 ```shell
-crontab -e
+$ crontab -e
 # 新增下面这行
 * * * * * sudo /home/he-sb/node-exporter/smartmon.sh | sudo -u node_exporter sponge /var/lib/node_exporter/textfile_collector/smartmon.prom
 ```
