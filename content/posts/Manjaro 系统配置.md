@@ -125,7 +125,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 4.3 更换 Oh My Zsh 主题：
 
-编辑 `~/.zshrc` 这个文件，找到 `ZSH_THEME` 字段，将后面的值修改为 `"ys"` （俺使用 [ys](https://github.com/ohmyzsh/ohmyzsh/wiki/themes#ys) 这个主题），然后 `source ~/.zshrc` 使修改生效。
+一行命令直接修改（俺使用 [ys](https://github.com/ohmyzsh/ohmyzsh/wiki/themes#ys) 这个主题），然后重载 zsh 的配置：
+
+```shell
+sed -i '/^ZSH_THEME=/c\ZSH_THEME="ys"' ~/.zshrc && source ~/.zshrc
+```
 
 4.4 安装 Oh My Zsh 插件：
 
@@ -135,35 +139,18 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugi
 # zsh-autosuggestions（自动建议）
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 # zsh-completions（自动补全）
-git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions && echo "fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src" >> ~/.zshrc
 ```
 
-在 `~/.zshrc` 文件中找到 `plugins` 字段，默认值为 `(git)`（默认启用了 git 插件）：
+一行命令直接将插件配置覆盖为需要的这几个插件，然后重载 zsh 配置：
 
-```conf
-...
-plugins=(git)
-...
+```shell
+sed -i '/^plugins=/c\plugins=(sudo extract zsh-syntax-highlighting zsh-autosuggestions zsh-completions)' ~/.zshrc && sed -i '/source $ZSH\/oh-my-zsh.sh/d' ~/.zshrc && echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc && source ~/.zshrc
 ```
 
-括号内添加上刚才安装的三个新插件名字，中间用空格隔开，并在下面增加一行 `autoload -U compinit && compinit`（zsh-completions 插件需要），编辑好后应该类似下面这样：
+其中 `sudo` 和 `extract` 是 oh my zsh 自带的插件，前者的作用是在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便，后者整合了常用的解压文件的命令别名，解压文件时只需 `extract <filename>` 就可以，不再需要记忆不同格式的解压命令。
 
-```conf
-...
-plugins=(sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract)
-autoload -U compinit && compinit
-...
-```
-
-不开启内置的 git 插件是因为这只是自带的一大堆 alias，而且很少会用到。
-
-其中 sudo 和 extract 是 ohmyzsh 自带的插件，前者的作用是在已经输入好的命令前自动加上 `sudo`，双击 ESC 键即可，非常方便，后者整合了常用的解压文件的命令别名，解压文件时只需 `extract <filename>` 就可以，不再需要记忆不同格式的解压命令。
-
-最后使修改后的配置生效：
-
-```bash
-source ~/.zshrc
-```
+命令的其他部分的说明，可以参考 [这里](/posts/creating-vm-template-for-pve-based-on-cloud-init/#配置-zsh-和-oh-my-zsh) 。
 
 ## 5.安装和配置字体
 
