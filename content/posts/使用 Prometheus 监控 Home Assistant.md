@@ -4,7 +4,7 @@ description = " "
 date = "2023-09-24T01:29:02+08:00"
 toc = true
 categories = ["奇技淫巧"]
-tags = ["homelab","docker","prometheus","hass","grafana"]
+tags = ["homelab","docker","prometheus","hass","grafana","监控"]
 slug = "hass-prometheus"
 draft = false
 +++
