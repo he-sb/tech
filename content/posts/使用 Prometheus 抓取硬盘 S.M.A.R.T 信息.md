@@ -6,7 +6,7 @@ toc = true
 categories = ["奇技淫巧"]
 tags = ["homelab","docker","prometheus","硬盘","grafana","监控"]
 slug = "prometheus-hdd-smart"
-draft = true
+draft = false
 +++
 
 ## 前言
