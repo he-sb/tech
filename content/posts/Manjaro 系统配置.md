@@ -252,7 +252,7 @@ mv $HOME/视频 $HOME/Videos
 
 *todo*
 
-## 附：包管理说明
+## 附 1：包管理说明
 
 Arch 系的 Linux 发行版，软件包来源有两个，Community（Arch 官方仓库），AUR（Arch User Repository, Arch 用户仓库）。用户将软件放在 AUR ，Arch 官方则定期挑选 AUR 里的优秀程序到 community，实际表现为 Community 为 AUR 的子集，Community 有的应用 AUR 都有，但 AUR 内有而 Community 没有的那部分软件可能在系统上的运行表现不大稳定。
 
@@ -312,18 +312,51 @@ yay -S <packagename>
 yay <keyword>
 ```
 
+## 附 2：开启 BBR *todo*
+
+Manjaro 内核的 TCP 拥塞控制默认是 cubic（可以执行 `sysctl net.ipv4.tcp_congestion_control` 验证），效率不是很高，俺直接换成现代的 BBR.
+
+首先加载 BBR 内核模块：
+
+```shell
+sudo modprobe tcp_bbr
+```
+
+然后配置模块开机自动加载：
+
+```shell
+sudo zsh -c 'echo "tcp_bbr" >> /etc/modules-load.d/modules.conf'
+```
+
+修改内核配置，将拥塞控制算法切换到 BBR：
+
+```shell
+sudo zsh -c 'echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf'
+sudo zsh -c 'echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf'
+```
+
+使改动生效：
+
+```shell
+sudo sysctl -p
+```
+
+验证 BBR 是否开启：
+
+```shell
+sysctl net.ipv4.tcp_congestion_control
+```
+
+确认输出为 `net.ipv4.tcp_congestion_control = bbr` 说明已经切换成功了。
+
 ---
 
 *参考链接：*
 
 1. [与Manjaro相见恨晚 - 山炮不二](https://xsinger.me/diy/857.html)
-
 2. [Manjaro 个人新装配置 | 禾七博客](https://leay.net/2019/12/18/manjaro/)
-
 3. [Manjaro-KDE配置全攻略 - 知乎](https://zhuanlan.zhihu.com/p/114296129)
-
 4. [manjaro 安装配置总结 | Marsvet's Blog | Where there's a start, there's a finish.](https://www.marsvet.top/2020-08-04/Install-and-configure-manjaro/)
-
 5. [pacman (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-
 6. [如何将 Home 目录下的文件夹设置为英文 | Mogeko`s Blog](https://mogeko.me/2019/060/)
+7. [sysctl - ArchWiki](https://wiki.archlinux.org/title/Sysctl#Enable_BBR)
