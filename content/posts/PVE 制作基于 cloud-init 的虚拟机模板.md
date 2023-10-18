@@ -9,8 +9,6 @@ slug = "creating-vm-template-for-pve-based-on-cloud-init"
 draft = false
 +++
 
-# 制作基于 cloud-init 的模板 VM
-
 ## 00. 准备工作
 
 首先需要在 PVE 创建一个新虚拟机：
