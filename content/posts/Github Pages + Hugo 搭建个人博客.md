@@ -10,12 +10,12 @@ draft = false
 
 ## 前言
 
-本博客是使用 [Hugo](https//gohugo.io/) 生成的纯静态博客，部署在 [Github Pages](https://pages.github.com/) 上，下面讲解一下搭建过程，希望能帮到有需要的朋友。
+本博客是使用 [Hugo](https://gohugo.io/) 生成的纯静态博客，部署在 [Github Pages](https://pages.github.com/) 上，下面讲解一下搭建过程，希望能帮到有需要的朋友。
 
 准备工作
 
 - 一个 GitHub 帐号；
-- 挑选一个主题（比如本博客使用的 [MemE](https://github.com/reuixiy/hugo-theme-meme) ）。  
+- 挑选一个主题（比如本博客使用的 [MemE](https://github.com/reuixiy/hugo-theme-meme) ）。
     如果不喜欢本博客的主题，文末的【参考链接】部分放了些俺觉得不错的主题也可以看看。
 
 ## 安装 Hugo

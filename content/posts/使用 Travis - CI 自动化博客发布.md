@@ -8,7 +8,7 @@ slug = "using-travis-ci-to-automate-publishing-blogs-on-github-pages"
 draft = false
 +++
 
-本博客使用 [Hugo](https//gohugo.io/) 生成，部署在 [Github Pages](https://pages.github.com/) 上，新建一篇文章并发布，常规的操作流程是这样的：
+本博客使用 [Hugo](https://gohugo.io/) 生成，部署在 [Github Pages](https://pages.github.com/) 上，新建一篇文章并发布，常规的操作流程是这样的：
 
 ```bash
 hugo new posts/new-article.md
@@ -26,7 +26,7 @@ git push
 
 2. git 是一个版本控制工具，只是用来向 Github 上传最终版本的静态文件实在太不优雅。
 
-经过一番学习，发现不少大佬都在用 [Travis CI](https//travis-ci.org/) 这个持续集成（ Continuous Integration ，简称 CI ）服务来使静态博客的发布过程自动化，思路为：
+经过一番学习，发现不少大佬都在用 [Travis CI](https://travis-ci.org/) 这个持续集成（ Continuous Integration ，简称 CI ）服务来使静态博客的发布过程自动化，思路为：
 
 1. 使用 git 来管理源代码，即用于生成静态站点的配置文件及文章的 `markdown` 源文件等（以下统一称为“源文件”）。
 
