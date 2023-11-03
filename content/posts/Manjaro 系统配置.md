@@ -312,14 +312,14 @@ sudo modprobe tcp_bbr
 然后配置模块开机自动加载：
 
 ```shell
-sudo zsh -c 'echo "tcp_bbr" >> /etc/modules-load.d/modules.conf'
+echo "tcp_bbr" | sudo tee -a /etc/modules-load.d/modules.conf
 ```
 
 修改内核配置，将拥塞控制算法切换到 BBR：
 
 ```shell
-sudo zsh -c 'echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf'
-sudo zsh -c 'echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf'
+echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
 ```
 
 使改动生效：
