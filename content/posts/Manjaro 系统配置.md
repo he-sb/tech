@@ -331,7 +331,9 @@ sudo sysctl -p
 验证 BBR 是否开启：
 
 ```shell
+# 以下两行命令任选其一即可
 sysctl net.ipv4.tcp_congestion_control
+lsmod | grep bbr
 ```
 
 确认输出为 `net.ipv4.tcp_congestion_control = bbr` 说明已经切换成功了。
