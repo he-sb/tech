@@ -159,16 +159,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 ## zsh-completions（自动补全）
 git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions && echo "fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src" >> ~/.zshrc
 # 启用插件，并重载配置使其生效
-sed -i '/^plugins=/c\plugins=(sudo zsh-syntax-highlighting zsh-autosuggestions zsh-completions)' ~/.zshrc && source ~/.zshrc
+sed -i '/^plugins=/c\plugins=(sudo zsh-autosuggestions zsh-syntax-highlighting)' ~/.zshrc && sed -i '/source $ZSH\/oh-my-zsh.sh/d' ~/.zshrc && echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc && source ~/.zshrc
 ```
 
 oh-my-zsh 插件注意事项：
-1. 根据 zsh-syntax-highlighting 插件的 [安装说明](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc) ， `.zshrc` 文件中所有的 `source` 命令都要放在文件的末尾
-2. 根据 zsh-completions 插件的 [安装说明](https://github.com/zsh-users/zsh-completions#oh-my-zsh) ， `.zshrc` 文件中插入的 `fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src` 命令要出现在原有的之前
-3. 综上，在上面的命令执行完毕之后，还需要手动执行一下这行命令，将原本的 `source $ZSH/oh-my-zsh.sh` 移动至文件末尾：
-    ```shell
-	sed -i '/source $ZSH\/oh-my-zsh.sh/d' ~/.zshrc && echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc && source ~/.zshrc
-	```
+1. ~~根据 zsh-syntax-highlighting 插件的 [安装说明](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc) ， `.zshrc` 文件中所有的 `source` 命令都要放在文件的末尾~~ 此为误读，仅在未使用 oh-my-zsh 管理插件时，`source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` 这行需要在 `.zshrc` 文件末尾
+2. 根据 zsh-completions 插件的 [安装说明](https://github.com/zsh-users/zsh-completions#oh-my-zsh) ， `.zshrc` 文件中插入的 `fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src` 命令要出现在原有的 `source "$ZSH/oh-my-zsh.sh"` 之前
+3. 综上，在上面的命令最后在 `source ~/.zshrc` 之前，先将原本的 `source $ZSH/oh-my-zsh.sh` 移动到了文件末尾
 
 ### 配置 UFW 防火墙
 
