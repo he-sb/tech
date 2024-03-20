@@ -24,9 +24,13 @@ draft = false
 * 发送 `/setjoingroups` 到 @BotFather，选择刚创建好的 Bot，选择 `Enable`。
 * 发送 `/setcommands` 到 @BotFather，选择刚创建好的 Bot，发送以下内容：
 ```
-link - 将回话绑定到Telegram群组
+help - 显示命令列表.
+link - 将远程会话绑定到 Telegram 群组
 chat - 生成会话头
-recog - 恢复语音消息以进行识别
+recog - 回复语音消息以进行识别
+info - 显示当前 Telegram 聊天的信息.
+unlink_all - 将所有远程会话从 Telegram 群组解绑.
+update_info - 更新群组名称和头像
 extra - 获取更多功能
 ```
 
@@ -46,34 +50,51 @@ Telegram 中每位用户有一个唯一的数字 ID，可通过 Bot 来查询，
 
 ### 启动 Docker 并登陆
 
+> 2024.03.20 镜像更换为和小伙伴合作打包的 [j0k3rh/efb-wechat](https://hub.docker.com/r/j0k3rh/efb-wechat/)，下文的教程已经适配了这个镜像
+
+> ~~2020/12/30 更换镜像为 [yhndnzj/efb](https://hub.docker.com/r/yhndnzj/efb) ，因为之前的很久不更新了，而且配置复用太麻烦，也不支持发送 GIF。~~
+
 ~~Docker使用 [mikubill/efbwechat](https://hub.docker.com/r/mikubill/efbwechat) 这个镜像，尝试了一圈这个是启动最省心的。~~
 
-> 2020/12/30 更换镜像为 [yhndnzj/efb](https://hub.docker.com/r/yhndnzj/efb) ，因为之前的很久不更新了，而且配置复用太麻烦，也不支持发送 GIF。
-
-首先执行这个命令来初始化配置文件：
+首先克隆仓库，仓库中包含了初始化配置文件：
 
 ```bash
-curl -fsSL https://github.com/YHNdnzj/efb-docker/raw/master/init.sh | bash
+git clone https://github.com/wbbk/efb-update efb-update
 ```
 
-上面的脚本会在 `/etc/ehforwarderbot` 这个路径下生成默认的配置文件，修改一下：
+修改 `efb-update/profiles/default` 路径下的配置文件：
+
+1. 主配置文件 `efb-update/profiles/default/config.yaml`
+    - `middlewares` 定义了启用的转发通道和中间件
+        - `catbaron.voice_recog` 语音转文字
+        - `patch.PatchMiddleware` 手机微信标记已读
+        - 默认启用两个插件，如果不需要某个插件，删除或注释对应的行即可
+        - 如果两个都不需要，可以直接删除或注释 `middlewares` 小节
+
+2. Telegram 配置 `efb-update/profiles/default/blueset.telegram/config.yaml`
+    - `token`
+        - Telegram 的 bot token
+        - 后方的值替换为刚才新建 Bot 时保存的 Token
+    - `admins`
+        - Telegram 账号的数字 ID
+        - 下方的值替换为刚才保存的 Telegram User ID
+
+3. wechat 配置 `efb-update/profiles/default/blueset.wechat/config.yaml`
+    - 其他可用的配置及含义参考插件仓库： [ehForwarderBot/efb-wechat-slave](https://github.com/ehForwarderBot/efb-wechat-slave?tab=readme-ov-file#%E5%AE%9E%E9%AA%8C%E5%8A%9F%E8%83%BD)
+
+4. 插件 `catbaron.voice_recog` 配置 `efb-update/profiles/default/catbaron.voice_recog/config.yaml`
+    - 语音转文字使用的 API 配置
+    - 配置方法参考插件仓库： [catbaron0/efb-voice_recog-middleware](https://github.com/catbaron0/efb-voice_recog-middleware)
+
+5. 插件 `patch.PatchMiddleware` 配置 `efb-update/profiles/default/patch.PatchMiddleware/config.yaml`
+    - `auto_mark_as_read` 是否自动在手机微信标记已读
+    - `remove_emoji_in_title` 是否移除 Telegram 群组名称中的 emoji
+    - 其他可用配置参考插件仓库： [ehForwarderBot/efb-patch-middleware](https://github.com/ehForwarderBot/efb-patch-middleware)
+
+然后启动镜像：
 
 ```bash
-vi /etc/ehforwarderbot/profiles/wechat/blueset.telegram/config.yaml
-```
-
-文件内容是这样的：
-
-```bash
-token: "TOKEN"
-admins: 
-- ID
-```
-
-把第一行引号中的 `TOKEN` 替换为刚才新建 Bot 时保存的 Token，第三行的 `ID` 替换为刚才保存的 Telegram User ID，然后启动镜像：
-
-```bash
-docker run -d -e EFB_PROFILE=wechat --name efb-wechat -v /etc/ehforwarderbot:/etc/ehforwarderbot yhndnzj/efb
+docker compose up -d
 ```
 
 启动镜像没有报错的话输入下面这条命令
@@ -92,7 +113,7 @@ docker logs -f efb-wechat
 
 ## 老司机使用
 
-此镜像的配置文件在 `/etc/ehforwarderbot` 这个文件夹内，如服务器重装或迁移时，备份这个文件夹并在重新部署容器时挂载上即可。
+此镜像内的配置文件和所有的微信绑定关系，都在 `efb-update/profiles` 这个文件夹内，如服务器重装或迁移时，备份这个文件夹并在重新部署容器时挂载上即可。
 
 ---
 
