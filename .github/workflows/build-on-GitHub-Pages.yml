@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-22.04
-    permissions:  # actions/deploy-pages@v2 需要
+    permissions:  # actions/deploy-pages@v4 需要
       pages: write
       id-token: write
     env:
@@ -46,7 +46,7 @@ jobs:
           cd site && hugo --gc --minify --cleanDestinationDir
       # 上传构建结果
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site/public/
           name: 'github-pages'
@@ -56,4 +56,4 @@ jobs:
         env:
           name: github-pages
           url: ${{ steps.deployment.outputs.page_url }}
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
