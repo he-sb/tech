@@ -205,6 +205,7 @@ UFW 基础操作：
 # 允许端口入站
 sudo ufw allow 22
 sudo ufw allow 22/tcp
+sudo ufw allow 22:29/tcp
 # 查看防火墙状态（简略）
 sudo ufw status
 # 查看防火墙状态（详细）
