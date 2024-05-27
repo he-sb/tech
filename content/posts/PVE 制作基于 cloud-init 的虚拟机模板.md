@@ -174,6 +174,7 @@ oh-my-zsh 插件注意事项：
 1. ~~根据 zsh-syntax-highlighting 插件的 [安装说明](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc) ， `.zshrc` 文件中所有的 `source` 命令都要放在文件的末尾~~ 此为误读，仅在未使用 oh-my-zsh 管理插件时，`source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` 这行需要在 `.zshrc` 文件末尾
 2. 根据 zsh-completions 插件的 [安装说明](https://github.com/zsh-users/zsh-completions#oh-my-zsh) ， `.zshrc` 文件中插入的 `fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src` 命令要出现在原有的 `source "$ZSH/oh-my-zsh.sh"` 之前
 3. 综上，在上面的命令最后在 `source ~/.zshrc` 之前，先将原本的 `source $ZSH/oh-my-zsh.sh` 移动到了文件末尾
+4. 如果不是 oh-my-zsh 的重度用户，可以执行 `sed -i "/omz:update.*disabled/s/^#\s*//" ~/.zshrc` 关闭自动更新，有需要时可以执行 `omz update` 手动更新
 
 ### 配置 UFW 防火墙
 
