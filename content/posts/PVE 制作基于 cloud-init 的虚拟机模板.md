@@ -295,12 +295,24 @@ sudo systemctl enable docker
 
 ### 清理善后
 
+执行 `sudo dmesg | grep cfg80211` 看看结果中有没有包含这一行：
+
+```shell
+cfg80211: failed to load regulatory.db
+```
+
+没有的话可以直接跳到下一段，清理缓存后关机了。如果有，那么需要额外安装 `iw` 软件包：
+
+```shell
+sudo apt install -y iw
+```
+
 需要安装的软件包全部安装完毕后，可以清理一下 apt 的缓存，毕竟是作为模板使用的虚拟机，硬盘空间尽量精简一些，加快后续克隆新虚拟机时的速度，克隆出来的虚拟机可以自行扩容硬盘后再添加其他软件。
 
 ```shell
 sudo apt clean
 sudo apt autoclean
-sudo apt autoremove
+sudo apt --purge autoremove
 ```
 
 至此，准备用作模板的虚拟机已配置完成。
@@ -315,7 +327,9 @@ sudo apt autoremove
 - zsh
 - oh-my-zsh
 - ufw
-- linux-headers-6.1.0-10-amd64
+- linux-headers-6.1.0-21-amd64
+- iw
+	- 解决开机时的 `cfg80211: failed to load regulatory.db` 报错
 - docker
 	- 可选安装
 	- 俺个人的选择是：不在模板中预装，只在需要的虚拟机中按照上文的操作，手动安装
@@ -359,3 +373,4 @@ sudo apt autoremove
 4. [Linux VPS 服务器基础安全设置 - P3TERX ZONE](https://p3terx.com/archives/improve-linux-server-security.html)
 5. [打造 Windows 10 下最强终端方案：WSL + Terminus + Oh My Zsh + The Fuck - P3TERX ZONE](https://p3terx.com/archives/the-strongest-terminal-solution-under-windows-10.html)
 6. [Debian/Ubuntu 中安装和配置 UFW（简单防火墙） - P3TERX ZONE](https://p3terx.com/archives/installing-and-configuring-ufw-in-debian.html)
+7. [cfg80211: failed to load regulatory.db | Proxmox Support Forum](https://forum.proxmox.com/threads/cfg80211-failed-to-load-regulatory-db.137298/#post-658457)
