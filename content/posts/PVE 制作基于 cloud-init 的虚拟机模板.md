@@ -40,32 +40,24 @@ draft = false
 > https://cloud.debian.org/images/cloud/
 
 ```shell
-curl -OL https://cloud.debian.org/images/cloud/bookworm/20230723-1450/debian-12-generic-amd64-20230723-1450.qcow2
+curl -OL https://cloud.debian.org/images/cloud/bookworm/20240507-1740/debian-12-generic-amd64-20240507-1740.qcow2
 ```
 
 校验下载的文件是否正确，完整：
 
 ```shell
-sha512sum debian-12-generic-amd64-20230723-1450.qcow2
+sha512sum debian-12-generic-amd64-20240507-1740.qcow2
 ```
 
-查看计算出的 SHA512 值，是否和 [官网公布](https://cloud.debian.org/images/cloud/bookworm/20230723-1450/SHA512SUMS) 的一致，不一致需要重新下载，或者更换镜像源。如果一致，那么将下载到的文件转换为虚拟机磁盘：
+查看计算出的 SHA512 值，是否和 [官网公布](https://cloud.debian.org/images/cloud/bookworm/20240507-1740/SHA512SUMS) 的一致，不一致需要重新下载，或者更换镜像源。如果一致，那么将下载到的文件转换为虚拟机磁盘：
 
 ```shell
-qm importdisk 108 ~/debian-12-generic-amd64-20230723-1450.qcow2 nfs_g4600
+qm importdisk 108 ~/debian-12-generic-amd64-20240507-1740.qcow2 nfs_g4600 --format=qcow2
 ```
 
-其中，`108` 为上文创建好的虚拟机的 ID，末尾的 `nfs_g4600` 为 PVE 宿主机用于存储【磁盘镜像】的存储配置（如果你没有修改过 PVE 宿主机的存储配置，那么这里应该是 `local-lvm` ）。
+其中，`108` 为上文创建好的虚拟机的 ID， `nfs_g4600` 为 PVE 宿主机用于存储【磁盘镜像】的存储配置（如果你没有修改过 PVE 宿主机的存储配置，那么这里应该是 `local-lvm` ）， `--format=qcow2` 表示导入后的磁盘格式为 `qcow2` ，不加这个参数的话，默认导入后的磁盘格式为 `raw` ，是无法拍摄快照的，使用起来比较不便。
 
-导入完成后，默认情况下导入后的磁盘格式为 `raw` ，使用这种类型硬盘的虚拟机，是无法拍摄快照的，因此还需要转换一下磁盘格式：
-
-```shell
-qemu-img convert -O qcow2 /mnt/pve/nfs_g4600/images/108/vm-108-disk-0.raw /mnt/pve/nfs_g4600/images/108/vm-108-disk-0.qcow2
-```
-
-其中，`/mnt/pve/nfs_g4600/images` 为 PVE 宿主机用于存储【磁盘镜像】的实际路径（如果没有修改过 PVE 宿主机的存储配置，此处的路径应该是 `local-lvm:108/vm-108-disk-0.qcow2` ）。
-
-转换完成后，查看虚拟机的【硬件】配置，应该能看到下方多了两行： `未使用的磁盘 0` 和 `未使用的磁盘 1` ，先点击选中 `未使用的磁盘 0` （即先导入的类型为 `raw` 的磁盘），点击“移除”按钮，删掉它，然后双击 `未使用的磁盘 1` （即刚给转换后的类型为 `qcow2` 的磁盘），勾选 `SSD 仿真` （这一步非必需），`总线 / 设备` 选择 `SCSI` ，点击“添加”按钮，添加为磁盘后，单击新添加的磁盘，点击上方的“磁盘操作”按钮，选择“调整大小”，输入 `1` ，点击“确认”，给磁盘增加 1 G 容量，否则下文配置时会出现磁盘空间不足的情况（默认的硬盘只有 2 G 容量）。
+导入完成后，查看虚拟机的【硬件】配置，应该能看到下方多了一行 `未使用的磁盘 0` ，双击此项后勾选 `SSD 仿真` （这一步非必需），`总线 / 设备` 选择 `SCSI` ，点击“添加”按钮，添加为磁盘后，单击新添加的磁盘，点击上方的“磁盘操作”按钮，选择“调整大小”，输入 `1` ，点击“确认”，给磁盘增加 1 G 容量，否则下文配置时会出现磁盘空间不足的情况（默认的硬盘只有 2 G 容量）。
 
 然后进入【选项】修改：
 - 使用平板仿真
@@ -96,7 +88,7 @@ qemu-img convert -O qcow2 /mnt/pve/nfs_g4600/images/108/vm-108-disk-0.raw /mnt/p
 ## 01. 配置模板系统
 
 这部分内容强烈建议通过 SSH 连接至虚拟机操作，通过 PVE web 端的【控制台（noVNC）】体验过于生草（比如不支持复制粘贴），严重不推荐。如果因为某些原因，只能通过网页后台来连接，那么建议点击右上角的“控制台”按钮旁的下拉三角，选择【xterm.js】来使用，这里至少可以正常的复制粘贴内容
-- 在创建虚拟机时如果没有添加 `串行端口` ，或者 `串行端口` 的序号不为 `0` ，那么是没法使用 xterm.js 的
+- 在创建虚拟机时如果没有添加 `串行端口` ，或者 `串行端口` 的序号不为 `0` ，那么是没法使用【xterm.js】的
 
 闲话少说，首先配置 `sudo` 命令免密码，这样避免每次使用 `sudo` 命令时都需要输入前面在 cloud-init 中配置的用户密码：
 
@@ -168,13 +160,15 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions && echo "fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src" >> ~/.zshrc
 # 启用插件，并重载配置使其生效
 sed -i '/^plugins=/c\plugins=(sudo zsh-autosuggestions zsh-syntax-highlighting)' ~/.zshrc && sed -i '/source $ZSH\/oh-my-zsh.sh/d' ~/.zshrc && echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc && source ~/.zshrc
+# 关闭 oh-my-zsh 自动更新，避免阻塞
+sed -i "/omz:update.*disabled/s/^#\s*//" ~/.zshrc
 ```
 
 oh-my-zsh 插件注意事项：
 1. ~~根据 zsh-syntax-highlighting 插件的 [安装说明](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md#in-your-zshrc) ， `.zshrc` 文件中所有的 `source` 命令都要放在文件的末尾~~ 此为误读，仅在未使用 oh-my-zsh 管理插件时，`source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh` 这行需要在 `.zshrc` 文件末尾
 2. 根据 zsh-completions 插件的 [安装说明](https://github.com/zsh-users/zsh-completions#oh-my-zsh) ， `.zshrc` 文件中插入的 `fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src` 命令要出现在原有的 `source "$ZSH/oh-my-zsh.sh"` 之前
 3. 综上，在上面的命令最后在 `source ~/.zshrc` 之前，先将原本的 `source $ZSH/oh-my-zsh.sh` 移动到了文件末尾
-4. 如果不是 oh-my-zsh 的重度用户，可以执行 `sed -i "/omz:update.*disabled/s/^#\s*//" ~/.zshrc` 关闭自动更新，有需要时可以执行 `omz update` 手动更新
+4. 默认关闭了 oh-my-zsh 的自动更新，有需要时可以执行 `omz update` 手动更新
 
 ### 配置 UFW 防火墙
 
