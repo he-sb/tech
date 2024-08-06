@@ -25,6 +25,10 @@ git config --global core.quotePath false
 # 设置大小写敏感，保持 Windows / UNIX 一致性
 # 在目录名大小写修改时，commit 可正常提交
 git config --global core.ignorecase false
+# 可选：添加 username 和邮箱信息
+# 这两项在 git commit 提交时需要
+git config --global user.name "he-sb"
+git config --global user.email "test@example.com"
 ```
 
 ## 命令相关
