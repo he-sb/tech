@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:  # actions/deploy-pages@v4 需要
       pages: write
       id-token: write
@@ -32,7 +32,7 @@ jobs:
       # 安装 hugo
       - name: Setup Hugo
         env:
-          HUGO_VERSION: 0.118.2  # hugo 版本号
+          HUGO_VERSION: 0.131.0  # hugo 版本号
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-amd64.deb && \
           sudo dpkg -i hugo.deb && \
