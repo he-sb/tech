@@ -18,7 +18,7 @@
                     {{ end }}
                 {{ end }}
             {{ else if eq .Identifier "lang-switcher" }}
-                {{ if and $.Site.IsMultiLingual $.Site.Params.enableLangToggle }}
+                {{ if and hugo.IsMultilingual $.Site.Params.enableLangToggle }}
                     {{ if eq $.Site.Params.headerLayout "flex" }}
                         {{ $switcher := partial "components/multilingual.html" $ctx }}
                         {{ with $switcher }}
