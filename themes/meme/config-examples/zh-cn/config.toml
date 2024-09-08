@@ -36,9 +36,6 @@ enableGitInfo = false
 # 是否生成 robots.txt 文件
 enableRobotsTXT = true
 
-# 每一分页的文章数（仅对「文章摘要」首页布局有效）
-paginate = 5
-
 # URL 相关
 disablePathToLower = false
 relativeURLs = false
@@ -57,6 +54,12 @@ uglyURLs = false
 # 修改时间
 [frontmatter]
     lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
+
+[pagination]
+    disableAliases = false
+    # 每一分页的文章数（仅对「文章摘要」首页布局有效）
+    pagerSize = 5
+    path = 'page'
 
 # Markdown 渲染器
 [markup]
@@ -92,7 +95,6 @@ uglyURLs = false
 # 压缩 HTML
 [minify.tdewolff.html]
     keepWhitespace = false
-
 
 # 相关文章
 [related]
@@ -1399,7 +1401,6 @@ uglyURLs = false
         valine = "/npm/valine@1.4.14/dist/Valine.min.js"
         busuanzi = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
         utterances = "https://utteranc.es/client.js"
-
 
 
     ######################################

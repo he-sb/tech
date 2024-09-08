@@ -93,21 +93,6 @@ uglyURLs = false
 [minify.tdewolff.html]
     keepWhitespace = false
 
-# 作者信息
-[author]
-    # 名字
-    name = "HE-SB"
-    # 邮箱
-    email = ""
-    # 座右铭或简介
-    motto = "阻碍进步的不是无知，是傲慢"
-    # 头像
-    avatar = "/icons/apple-touch-icon.png"
-    # 网站（默认值：baseURL）
-    website = ""
-    # 推特
-    twitter = ""
-
 # 相关文章
 [related]
     threshold = 80
@@ -1425,3 +1410,20 @@ uglyURLs = false
         valine = "/npm/valine@1.4.14/dist/Valine.min.js"
         busuanzi = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
         utterances = "https://utteranc.es/client.js"
+
+
+    ######################################
+    # 作者信息
+    [params.author]
+        # 名字
+        name = "HE-SB"
+        # 邮箱
+        email = ""
+        # 座右铭或简介
+        motto = "阻碍进步的不是无知，是傲慢"
+        # 头像
+        avatar = "/icons/apple-touch-icon.png"
+        # 网站（默认值：baseURL）
+        website = ""
+        # 推特
+        twitter = ""
