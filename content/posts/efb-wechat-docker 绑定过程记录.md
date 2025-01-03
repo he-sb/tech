@@ -50,6 +50,8 @@ Telegram 中每位用户有一个唯一的数字 ID，可通过 Bot 来查询，
 
 ### 启动 Docker 并登陆
 
+> 2025.01.03 镜像默认没有安装任何插件，有需要的话可以自行进入容器内安装
+
 > 2024.03.20 镜像更换为和小伙伴合作打包的 [j0k3rh/efb-wechat](https://hub.docker.com/r/j0k3rh/efb-wechat/)，下文的教程已经适配了这个镜像
 
 > ~~2020/12/30 更换镜像为 [yhndnzj/efb](https://hub.docker.com/r/yhndnzj/efb) ，因为之前的很久不更新了，而且配置复用太麻烦，也不支持发送 GIF。~~
@@ -59,37 +61,41 @@ Telegram 中每位用户有一个唯一的数字 ID，可通过 Bot 来查询，
 首先克隆仓库，仓库中包含了初始化配置文件：
 
 ```bash
-git clone https://github.com/wbbk/efb-update efb-update
+git clone https://github.com/he-sb/efb-update efb-update
 ```
 
-修改 `efb-update/profiles/default` 路径下的配置文件：
+修改 `efb-update/data/profiles/default` 路径下的配置文件：
 
-1. 主配置文件 `efb-update/profiles/default/config.yaml`
-    - `middlewares` 定义了启用的转发通道和中间件
-        - `catbaron.voice_recog` 语音转文字
-        - `patch.PatchMiddleware` 手机微信标记已读
-        - 默认启用两个插件，如果不需要某个插件，删除或注释对应的行即可
-        - 如果两个都不需要，可以直接删除或注释 `middlewares` 小节
+1. 主配置文件 `efb-update/data/profiles/default/config.yaml`
+    - ~~`middlewares` 定义了启用的转发通道和中间件~~
+        - ~~`catbaron.voice_recog` 语音转文字~~
+        - ~~`patch.PatchMiddleware` 手机微信标记已读~~
+        - ~~默认启用两个插件，如果不需要某个插件，删除或注释对应的行即可~~
+        - ~~如果两个都不需要，可以直接删除或注释 `middlewares` 小节~~
 
-2. Telegram 配置 `efb-update/profiles/default/blueset.telegram/config.yaml`
+2. Telegram 配置 `efb-update/data/profiles/default/blueset.telegram/config.yaml`
     - `token`
         - Telegram 的 bot token
         - 后方的值替换为刚才新建 Bot 时保存的 Token
     - `admins`
         - Telegram 账号的数字 ID
         - 下方的值替换为刚才保存的 Telegram User ID
+    - `request_kwargs`
+        - 如果镜像部署在国内机器上（国内 VPS 或者 HomeLab，软路由之类的场景），那么需要在这里配置 http 代理才能调用 Telegram Bot
+        - 需要时取消这一行以及下方 `proxy_url` 这行的注释，并修改代理地址
+        - 如果 http 代理需要鉴权，那么再取消下方 `username` 和 `password` 行的注释，并将其修改为正确的代理鉴权信息
 
-3. wechat 配置 `efb-update/profiles/default/blueset.wechat/config.yaml`
+3. wechat 配置 `efb-update/data/profiles/default/blueset.wechat/config.yaml`
     - 其他可用的配置及含义参考插件仓库： [ehForwarderBot/efb-wechat-slave](https://github.com/ehForwarderBot/efb-wechat-slave?tab=readme-ov-file#%E5%AE%9E%E9%AA%8C%E5%8A%9F%E8%83%BD)
 
-4. 插件 `catbaron.voice_recog` 配置 `efb-update/profiles/default/catbaron.voice_recog/config.yaml`
-    - 语音转文字使用的 API 配置
-    - 配置方法参考插件仓库： [catbaron0/efb-voice_recog-middleware](https://github.com/catbaron0/efb-voice_recog-middleware)
+4. ~~插件 `catbaron.voice_recog` 配置 `efb-update/profiles/default/catbaron.voice_recog/config.yaml`~~
+    - ~~语音转文字使用的 API 配置~~
+    - ~~配置方法参考插件仓库： [catbaron0/efb-voice_recog-middleware](https://github.com/catbaron0/efb-voice_recog-middleware)~~
 
-5. 插件 `patch.PatchMiddleware` 配置 `efb-update/profiles/default/patch.PatchMiddleware/config.yaml`
-    - `auto_mark_as_read` 是否自动在手机微信标记已读
-    - `remove_emoji_in_title` 是否移除 Telegram 群组名称中的 emoji
-    - 其他可用配置参考插件仓库： [ehForwarderBot/efb-patch-middleware](https://github.com/ehForwarderBot/efb-patch-middleware)
+5. ~~插件 `patch.PatchMiddleware` 配置 `efb-update/profiles/default/patch.PatchMiddleware/config.yaml`~~
+    - ~~`auto_mark_as_read` 是否自动在手机微信标记已读~~
+    - ~~`remove_emoji_in_title` 是否移除 Telegram 群组名称中的 emoji~~
+    - ~~其他可用配置参考插件仓库： [ehForwarderBot/efb-patch-middleware](https://github.com/ehForwarderBot/efb-patch-middleware)~~
 
 然后启动镜像：
 
@@ -113,7 +119,7 @@ docker logs -f efb-wechat
 
 ## 老司机使用
 
-此镜像内的配置文件和所有的微信绑定关系，都在 `efb-update/profiles` 这个文件夹内，如服务器重装或迁移时，备份这个文件夹并在重新部署容器时挂载上即可。
+此镜像内的配置文件和所有的微信绑定关系，都在 `efb-update/data/profiles` 这个文件夹内，如服务器重装或迁移时，备份这个文件夹并在重新部署容器时挂载上即可。
 
 ---
 
