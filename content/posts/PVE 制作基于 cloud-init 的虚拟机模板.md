@@ -93,7 +93,7 @@ qm importdisk 108 ~/debian-12-generic-amd64-20240507-1740.qcow2 nfs_g4600 --form
 闲话少说，首先配置 `sudo` 命令免密码，这样避免每次使用 `sudo` 命令时都需要输入前面在 cloud-init 中配置的用户密码：
 
 ```shell
-sudo tee /etc/sudoers.d/he-sb <<< 'he-sb ALL=(ALL) NOPASSWD: ALL'
+sudo tee /etc/sudoers.d/$USER <<< '$USER ALL=(ALL) NOPASSWD: ALL'
 ```
 
 修改一下 SSH 配置文件，显式地禁止 root 用通过 SSH 登录，顺便关闭普通用户的密码登录，仅允许密钥登录，提升安全性（如果上文在 PVE 中配置 cloud-init 时配置了 SSH 密钥，这里应该默认以及禁止了密码登录：
