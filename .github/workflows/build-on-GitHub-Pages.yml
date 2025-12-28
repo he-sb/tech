@@ -32,7 +32,7 @@ jobs:
       # 安装 hugo
       - name: Setup Hugo
         env:
-          HUGO_VERSION: 0.140.0  # hugo 版本号
+          HUGO_VERSION: 0.153.3  # hugo 版本号
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-amd64.deb && \
           sudo dpkg -i hugo.deb && \
