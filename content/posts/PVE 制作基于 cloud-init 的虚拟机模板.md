@@ -160,7 +160,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/z
 git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions && echo "fpath+=$ZSH_CUSTOM/plugins/zsh-completions/src" >> ~/.zshrc
 # 启用插件，并重载配置使其生效
 sed -i '/^plugins=/c\plugins=(sudo zsh-autosuggestions zsh-syntax-highlighting)' ~/.zshrc && sed -i '/source $ZSH\/oh-my-zsh.sh/d' ~/.zshrc && echo 'source $ZSH/oh-my-zsh.sh' >> ~/.zshrc && source ~/.zshrc
-# 关闭 oh-my-zsh 自动更新，避免阻塞
+# 关闭 oh-my-zsh 自动更新，避免阻塞启动
 sed -i "/omz:update.*disabled/s/^#\s*//" ~/.zshrc
 ```
 
