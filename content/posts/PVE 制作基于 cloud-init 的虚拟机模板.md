@@ -8,6 +8,7 @@ tags = ["pve","cloud-init","debian"]
 slug = "creating-vm-template-for-pve-based-on-cloud-init"
 draft = false
 +++
+**系统环境：** Proxmox VE 7.4 x64
 
 ## 00. 准备工作
 
