@@ -2,7 +2,7 @@
 title = "Git 操作合集"
 description = " "
 date = "2020-12-26T20:51:07+08:00"
-toc = false
+toc = true
 categories = ["奇技淫巧"]
 tags = ["Git"]
 slug = "usage-of-git"
