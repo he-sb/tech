@@ -19,7 +19,8 @@ curl 是一个非常实用的命令行程序（是的，俺知道它也是一个
 
 ```shell
 # http 代理
-curl -x 192.168.1.111:1080 https://example.com
+## 下面两个命令是等价的
+curl -x 192.168.1.111 https://example.com
 curl -x http://192.168.1.111:1080 https://example.com
 # socks5 代理（不代理 DNS 请求）
 curl -x socks5://192.168.1.111:1080 https://example.com
