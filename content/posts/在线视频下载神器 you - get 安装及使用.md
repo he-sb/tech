@@ -2,10 +2,10 @@
 title = "在线视频下载神器 You-Get 的安装及使用"
 description = " "
 date = "2018-12-03T12:37:35+08:00"
+toc = true
 categories = ["奇技淫巧"]
-tags = ["you-get","下载"]
+tags = ["you-get","下载","ffmpeg"]
 slug = "setup-and-useing-guide-for-You-Get"
-comments = true
 draft = false
 +++
 **系统环境：** Windows 10 专业版 1803 x64
