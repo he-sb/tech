@@ -36,7 +36,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    env:
+    environment:
       TZ: Asia/Shanghai
       SOURCE_REPO: "he-sb/tech"  # 博客源码仓库
     steps:
@@ -55,7 +55,7 @@ jobs:
           git clone --branch=master --quiet https://github.com/$SOURCE_REPO site
       # 安装 hugo
       - name: Setup Hugo
-        env:
+        environment:
           HUGO_VERSION: 0.154.3  # hugo 版本号
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-amd64.deb && \
@@ -63,7 +63,7 @@ jobs:
           hugo version
       # 构建
       - name: Build
-        env:
+        environment:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run:
