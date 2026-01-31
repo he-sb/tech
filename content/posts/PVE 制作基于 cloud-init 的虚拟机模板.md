@@ -385,3 +385,4 @@ sudo apt --purge autoremove
 5. [打造 Windows 10 下最强终端方案：WSL + Terminus + Oh My Zsh + The Fuck - P3TERX ZONE](https://p3terx.com/archives/the-strongest-terminal-solution-under-windows-10.html)
 6. [Debian/Ubuntu 中安装和配置 UFW（简单防火墙） - P3TERX ZONE](https://p3terx.com/archives/installing-and-configuring-ufw-in-debian.html)
 7. [cfg80211: failed to load regulatory.db | Proxmox Support Forum](https://forum.proxmox.com/threads/cfg80211-failed-to-load-regulatory-db.137298/#post-658457)
+8. [给 Docker 启用 IPv6 支持 | Dejavu's Blog](https://blog.dejavu.moe/posts/enable-ipv6-in-docker/)
