@@ -278,7 +278,6 @@ sudo bash -c 'cat > /etc/docker/daemon.json' << EOF
   "fixed-cidr-v6": "fd00:dead:beef::/64",
   "experimental":true,
   "ip6tables":true,
-  // 私有地址池
   "default-address-pools": [
     {
       "base": "172.17.0.0/16",
