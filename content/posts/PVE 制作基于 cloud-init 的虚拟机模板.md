@@ -269,15 +269,26 @@ docker version
 # 限制日志文件大小，并开启 ipv6
 sudo bash -c 'cat > /etc/docker/daemon.json' << EOF
 {
-    "log-driver": "json-file",
-    "log-opts": {
-        "max-size": "20m",
-        "max-file": "3"
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "20m",
+    "max-file": "3"
+  },
+  "ipv6": true,
+  "fixed-cidr-v6": "fd00:dead:beef::/64",
+  "experimental":true,
+  "ip6tables":true,
+  // 私有地址池
+  "default-address-pools": [
+    {
+      "base": "172.17.0.0/16",
+      "size": 24
     },
-    "ipv6": true,
-    "fixed-cidr-v6": "fd00:dead:beef:c0::/80",
-    "experimental":true,
-    "ip6tables":true
+    {
+      "base": "fd00:dead:beef:100::/80",
+      "size": 112
+    }
+  ]
 }
 EOF
 ```
