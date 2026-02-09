@@ -191,6 +191,8 @@ python client-linux.py
 
 ## 4.配置客户端进程守护
 
+### 4.1 通过 supervisor 实现（仅记录，不再推荐此方法）
+
 参考 [使用 Supervisor 实现 Linux 进程守护](/posts/supervisor-in-linux-daemon) 的方法，先新建一个配置文件：
 
 ```bash
@@ -201,11 +203,11 @@ vi /etc/supervisord.d/ServerStatus.conf
 
 ```ini
 [program: ServerStatus]
-command=python client-linux.py SERVER="server_ip" USER="s01" PASSWORD="*"  ; 相应参数需要按照上文说明修改
+command=python client-linux.py
 autorestart=true
 autostart=true
-stderr_logfile=/var/log/ProjectName.err.log
-stdout_logfile=/var/log/ProjectName.out.log
+stderr_logfile=/var/log/ServerStatus.err.log
+stdout_logfile=/var/log/ServerStatus.out.log
 user=root
 startsecs=1
 ```
@@ -214,4 +216,76 @@ startsecs=1
 
 ```bash
 supervisorctl reload
+```
+
+### 4.2 通过 systemd 实现
+
+上一小节使用的 supervisor 虽然也能达到目的，但是要多装一个软件包，而且后台要多运行一个守护进程，不够优雅。几乎所有的现代 Linux 发行版都内置了 systemd（是的，即使是 CentOS 7 也支持），通过它来实现进程守护更加原生，更加优雅，日志也原生集成至 `journalctl`，不用再手动配置。
+
+首先创建一个新的 service 文件：
+
+```shell
+vim /etc/systemd/system/ServerStatus.service
+```
+
+在其中写入以下内容：
+
+```ini
+[Unit]
+Description=ServerStatus Client Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /root/client-linux.py
+WorkingDirectory=/root
+User=0
+Group=0
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+参数释义：
+
+- `ExecStart`: 等价于 supervisor 配置文件中的 `command`，启动命令，空格前是 python 命令的绝对路径，空格后是脚本文件的绝对路径。
+- `WorkingDirectory`: 工作目录。一般保持和 python 脚本所在的路径相同。
+- `User`: 执行脚本的用户 UID. 一般保持和登录 SSH 的用户 UID 相同。
+    - 可以先执行 `id -u` 命令查看当前用户的 UID 和 GID.
+        - CentOS 7 系统一般使用 root 用户，该值为 `0`.
+        - Debian 系统一般使用普通用户，该值一般为 `1000`.
+- `Group`: 执行脚本的用户 GID. 一般保持和登录 SSH 的用户 GID 相同。
+    - 可以先执行 `id -g` 命令查看当前用户的 UID 和 GID.
+        - CentOS 7 系统一般使用 root 用户，该值为 `0`.
+        - Debian 系统一般使用普通用户，该值一般为 `1000`.
+
+然后重载 systemd 配置，让系统识别新服务，并配置开机自启：
+
+```shell
+# 重新加载配置
+systemctl daemon-reload
+# 设置开机自启，并立即启动服务
+systemctl enable --now ServerStatus
+```
+
+管理命令（和 supervisor 相似）：
+
+```shell
+# 查看运行状态
+systemctl status ServerStatus
+# 重启服务
+systemctl restart ServerStatus
+# 启动服务
+systemctl start ServerStatus
+# 停止服务
+systemctl stop ServerStatus
+```
+
+查看服务的日志：
+
+```shell
+journalctl -u ServerStatus -f
 ```
