@@ -304,7 +304,8 @@ sudo systemctl reload docker && sudo systemctl restart docker
 允许 docker 开机自启动：
 
 ```shell
-sudo systemctl enable docker
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 ```
 
 ### 清理善后
