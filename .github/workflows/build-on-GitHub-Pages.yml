@@ -43,7 +43,7 @@ jobs:
           cd site && hugo --gc --minify --cleanDestinationDir
       # 上传构建结果
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site/public/
   deploy:
