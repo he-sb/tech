@@ -38,7 +38,6 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       TZ: Asia/Shanghai
-      SOURCE_REPO: "he-sb/tech"  # 博客源码仓库
     steps:
       # 配置 git，避免一些莫名其妙的错误
       - name: Git Configuration
@@ -52,11 +51,11 @@ jobs:
       # 拉取源码
       - name: Clone Repository
         run:
-          git clone --branch=master --quiet https://github.com/$SOURCE_REPO site
+          git clone --branch=master --quiet https://github.com/he-sb/tech site
       # 安装 hugo
       - name: Setup Hugo
         env:
-          HUGO_VERSION: 0.155.1  # hugo 版本号
+          HUGO_VERSION: 0.158.0  # hugo 版本号
         run: |
           wget -q -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-amd64.deb && \
           sudo dpkg -i hugo.deb && \
@@ -70,7 +69,7 @@ jobs:
           cd site && hugo --gc --minify --cleanDestinationDir
       # 上传构建结果
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site/public/
   deploy:
