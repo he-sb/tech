@@ -28,6 +28,12 @@ curl -x socks5://192.168.1.111:1080 https://example.com
 curl -x socks5h://192.168.1.111:1080 https://example.com
 ```
 
+特别地，如果需要验证当前的出口 IP, 那么可以使用下面这个命令：
+
+```shell
+curl -x http://127.0.0.1:2080 https://www.cloudflare.com/cdn-cgi/trace
+```
+
 ### 01. 下载文件
 
 ```shell
