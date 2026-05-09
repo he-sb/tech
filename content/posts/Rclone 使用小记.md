@@ -97,6 +97,10 @@ Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf`，或执行 `rcl
 
 `--tpslimit FLOAT` 标志限制每秒钟的事务数（默认值为 0 ，即不限制），在操作大量文件时，不使用此参数的话很可能触发网盘的 API 资源开销限制。
 
+**15.**
+
+`--http-proxy http://192.168.1.111:1080` 使用 http 代理。
+
 ---
 
 *参考链接：*
