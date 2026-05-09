@@ -101,6 +101,29 @@ Rclone 配置文件路径为 `~/.config/rclone/rclone.conf`，或执行 `rclone 
 
 `--http-proxy http://192.168.1.111:1080` 使用 http 代理。
 
+**16.**
+
+本地向 VPS 传输数据时，如果速度跑不满本地上行带宽（比如俺本地到 VPS，VPS 使用 OpenList 提供的 webdav 协议，通过 traefik 反代），可以使用下面的命令来加速：
+
+```shell
+rclone copy <local_path> <remote_webdav_path> \
+    -vvP \
+    --header "Transfer-Encoding: chunked" \
+    --disable-http2 \
+    --buffer-size 128M \
+    --timeout 10m \
+    --contimeout 1m \
+    --low-level-retries 10
+```
+
+其中：
+- `--header "Transfer-Encoding: chunked"`
+  - 告诉 traefik 使用流式传输，避免等待分块。
+- `--disable-http2`
+  - 关闭了 HTTP/2 协议，在少量大文件上传时可以避免和系统的 TCP 分块逻辑冲突；
+  - 如果传输大量小文件时速度慢，尝试去掉此参数。
+
+
 ---
 
 *参考链接：*
