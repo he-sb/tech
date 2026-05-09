@@ -83,7 +83,7 @@ Command move needs 2 arguments maximum
 
 **11.**
 
-Rclone 配置文件路径为 `/root/.config/rclone/rclone.conf`，或执行 `rclone config file` 来查看，在 VPS 重装系统或迁移前可以备份下来免去重新配置的麻烦。
+Rclone 配置文件路径为 `~/.config/rclone/rclone.conf`，或执行 `rclone config file` 来查看，在 VPS 重装系统或迁移前可以备份下来免去重新配置的麻烦。
 
 **12.**
 
