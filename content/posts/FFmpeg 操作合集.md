@@ -19,7 +19,7 @@ draft = false
 
 ```shell
 # 下载预编译好的二进制可执行文件
-curl -o ffmpeg-latest.tar.xz -fsSL https://github.com/yt-dlp/FFmpeg-Builds/releases/download/autobuild-2026-01-13-14-23/ffmpeg-N-122452-gf897bcd122-linux64-gpl.tar.xz
+curl -o ffmpeg-latest.tar.xz -fsSL https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-06-23-13-52/ffmpeg-n8.1.2-linux64-gpl-8.1.tar.xz
 # 解压到当前目录下的 ffmpeg-latest 文件夹内
 mkdir -p ./ffmpeg-latest && tar -xvf ffmpeg-latest.tar.xz -C ./ffmpeg-latest --strip-components=1
 # 将可执行文件复制到系统内
